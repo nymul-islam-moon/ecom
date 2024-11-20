@@ -231,25 +231,37 @@
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label>Full Name *</label>
-										<input type="text" class="form-control" name="name" placeholder="Full Name">
+										<input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label>Email *</label>
-									<input type="text" class="form-control" name="email" placeholder="Email*">
+									<input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email*">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
 								</div>
 
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label>Password *</label>
 										<input type="password" class="form-control" name="password" placeholder="Password*">
+                                        @error('password')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
 
 									<div class="form-group col-md-6">
 										<label>Confirm Password *</label>
 										<input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password*">
-									</div>
+                                        @error('password_confirmation')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-md full-width bg-dark text-light fs-md ft-medium">Create An Account</button>
