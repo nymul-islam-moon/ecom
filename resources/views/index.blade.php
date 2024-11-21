@@ -27,7 +27,7 @@
 
     <body>
 
-		 <!-- ============================================================== -->
+		<!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
        <div class="preloader"></div>
@@ -65,7 +65,7 @@
 							</div>
 
 							<div class="currency-selector dropdown js-dropdown float-right mr-3">
-								<a href="javascript:void(0);" class="text-muted medium"><i class="lni lni-user mr-1"></i>Sign In / Register</a>
+								<a href="{{ route('signin-signup') }}" class="text-muted medium"><i class="lni lni-user mr-1"></i>Sign In / Register</a>
 							</div>
 						</div>
 
@@ -165,6 +165,7 @@
 					</nav>
 				</div>
 			</div>
+
 			<!-- End Navigation -->
 			<div class="clearfix"></div>
 			<!-- ============================================================== -->
