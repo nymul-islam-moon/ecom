@@ -131,7 +131,7 @@
                 <div class="nav-menus-wrapper">
                     <ul class="nav-menu">
                         <li><a href="{{ route('home') }}" class="pl-0">Home</a></li>
-                        <li><a href="#">Shop</a></li>
+                        <li><a href="{{ route('shop') }}">Shop</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -145,21 +145,3 @@
 <!-- ============================================================== -->
 <!-- Top header  -->
 <!-- ============================================================== -->
-
-<!-- ======================= Top Breadcrubms ======================== -->
-<div class="gray py-3">
-    <div class="container">
-        <div class="row">
-            <div class="colxl-12 col-lg-12 col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Login</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ======================= Top Breadcrubms ======================== -->

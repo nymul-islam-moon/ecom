@@ -39,6 +39,24 @@
 
         <x-admin.nav-bar />
 
+        <!-- ======================= Top Breadcrubms ======================== -->
+        <div class="gray py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="colxl-12 col-lg-12 col-md-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ======================= Top Breadcrubms ======================== -->
+
         <!-- ======================= Login Detail ======================== -->
         <section class="middle">
             <div class="container">
@@ -93,8 +111,8 @@
 
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="text" class="form-control" name="email"
-                                    value="{{ old('email') }}" placeholder="Email*">
+                                <input type="text" class="form-control" name="email" value="{{ old('email') }}"
+                                    placeholder="Email*">
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -103,8 +121,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Password *</label>
-                                    <input type="password" class="form-control" name="password"
-                                        placeholder="Password*">
+                                    <input type="password" class="form-control" name="password" placeholder="Password*">
                                     @error('password')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
