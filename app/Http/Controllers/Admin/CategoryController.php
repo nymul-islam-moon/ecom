@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\CategoryCreateRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -28,14 +30,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        $validated = $request->validate([
-            'name'=>'required',
-            'status'=>'required',
-        ]);
-
-        Category::create($validated);
+        Category::create($request->validated());
+        
         return redirect()->route('admin.categories.index')->with('success','Category added successfully');
     }
 
@@ -45,6 +43,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category = Category::findOrFail($id);
+
         return view('categories.show',compact($category));
     }
 
@@ -54,21 +53,18 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
+
         return view('admin.category.edit',compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
         $category = Category::findOrFail($id);
-        $validated = $request->validate([
-            'name'=>'required',
-            'status'=>'required',
-        ]);
+        $category->update($request->validated());
 
-        $category->update($validated);
         return redirect()->route('categories.index')->with('success','Category updated successfully');
     }
 

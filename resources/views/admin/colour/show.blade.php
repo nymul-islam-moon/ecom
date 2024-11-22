@@ -12,17 +12,17 @@
 <body>
   <div class="container mt-4">
   
-        @if($category)
+        @if($colour)
         <div class="d-flex gap-4 justify-content-center">
-            <h1 class="text-center"> {{$category->name}} </h1>
-            <a class="btn btn-outline-warning d-flex align-items-center " href="{{route('category.edit',$category->id)}}">
+            <h1 class="text-center"> {{$colour->name}} </h1>
+            <a class="btn btn-outline-warning d-flex align-items-center " href="{{route('colours.edit',$colour->id)}}">
                 <i class="fas fa-edit me-1"></i> Edit
             </a>
         </div>
 
-        <p class="text-center">{{$category->name}}</p>
+        <p class="text-center">{{$colour->name}}</p>
         <div class='bg-secondary-subtle mt-4 fs-4 rounded text-center p-5'>
-            <p>{{$category->status}}</p>
+            <p>{{$colour->status}}</p>
         </div>
 
         <!-- Displaying Comments -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubCategory\SubCategoryCreateRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -30,15 +31,10 @@ class SubCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubCategoryCreateRequest $request)
     {
-        $validated = $request->validate([
-            'name'=>'required',
-            'category_id'=>'required',
-            'status'=>'required',
-        ]);
-
-        SubCategory::create($validated);
+        SubCategory::create($request->validated());
+        
         return redirect()->route('sub-categories.index')->with('success','Sub Category added successfully');
     }
 
@@ -58,21 +54,18 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::findOrFail($id);
         $categories = Category::all();
+
         return view('admin.sub-category.edit',compact('categories','subCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubCategoryCreateRequest $request, string $id)
     {
         $category = SubCategory::findOrFail($id);
-        $validated = $request->validate([
-            'name'=>'required',
-            'status'=>'required',
-        ]);
+        $category->update($request->validated());
 
-        $category->update($validated);
         return redirect()->route('sub-categories.index')->with('success','Category updated successfully');
     }
 

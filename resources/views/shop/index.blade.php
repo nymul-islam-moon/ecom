@@ -36,6 +36,7 @@
         </section>
         <!-- ======================= Shop Style 1 ======================== -->
 
+        
 
         <!-- ======================= Filter Wrap Style 1 ======================== -->
         <section class="py-3 br-bottom br-top">
@@ -365,6 +366,7 @@
                                         New</div>
                                     <div class="card-body p-0">
                                         <div class="shop_thumb position-relative">
+                                            
                                             <a class="card-img-top d-block overflow-hidden"
                                                 href="shop-single-v1.html"><img class="card-img-top"
                                                     src="assets/img/product/12.jpg" alt="..."></a>
