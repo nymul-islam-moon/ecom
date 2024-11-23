@@ -10,28 +10,28 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Colour</h1>
-        <button class="btn btn-info text-align-end"><a href="{{route('colours.create')}}" class="text-decoration-none text-white" href="">Create</a></button>
+        <h1 class="text-center">Color</h1>
+        <button class="btn btn-info text-align-end"><a href="{{route('colors.create')}}" class="text-decoration-none text-white" href="">Create</a></button>
         <table class="table">
             <thead>
               <tr>
-                
+
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-        @php
-            $count=0;
-        @endphp
-            @foreach ($colours as $colour)
+            @php
+                $count=0;
+            @endphp
+            @foreach ($colors as $color)
             <tr id="">
                 <td> {{++$count}} </td>
-                <td> {{$colour->name}} </td>
-                
-                <td><button class="btn btn-info"><a href="{{route('colours.edit',$colour->id)}}">Edit</a>
-                </button> <button class="btn btn-danger"><a href="{{route('colours.destroy',$colour->id)}}">Delete</a></button></td>
+                <td> {{$color->name}} </td>
+
+                <td><button class="btn btn-info"><a href="{{route('colors.edit',$color->id)}}">Edit</a>
+                </button> <button class="btn btn-danger"><a href="{{route('colors.destroy',$color->id)}}">Delete</a></button></td>
               </tr>
             @endforeach
             </tbody>

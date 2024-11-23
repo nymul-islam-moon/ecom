@@ -4,7 +4,7 @@ namespace App\Http\Requests\Colour;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ColourUpdateRequest extends FormRequest
+class ColorCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

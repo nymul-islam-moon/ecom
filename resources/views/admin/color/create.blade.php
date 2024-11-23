@@ -10,12 +10,10 @@
 </head>
 <body>
 <div class="container">
-    <h1>Edit Colour</h1>
-    <form class="form-control" action="{{route('colours.update')}}" method="post">
-        @method('PATCH')
+    <h1>Create color</h1>
+    <form class="form-control" action="{{route('colors.store')}}" method="post">
         @csrf
-        <input class="form-control mt-4" value="{{$colour->name}}" type="text" name="name" id="">
-
+        <input class="form-control mt-4" type="text" name="name" id="">
         <button class="btn btn-info mt-4" type="submit">Submit</button>
     </form>
 </div>

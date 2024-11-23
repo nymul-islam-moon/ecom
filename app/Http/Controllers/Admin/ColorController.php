@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Colour\ColourCreateRequest;
-use App\Http\Requests\Colour\ColourUpdateRequest;
-use App\Models\Colour;
+use App\Http\Requests\Color\ColorCreateRequest;
+use App\Http\Requests\Color\ColorUpdateRequest;
+use App\Models\Color;
 
 class ColorController extends Controller
 {
     public function index()
     {
-        $colours = Colour::all();
+        $colors = Color::all();
 
-        return view('admin.colour.index', compact('colours'));
+        return view('admin.color.index', compact('colors'));
     }
 
     /**
