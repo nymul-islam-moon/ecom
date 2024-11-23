@@ -11,11 +11,11 @@
 </head>
 <body>
   <div class="container mt-4">
-  
+
         @if($shop)
         <div class="d-flex gap-4 justify-content-center">
             <h1 class="text-center"> {{$shop->name}} </h1>
-            <a class="btn btn-outline-warning d-flex align-items-center " href="{{route('shops.edit',$shop->id)}}">
+            <a class="btn btn-outline-warning d-flex align-items-center " href="{{route('admin.shops.edit',$shop->id)}}">
                 <i class="fas fa-edit me-1"></i> Edit
             </a>
         </div>
@@ -26,11 +26,11 @@
         </div>
 
         <!-- Displaying Comments -->
-     
+
 
         <!-- Comment Submission Form -->
-   
-        
+
+
         @endif
     </div>
 </body>

@@ -11,10 +11,10 @@
 <body>
 <div class="container">
     <h1>Create Shop</h1>
-    <form class="form-control" action="{{route('shops.store')}}" method="post">
+    <form class="form-control" action="{{route('admin.shops.store')}}" method="post">
         @csrf
         <input class="form-control mt-4" type="text" name="name" id="">
-        <select name="status" class="form-select mt-4" id=""> 
+        <select name="status" class="form-select mt-4" id="">
             <option value="0">Inactive</option>
             <option value="1">Active</option>
         </select>

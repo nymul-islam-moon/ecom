@@ -11,11 +11,11 @@
 <body>
 <div class="container">
     <h1>Edit shop</h1>
-    <form class="form-control" action="{{route('shops.update')}}" method="post">
+    <form class="form-control" action="{{route('admin.shops.update')}}" method="post">
         @method('PATCH')
         @csrf
         <input class="form-control mt-4" value="{{$shop->name}}" type="text" name="name" id="">
-        <select name="status" class="form-select mt-4" id=""> 
+        <select name="status" class="form-select mt-4" id="">
             <option value="0" {{ $shop->status == 0 ? 'selected' : '' }}>Inactive</option>
             <option value="1" {{ $shop->status == 1 ? 'selected' : '' }}>Active</option>
         </select>

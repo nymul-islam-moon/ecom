@@ -63,7 +63,7 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
         $shop->update($request->validated());
 
-        return redirect()->route('shops.index')->with('success','Shop updated successfully');
+        return redirect()->route('admin.shops.index')->with('success','Shop updated successfully');
     }
 
     /**
@@ -74,6 +74,6 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
         $shop->delete();
 
-        return redirect()->route('shops.index')->with('success','Shop deleted successfully');
+        return redirect()->route('admin.shops.index')->with('success','Shop deleted successfully');
     }
 }

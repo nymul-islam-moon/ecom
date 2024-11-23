@@ -11,11 +11,11 @@
 <body>
     <div class="container">
         <h1 class="text-center">Shop</h1>
-        <button class="btn btn-info text-align-end"><a href="{{route('shops.create')}}" class="text-decoration-none text-white" href="">Create</a></button>
+        <button class="btn btn-info text-align-end"><a href="{{route('admin.shops.create')}}" class="text-decoration-none text-white" href="">Create</a></button>
         <table class="table">
             <thead>
               <tr>
-                
+
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Status</th>
@@ -31,9 +31,9 @@
                 <td> {{++$count}} </td>
                 <td> {{$shop->name}} </td>
                 <td> {{$shop->status}} </td>
-                
-                <td><button class="btn btn-info"><a href="{{route('shops.edit',$shop->id)}}">Edit</a>
-                </button> <button class="btn btn-danger"><a href="{{route('shops.destroy',$shop->id)}}">Delete</a></button></td>
+
+                <td><button class="btn btn-info"><a href="{{route('admin.shops.edit',$shop->id)}}">Edit</a>
+                </button> <button class="btn btn-danger"><a href="{{route('admin.shops.destroy',$shop->id)}}">Delete</a></button></td>
               </tr>
             @endforeach
             </tbody>

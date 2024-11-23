@@ -8,7 +8,7 @@ use App\Http\Requests\Colour\ColourUpdateRequest;
 use App\Models\Colour;
 use Illuminate\Http\Request;
 
-class ColourController extends Controller
+class ColorController extends Controller
 {
     public function index()
     {
@@ -30,7 +30,7 @@ class ColourController extends Controller
     public function store(ColourCreateRequest $request)
     {
         Colour::create($request->validated());
-        
+
         return redirect()->route('admin.colours.index')->with('success','Colour added successfully');
     }
 
