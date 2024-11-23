@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategory\SubCategoryCreateRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -16,7 +15,8 @@ class SubCategoryController extends Controller
     public function index()
     {
         $categories = SubCategory::all();
-        return view('admin.sub-category.index',compact('categories'));
+
+        return view('admin.sub-category.index', compact('categories'));
     }
 
     /**
@@ -25,7 +25,8 @@ class SubCategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.sub-category.create',compact('categories'));
+
+        return view('admin.sub-category.create', compact('categories'));
     }
 
     /**
@@ -34,8 +35,8 @@ class SubCategoryController extends Controller
     public function store(SubCategoryCreateRequest $request)
     {
         SubCategory::create($request->validated());
-        
-        return redirect()->route('sub-categories.index')->with('success','Sub Category added successfully');
+
+        return redirect()->route('sub-categories.index')->with('success', 'Sub Category added successfully');
     }
 
     /**
@@ -44,7 +45,8 @@ class SubCategoryController extends Controller
     public function show(string $id)
     {
         $category = SubCategory::findOrFail($id);
-        return view('admin.sub-category.show',compact($category));
+
+        return view('admin.sub-category.show', compact($category));
     }
 
     /**
@@ -55,7 +57,7 @@ class SubCategoryController extends Controller
         $subCategory = SubCategory::findOrFail($id);
         $categories = Category::all();
 
-        return view('admin.sub-category.edit',compact('categories','subCategory'));
+        return view('admin.sub-category.edit', compact('categories', 'subCategory'));
     }
 
     /**
@@ -66,7 +68,7 @@ class SubCategoryController extends Controller
         $category = SubCategory::findOrFail($id);
         $category->update($request->validated());
 
-        return redirect()->route('sub-categories.index')->with('success','Category updated successfully');
+        return redirect()->route('sub-categories.index')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -77,6 +79,6 @@ class SubCategoryController extends Controller
         $category = SubCategory::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('admin.sub-categories.index')->with('success','Category deleted successfully');
+        return redirect()->route('admin.sub-categories.index')->with('success', 'Category deleted successfully');
     }
 }

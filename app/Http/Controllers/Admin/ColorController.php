@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Colour\ColourCreateRequest;
 use App\Http\Requests\Colour\ColourUpdateRequest;
 use App\Models\Colour;
-use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
     public function index()
     {
         $colours = Colour::all();
-        return view('admin.colour.index',compact('colours'));
+
+        return view('admin.colour.index', compact('colours'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ColorController extends Controller
     {
         Colour::create($request->validated());
 
-        return redirect()->route('admin.colours.index')->with('success','Colour added successfully');
+        return redirect()->route('admin.colours.index')->with('success', 'Colour added successfully');
     }
 
     /**
@@ -40,7 +40,8 @@ class ColorController extends Controller
     public function show(string $id)
     {
         $colour = Colour::findOrFail($id);
-        return view('colours.show',compact($colour));
+
+        return view('colours.show', compact($colour));
     }
 
     /**
@@ -49,7 +50,8 @@ class ColorController extends Controller
     public function edit(string $id)
     {
         $colour = Colour::findOrFail($id);
-        return view('admin.colour.edit',compact('colour'));
+
+        return view('admin.colour.edit', compact('colour'));
     }
 
     /**
@@ -60,7 +62,7 @@ class ColorController extends Controller
         $colour = Colour::findOrFail($id);
         $colour->update($request->validated());
 
-        return redirect()->route('colours.index')->with('success','Colour updated successfully');
+        return redirect()->route('colours.index')->with('success', 'Colour updated successfully');
     }
 
     /**
@@ -71,6 +73,6 @@ class ColorController extends Controller
         $colour = Colour::findOrFail($id);
         $colour->delete();
 
-        return redirect()->route('colours.index')->with('success','Colour deleted successfully');
+        return redirect()->route('colours.index')->with('success', 'Colour deleted successfully');
     }
 }

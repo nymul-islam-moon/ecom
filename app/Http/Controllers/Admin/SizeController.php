@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Size\SizeCreateRequest;
 use App\Http\Requests\Size\SizeUpdateRequest;
 use App\Models\Size;
-use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
     public function index()
     {
         $sizes = Size::all();
-        return view('admin.size.index',compact('sizes'));
+
+        return view('admin.size.index', compact('sizes'));
     }
 
     /**
@@ -30,8 +30,8 @@ class SizeController extends Controller
     public function store(SizeCreateRequest $request)
     {
         Size::create($request->validated());
-        
-        return redirect()->route('admin.sizes.index')->with('success','Size added successfully');
+
+        return redirect()->route('admin.sizes.index')->with('success', 'Size added successfully');
     }
 
     /**
@@ -40,7 +40,8 @@ class SizeController extends Controller
     public function show(string $id)
     {
         $size = Size::findOrFail($id);
-        return view('sizes.show',compact($size));
+
+        return view('sizes.show', compact($size));
     }
 
     /**
@@ -49,7 +50,8 @@ class SizeController extends Controller
     public function edit(string $id)
     {
         $size = Size::findOrFail($id);
-        return view('admin.size.edit',compact('size'));
+
+        return view('admin.size.edit', compact('size'));
     }
 
     /**
@@ -60,7 +62,7 @@ class SizeController extends Controller
         $size = Size::findOrFail($id);
         $size->update($request->validated());
 
-        return redirect()->route('sizes.index')->with('success','Size updated successfully');
+        return redirect()->route('sizes.index')->with('success', 'Size updated successfully');
     }
 
     /**
@@ -71,6 +73,6 @@ class SizeController extends Controller
         $size = Size::findOrFail($id);
         $size->delete();
 
-        return redirect()->route('sizes.index')->with('success','Size deleted successfully');
+        return redirect()->route('sizes.index')->with('success', 'Size deleted successfully');
     }
 }
