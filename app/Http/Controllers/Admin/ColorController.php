@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Color\ColorCreateRequest;
-use App\Http\Requests\Color\ColorUpdateRequest;
 use App\Models\Color;
 
 class ColorController extends Controller
