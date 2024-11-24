@@ -66,15 +66,22 @@
                         <div class="mb-3">
                             <h3>Login</h3>
                         </div>
-                        <form class="border p-3 rounded">
+                        <form class="border p-3 rounded" method="POST" action="{{ route('login') }}">
+                            @csrf
                             <div class="form-group">
-                                <label>Email *</label>
-                                <input type="text" class="form-control" placeholder="Email*">
+                                <label>{{ __('Email') }} *</label>
+                                <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email*">
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <label>Password *</label>
-                                <input type="password" class="form-control" placeholder="Password*">
+                                <label>{{ __('Password') }} *</label>
+                                <input type="password" name="password" class="form-control" placeholder="Password*">
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
