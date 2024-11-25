@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -18,5 +19,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::resource('/categories',CategoryController::class);
 
 require __DIR__.'/auth.php';
