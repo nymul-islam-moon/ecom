@@ -170,53 +170,53 @@
 
                 <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img id="header-lang-img" src="{{ asset('admin/images/flags/us.svg') }}" alt="Header Language" height="20" class="rounded">
+                        <img id="" src="{{ asset('admin/images/flags/us.svg') }}" alt="Header Language" height="20" class="rounded">
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
+                        <a href="" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
                             <img src="{{ asset('admin/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">English</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp" title="Spanish">
+                        <a href="" class="dropdown-item notify-item language" data-lang="sp" title="Spanish">
                             <img src="{{ asset('admin/images/flags/spain.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">Española</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr" title="German">
+                        <a href="" class="dropdown-item notify-item language" data-lang="gr" title="German">
                             <img src="{{ asset('admin/images/flags/germany.svg') }}" alt="user-image" class="me-2 rounded" height="18"> <span class="align-middle">Deutsche</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it" title="Italian">
+                        <a href="" class="dropdown-item notify-item language" data-lang="it" title="Italian">
                             <img src="{{ asset('admin/images/flags/italy.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">Italiana</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru" title="Russian">
+                        <a href="" class="dropdown-item notify-item language" data-lang="ru" title="Russian">
                             <img src="{{ asset('admin/images/flags/russia.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">русский</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ch" title="Chinese">
+                        <a href="" class="dropdown-item notify-item language" data-lang="ch" title="Chinese">
                             <img src="{{ asset('admin/images/flags/china.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">中国人</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="fr" title="French">
+                        <a href="" class="dropdown-item notify-item language" data-lang="fr" title="French">
                             <img src="{{ asset('admin/images/flags/french.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">français</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ar" title="Arabic">
+                        <a href="" class="dropdown-item notify-item language" data-lang="ar" title="Arabic">
                             <img src="{{ asset('admin/images/flags/ae.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">Arabic</span>
                         </a>
