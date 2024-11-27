@@ -146,962 +146,40 @@
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="apps-invoices-create.html" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Invoice</a>
+                                <a href="{{ route('admin.category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Category</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body bg-soft-light border border-dashed border-start-0 border-end-0">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-xxl-5 col-sm-12">
-                                <div class="search-box">
-                                    <input type="text" class="form-control search bg-light border-light" placeholder="Search for customer, email, country, status or something...">
-                                    <i class="ri-search-line search-icon"></i>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-xxl-3 col-sm-4">
-                                <input type="text" class="form-control bg-light border-light" id="datepicker-range" placeholder="Select date">
-                            </div>
-                            <!--end col-->
-                            <div class="col-xxl-3 col-sm-4">
-                                <div class="input-light">
-                                    <select class="form-control" data-choices="" data-choices-search-false="" name="choices-single-default" id="idStatus">
-                                        <option value="">Status</option>
-                                        <option value="all" selected="">All</option>
-                                        <option value="Unpaid">Unpaid</option>
-                                        <option value="Paid">Paid</option>
-                                        <option value="Cancel">Cancel</option>
-                                        <option value="Refund">Refund</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--end col-->
-
-                            <div class="col-xxl-1 col-sm-4">
-                                <button type="button" class="btn btn-primary w-100" onclick="SearchData();">
-                                    <i class="ri-equalizer-fill me-1 align-bottom"></i> Filters
-                                </button>
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </form>
-                </div>
+              
                 <div class="card-body">
                     <div>
-                        <div class="table-responsive table-card">
-                            <table class="table align-middle table-nowrap" id="invoiceTable">
-                                <thead class="text-muted">
-                                    <tr>
-                                        <th scope="col" style="width: 50px;">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="checkAll" value="option">
-                                            </div>
-                                        </th>
-                                        <th class="sort text-uppercase" data-sort="invoice_id">ID</th>
-                                        <th class="sort text-uppercase" data-sort="customer_name">Customer</th>
-                                        <th class="sort text-uppercase" data-sort="email">Email</th>
-                                        <th class="sort text-uppercase" data-sort="country">Country</th>
-                                        <th class="sort text-uppercase" data-sort="date">Date</th>
-                                        <th class="sort text-uppercase" data-sort="invoice_amount">Amount</th>
-                                        <th class="sort text-uppercase" data-sort="status">Payment Status</th>
-                                        <th class="sort text-uppercase" data-sort="action">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list form-check-all" id="invoice-list-data">
-
+                        <!-- Hoverable Rows -->
+                        <table class="table table-hover table-striped align-middle table-nowrap mb-0 ">
+                            <thead>
                                 <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000351">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000351" class="fw-medium link-primary">#VL25000351</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-xs rounded-circle me-2">Valentine Morin
-                                        </div>
-                                    </td>
-                                    <td class="email">euismod.enim@outlook.net</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000351"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000351"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000352">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000352" class="fw-medium link-primary">#VL25000352</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-xs rounded-circle me-2">Brody Holman
-                                        </div>
-                                    </td>
-                                    <td class="email">metus@protonmail.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Jun, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-warning text-uppercase">Unpaid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000352"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000352"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000353">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000353" class="fw-medium link-primary">#VL25000353</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-xs rounded-circle me-2">Jolie Hood
-                                        </div>
-                                    </td>
-                                    <td class="email">nunc.nulla@yahoo.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000353"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000353"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000354">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000354" class="fw-medium link-primary">#VL25000354</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-xs rounded-circle me-2">Buckminster Wong
-                                        </div>
-                                    </td>
-                                    <td class="email">morbi.quis@protonmail.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">04 Sep, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000354"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000354"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000355">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000355" class="fw-medium link-primary">#VL25000355</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 avatar-xs me-2"><div class="avatar-title bg-soft-success text-success rounded-circle fs-13">HL</div></div>Howard Lyons
-                                        </div>
-                                    </td>
-                                    <td class="email">neque.sed.dictum@icloud.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-primary text-uppercase">Refund</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000355"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000355"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000356">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000356" class="fw-medium link-primary">#VL25000356</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-6.jpg" alt="" class="avatar-xs rounded-circle me-2">Howard Oneal
-                                        </div>
-                                    </td>
-                                    <td class="email">porttitor.tellus.non@yahoo.net</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000356"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000356"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000357">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000357" class="fw-medium link-primary">#VL25000357</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xs rounded-circle me-2">Jena Hall
-                                        </div>
-                                    </td>
-                                    <td class="email">lectus.sit.amet@protonmail.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-danger text-uppercase">Cancel</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000357"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000357"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000358">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000358" class="fw-medium link-primary">#VL25000358</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-8.jpg" alt="" class="avatar-xs rounded-circle me-2">Paki Edwards
-                                        </div>
-                                    </td>
-                                    <td class="email">dictum.phasellus.in@hotmail.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000358"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000358"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000359">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000359" class="fw-medium link-primary">#VL25000359</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-xs rounded-circle me-2">Christian Cardenas
-                                        </div>
-                                    </td>
-                                    <td class="email">id.erat@aol.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">06 Feb, 2022 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000359"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000359"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000360">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000360" class="fw-medium link-primary">#VL25000360</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-xs rounded-circle me-2">Yoshi Guerra
-                                        </div>
-                                    </td>
-                                    <td class="email">sem.magna.nec@hotmail.ca</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000360"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000360"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000361">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000361" class="fw-medium link-primary">#VL25000361</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-xs rounded-circle me-2">Hilel Gillespie
-                                        </div>
-                                    </td>
-                                    <td class="email">enim.nunc@yahoo.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000361"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000361"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000362">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000362" class="fw-medium link-primary">#VL25000362</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-xs rounded-circle me-2">Randall Stafford
-                                        </div>
-                                    </td>
-                                    <td class="email">eget.lacus@outlook.org</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000362"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000362"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000363">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000363" class="fw-medium link-primary">#VL25000363</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-5.jpg" alt="" class="avatar-xs rounded-circle me-2">Fletcher Jones
-                                        </div>
-                                    </td>
-                                    <td class="email">sapien.cursus@google.couk</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000363"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000363"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000364">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000364" class="fw-medium link-primary">#VL25000364</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-6.jpg" alt="" class="avatar-xs rounded-circle me-2">Donovan Sparks
-                                        </div>
-                                    </td>
-                                    <td class="email">urna.convallis@yahoo.net</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000364"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000364"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000365">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000365" class="fw-medium link-primary">#VL25000365</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xs rounded-circle me-2">Sage Gardner
-                                        </div>
-                                    </td>
-                                    <td class="email">consequat.enim@google.com</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000365"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000365"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000366">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000366" class="fw-medium link-primary">#VL25000366</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-xs rounded-circle me-2">Paki Grimes
-                                        </div>
-                                    </td>
-                                    <td class="email">ante.lectus.convallis@google.com</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000366"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000366"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000367">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000367" class="fw-medium link-primary">#VL25000367</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-xs rounded-circle me-2">James Diaz
-                                        </div>
-                                    </td>
-                                    <td class="email">nascetur@yahoo.com</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000367"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000367"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000368">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000368" class="fw-medium link-primary">#VL25000368</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-xs rounded-circle me-2">Karen Monroe
-                                        </div>
-                                    </td>
-                                    <td class="email">ac.ipsum@google.com</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000368"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000368"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000369">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000369" class="fw-medium link-primary">#VL25000369</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-xs rounded-circle me-2">Vincent Weeks
-                                        </div>
-                                    </td>
-                                    <td class="email">metus.facilisis@hotmail.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000369"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000369"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000370">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000370" class="fw-medium link-primary">#VL25000370</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-5.jpg" alt="" class="avatar-xs rounded-circle me-2">Miriam Dickson
-                                        </div>
-                                    </td>
-                                    <td class="email">nunc.ac@icloud.ca</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000370"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000370"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000371">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000371" class="fw-medium link-primary">#VL25000371</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 avatar-xs me-2"><div class="avatar-title bg-soft-success text-success rounded-circle fs-13">AH</div></div>Ashton Head
-                                        </div>
-                                    </td>
-                                    <td class="email">cras@outlook.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000371"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000371"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr><tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child" value="#VL25000371">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000371" class="fw-medium link-primary">#VL25000371</a></td>
-                                    <td class="customer_name">
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-xs rounded-circle me-2">Linus Martin
-                                        </div>
-                                    </td>
-                                    <td class="email">fringilla.est.mauris@google.edu</td>
-                                    <td class="country">USA</td>
-                                    <td class="date">03 Apr, 2021 <small class="text-muted">9:58 PM</small></td>
-                                    <td class="invoice_amount">$875</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Paid</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="25000371"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                        View</button></li>
-                                                <li><button class="dropdown-item" href="javascript:void(0);" onclick="EditInvoice(this);" data-id="25000371"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</button></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-download-2-line align-bottom me-2 text-muted"></i>
-                                                        Download</a></li>
-                                                <li class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr></tbody>
-                            </table>
-                            <div class="noresult" style="display: none">
-                                <div class="text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
-                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                    <p class="text-muted mb-0">We've searched more than 150+ invoices We did not find any invoices for you search.</p>
-                                </div>
-                            </div>
-                        </div>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Icon</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $key =>  $category)
+                                    <tr>
+                                        <th scope="row">{{ $key + 1 }}</th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->icon }}</td>
+                                        <td>
+                                            <div class="hstack gap-3 flex-wrap">
+                                                <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                         <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
                                 <a class="page-item pagination-prev disabled" href="#">
@@ -1114,26 +192,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade flip" id="deleteOrder" tabindex="-1" aria-labelledby="deleteOrderLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body p-5 text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
-                                    <div class="mt-4 text-center">
-                                        <h4>You are about to delete a order ?</h4>
-                                        <p class="text-muted fs-15 mb-4">Deleting your order will remove all of your information from our database.</p>
-                                        <div class="hstack gap-2 justify-content-center remove">
-                                            <button class="btn btn-link link-success fw-medium text-decoration-none" id="deleteRecord-close" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</button>
-                                            <button class="btn btn-danger" id="delete-record">Yes, Delete It</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end modal -->
                 </div>
             </div>
 
@@ -1142,3 +200,82 @@
     </div>
     <!--end row-->
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- <table class="table table-success table-striped align-middle table-nowrap mb-0">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Invoice</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Basic Plan</td>
+            <td>$860</td>
+            <td>Nov 22, 2021</td>
+            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+            <td>
+                <div class="hstack gap-3 flex-wrap">
+                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Premium Plan</td>
+            <td>$1200</td>
+            <td>Nov 10, 2021</td>
+            <td><i class="ri-close-circle-line align-middle text-danger"></i> Unsubscribed</td>
+            <td>
+                <div class="hstack gap-3 flex-wrap">
+                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Basic Plan</td>
+            <td>$860</td>
+            <td>Nov 19, 2021</td>
+            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+            <td>
+                <div class="hstack gap-3 flex-wrap">
+                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>Corporate Plan</td>
+            <td>$1599</td>
+            <td>Nov 22, 2021</td>
+            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
+            <td>
+                <div class="hstack gap-3 flex-wrap">
+                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table> --}}
