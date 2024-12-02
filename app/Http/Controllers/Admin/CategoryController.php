@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::simplePaginate(2);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -32,10 +32,9 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $formData = $request->validated();
+        Category::create($formData);
 
-        Category::created($formData);
-
-        return redirect()->back()->with('success', 'Category created successfully');
+        return back()->with('success', 'Category created successfully');
 
     }
 
@@ -52,7 +51,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', array('category' => $category));
     }
 
     /**
@@ -60,7 +59,10 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $formData = $request->validated();
+
+        $category->update($formData);
+        return back()->with('success', 'Category updated successfully');
     }
 
     /**
@@ -68,6 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back()->with('success', 'Category deleted successfully');
     }
 }

@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Invoices</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
                         <li class="breadcrumb-item active">Invoice List</li>
                     </ol>
                 </div>
@@ -172,9 +172,19 @@
                                         <td>{{ $category->icon }}</td>
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
-                                                <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                                                <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
+                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
+                                                    <i class="ri-edit-2-line"></i>
+                                                </a>
+                                                
+                                                <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this category?')">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                    </button>
+                                                </form>
                                             </div>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach
@@ -182,13 +192,7 @@
                         </table>
                         <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-prev disabled" href="#">
-                                    Previous
-                                </a>
-                                <ul class="pagination listjs-pagination mb-0"></ul>
-                                <a class="page-item pagination-next" href="#">
-                                    Next
-                                </a>
+                                {{ $categories->links() }}
                             </div>
                         </div>
                     </div>
