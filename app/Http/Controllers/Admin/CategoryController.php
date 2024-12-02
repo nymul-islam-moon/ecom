@@ -11,8 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-
+        $categories = Category::simplePaginate(2);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -29,50 +28,46 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        Category::create($request->validated());
+        $formData = $request->validated();
+        Category::create($formData);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category added successfully');
+        return back()->with('success', 'Category created successfully');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        $category = Category::findOrFail($id);
-
-        return view('categories.show', compact($category));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        $category = Category::findOrFail($id);
-
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.edit', array('category' => $category));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, string $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category = Category::findOrFail($id);
-        $category->update($request->validated());
+        $formData = $request->validated();
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
+        $category->update($formData);
+        return back()->with('success', 'Category updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        $category = Category::findOrFail($id);
         $category->delete();
-
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
+        return back()->with('success', 'Category deleted successfully');
     }
 }

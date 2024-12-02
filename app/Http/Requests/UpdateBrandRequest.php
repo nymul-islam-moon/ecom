@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Size;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SizeCreateRequest extends FormRequest
+class UpdateBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class SizeCreateRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'logo' => 'required',
         ];
     }
 }

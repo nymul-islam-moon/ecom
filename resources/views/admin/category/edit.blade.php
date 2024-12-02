@@ -1,26 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <h1>Edit Category</h1>
-    <form class="form-control" action="{{route('categories.update')}}" method="post">
-        @method('PATCH')
-        @csrf
-        <input class="form-control mt-4" value="{{$category->name}}" type="text" name="name" id="">
-        <select name="status" class="form-select mt-4" id=""> 
-            <option value="0" {{ $category->status == 0 ? 'selected' : '' }}>Inactive</option>
-            <option value="1" {{ $category->status == 1 ? 'selected' : '' }}>Active</option>
-        </select>
-        <button class="btn btn-info mt-4" type="submit">Submit</button>
-    </form>
-</div>
-</body>
-</html>
+@extends('layouts.admin.app')
+
+@section('admin_content')
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Category Create</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
+                        <li class="breadcrumb-item active">Category Create</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @session('success')
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong> {{ $value }} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
+    @endsession
+    <div class="row">
+        <form class="row g-3 was-validated" action="{{ route('admin.category.update', $category->id) }}" method="POST" novalidate>
+            @csrf
+            @method('PUT')
+            <div class="col-md-6 has-validation">
+                <label for="category_name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="category_name" value="{{ $category->name }}" required placeholder="Category Name">
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="category_icon" class="form-label">Icon</label>
+                <input type="text" name="icon" class="form-control" id="category_icon" value="{{ $category->icon }}" required placeholder="Icon">
+                @error('icon')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Update Category</button>
+            </div>
+        </form>
+    </div>
+@endsection

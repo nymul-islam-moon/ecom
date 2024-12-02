@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Size\SizeCreateRequest;
-use App\Http\Requests\Size\SizeUpdateRequest;
 use App\Models\Size;
+use App\Http\Requests\StoreSizeRequest;
+use App\Http\Requests\UpdateSizeRequest;
 
 class SizeController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $sizes = Size::all();
-
+        $sizes = Size::simplePaginate(2);
         return view('admin.size.index', compact('sizes'));
     }
 
@@ -27,52 +29,47 @@ class SizeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SizeCreateRequest $request)
+    public function store(StoreSizeRequest $request)
     {
-        Size::create($request->validated());
+        $formData = $request->validated();
+        Size::create($formData);
 
-        return redirect()->route('admin.sizes.index')->with('success', 'Size added successfully');
+        return back()->with('success', 'Size created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Size $size)
     {
-        $size = Size::findOrFail($id);
-
-        return view('sizes.show', compact($size));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Size $size)
     {
-        $size = Size::findOrFail($id);
-
-        return view('admin.size.edit', compact('size'));
+        return view('admin.size.edit', array('size' => $size));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(SizeUpdateRequest $request, string $id)
+    public function update(UpdateSizeRequest $request, Size $size)
     {
-        $size = Size::findOrFail($id);
-        $size->update($request->validated());
+        $formData = $request->validated();
 
-        return redirect()->route('sizes.index')->with('success', 'Size updated successfully');
+        $size->update($formData);
+        return back()->with('success', 'Size updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Size $size)
     {
-        $size = Size::findOrFail($id);
         $size->delete();
-
-        return redirect()->route('sizes.index')->with('success', 'Size deleted successfully');
+        return back()->with('success', 'Size deleted successfully');
     }
 }

@@ -5,12 +5,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Invoice List</h4>
+                <h4 class="mb-sm-0">Brand List</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
-                        <li class="breadcrumb-item active">Invoice List</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
+                        <li class="breadcrumb-item active">Brand List</li>
                     </ol>
                 </div>
 
@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Invoices Sent</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">Brands Sent</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-success fs-14 mb-0">
@@ -37,7 +37,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="559.25">559.25</span>k</h4>
-                            <span class="badge bg-warning me-1">2,258</span> <span class="text-muted">Invoices sent</span>
+                            <span class="badge bg-warning me-1">2,258</span> <span class="text-muted">Brands sent</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Paid Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">Paid Brands</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-danger fs-14 mb-0">
@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Unpaid Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">Unpaid Brands</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-danger fs-14 mb-0">
@@ -113,7 +113,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Cancelled Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">Cancelled Brands</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-success fs-14 mb-0">
@@ -147,14 +147,14 @@
                 </div>
                 {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
             @endsession
-            <div class="card" id="invoiceList">
+            <div class="card" id="BrandList">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center">
                         <h5 class="card-title mb-0 flex-grow-1">Categories</h5>
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Category</a>
+                                <a href="{{ route('admin.brand.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Brand</a>
                             </div>
                         </div>
                     </div>
@@ -168,26 +168,26 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Icon</th>
+                                    <th scope="col">Logo</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $key =>  $category)
+                                @foreach ($brands as $key =>  $brand)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->icon }}</td>
+                                        <td>{{ $brand->name }}</td>
+                                        <td>{{ $brand->logo }}</td>
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
-                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
+                                                <a href="{{ route('admin.brand.edit', $brand->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
                                                     <i class="ri-edit-2-line"></i>
                                                 </a>
                                                 
-                                                <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('admin.brand.destroy', $brand->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this category?')">
+                                                    <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this brand?')">
                                                         <i class="ri-delete-bin-line"></i>
                                                     </button>
                                                 </form>
@@ -200,7 +200,7 @@
                         </table>
                         <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
-                                {{ $categories->links() }}
+                                {{ $brands->links() }}
                             </div>
                         </div>
                     </div>
@@ -212,82 +212,3 @@
     </div>
     <!--end row-->
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- <table class="table table-success table-striped align-middle table-nowrap mb-0">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Invoice</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Basic Plan</td>
-            <td>$860</td>
-            <td>Nov 22, 2021</td>
-            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
-            <td>
-                <div class="hstack gap-3 flex-wrap">
-                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Premium Plan</td>
-            <td>$1200</td>
-            <td>Nov 10, 2021</td>
-            <td><i class="ri-close-circle-line align-middle text-danger"></i> Unsubscribed</td>
-            <td>
-                <div class="hstack gap-3 flex-wrap">
-                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Basic Plan</td>
-            <td>$860</td>
-            <td>Nov 19, 2021</td>
-            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
-            <td>
-                <div class="hstack gap-3 flex-wrap">
-                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Corporate Plan</td>
-            <td>$1599</td>
-            <td>Nov 22, 2021</td>
-            <td><i class="ri-checkbox-circle-line align-middle text-success"></i> Subscribed</td>
-            <td>
-                <div class="hstack gap-3 flex-wrap">
-                    <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                    <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table> --}}
