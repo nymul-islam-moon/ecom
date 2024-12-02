@@ -17,38 +17,38 @@
             </div>
         </div>
     </div>
-
+    @session('success')
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong> {{ $value }} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
+    @endsession
     <div class="row">
-        <form action="{{ route('admin.category.store') }}" method="POST">
-            <div class="row gy-2 gx-3 mb-3 align-items-center">
-                <div class="col-sm-auto">
-                    <label class="visually-hidden" for="autoSizingInput">Name</label>
-                    <input type="text" name="name" class="form-control" id="category_name" placeholder="Name">
-
-                </div><!--end col-->
-                
-                <div class="col-sm-auto">
-                    <label class="visually-hidden" for="autoSizingInput">Icon</label>
-                    <input type="text" name="icon" class="form-control" id="category_icon" placeholder="Icon">
-                    {{-- @error('name')
-                        
-                    @enderror --}}
-                </div>
-
-                {{-- <div class="col-sm-auto">
-                    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-                    <select class="form-select" id="autoSizingSelect">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div><!--end col--> --}}
-                
-                <div class="col-sm-auto">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div><!--end col-->
-            </div><!--end row-->
+        <form class="row g-3 was-validated" action="{{ route('admin.category.store') }}" method="POST" novalidate>
+            @csrf
+            <div class="col-md-6 has-validation">
+                <label for="category_name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="category_name" value="{{ old('name') }}" required placeholder="Category Name">
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="category_icon" class="form-label">Icon</label>
+                <input type="text" name="icon" class="form-control" id="category_icon" value="{{ old('icon') }}" required placeholder="Icon">
+                @error('icon')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Create Category</button>
+            </div>
         </form>
     </div>
 @endsection

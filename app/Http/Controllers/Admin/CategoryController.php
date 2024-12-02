@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
         Category::created($formData);
 
-        return back();
+        return redirect()->back()->with('success', 'Category created successfully');
 
     }
 
