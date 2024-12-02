@@ -138,11 +138,19 @@
     </div> <!-- end row-->
 
     <div class="row">
+       
         <div class="col-lg-12">
+            @session('success')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> {{ $value }} </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
+            @endsession
             <div class="card" id="invoiceList">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 flex-grow-1">Invoices</h5>
+                        <h5 class="card-title mb-0 flex-grow-1">Categories</h5>
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
