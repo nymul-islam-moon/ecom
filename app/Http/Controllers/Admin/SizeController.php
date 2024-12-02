@@ -23,7 +23,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.size.create');
     }
 
     /**
@@ -31,7 +31,10 @@ class SizeController extends Controller
      */
     public function store(StoreSizeRequest $request)
     {
-        //
+        $formData = $request->validated();
+        Size::create($formData);
+
+        return back()->with('success', 'Size created successfully');
     }
 
     /**
@@ -47,7 +50,7 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        return view('admin.size.edit', array('size' => $size));
     }
 
     /**
@@ -55,7 +58,10 @@ class SizeController extends Controller
      */
     public function update(UpdateSizeRequest $request, Size $size)
     {
-        //
+        $formData = $request->validated();
+
+        $size->update($formData);
+        return back()->with('success', 'Size updated successfully');
     }
 
     /**
@@ -63,6 +69,7 @@ class SizeController extends Controller
      */
     public function destroy(Size $size)
     {
-        //
+        $size->delete();
+        return back()->with('success', 'Size deleted successfully');
     }
 }

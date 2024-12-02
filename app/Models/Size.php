@@ -9,4 +9,9 @@ class Size extends Model
 {
     /** @use HasFactory<\Database\Factories\SizeFactory> */
     use HasFactory;
+
+    
+    protected $table = 'sizes';
+
+    protected $fillable = [ 'name' ];
 }
