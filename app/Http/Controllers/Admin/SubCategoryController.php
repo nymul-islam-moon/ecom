@@ -3,82 +3,56 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SubCategory\SubCategoryCreateRequest;
-use App\Models\Category;
 use App\Models\SubCategory;
+use App\Http\Requests\StoreSubCategoryRequest;
+use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Models\Category;
 
 class SubCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $categories = SubCategory::all();
-
-        return view('admin.sub-category.index', compact('categories'));
+        $subCategories = SubCategory::simplePaginate(2);
+        return view('admin.sub-category.index', compact('subCategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
-
         return view('admin.sub-category.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(SubCategoryCreateRequest $request)
+    public function store(StoreSubCategoryRequest $request)
     {
-        SubCategory::create($request->validated());
+        $formData = $request->validated();
+        SubCategory::create($formData);
 
-        return redirect()->route('sub-categories.index')->with('success', 'Sub Category added successfully');
+        return back()->with('success', 'SubCategory created successfully');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(SubCategory $subCategory)
     {
-        $category = SubCategory::findOrFail($id);
-
-        return view('admin.sub-category.show', compact($category));
+        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(SubCategory $subCategory)
     {
-        $subCategory = SubCategory::findOrFail($id);
-        $categories = Category::all();
-
-        return view('admin.sub-category.edit', compact('categories', 'subCategory'));
+        $categories= Category::all();
+        return view('admin.sub-category.edit', array('subCategory' => $subCategory,'categories'=>$categories));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(SubCategoryCreateRequest $request, string $id)
+    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
     {
-        $category = SubCategory::findOrFail($id);
-        $category->update($request->validated());
+        $formData = $request->validated();
 
-        return redirect()->route('sub-categories.index')->with('success', 'Category updated successfully');
+        $subCategory->update($formData);
+        return back()->with('success', 'SubCategory updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(SubCategory $subCategory)
     {
-        $category = SubCategory::findOrFail($id);
-        $category->delete();
-
-        return redirect()->route('admin.sub-categories.index')->with('success', 'Category deleted successfully');
+        $subCategory->delete();
+        return back()->with('success', 'SubCategory deleted successfully');
     }
 }
