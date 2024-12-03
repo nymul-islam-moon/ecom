@@ -975,52 +975,64 @@
                         </li> <!-- end Dashboard Menu -->
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse"
-                                role="button" aria-expanded="false" aria-controls="sidebarApps">
-                                <i class="ri-apps-2-line"></i> <span data-key="t-apps">Apps</span>
+                                role="button" aria-expanded="{{ request()->routeIs(['admin.category.index', 'admin.sub-category.index', 'admin.brand.index', 'admin.colors.index', 'admin.size.index']) ? 'true' : 'false' }}" aria-controls="sidebarApps">
+                                <i class="ri-apps-2-line"></i> <span data-key="t-apps">Admin</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarApps">
+                            <div class="collapse menu-dropdown {{ request()->routeIs(['admin.category.index', 'admin.sub-category.index', 'admin.brand.index', 'admin.colors.index', 'admin.size.index']) ? 'show' : '' }}" id="sidebarApps">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> Calendar
+                                        <a href="{{ route('admin.category.index') }}" 
+                                           class="nav-link {{ request()->routeIs('admin.category.index') ? 'active' : '' }}" 
+                                           data-key="t-calendar">
+                                            Category
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="apps-chat.html" class="nav-link" data-key="t-chat"> Chat </a>
+                                        <a href="{{route("admin.sub-category.index")}}" class="nav-link {{ request()->routeIs('admin.sub-category.index') ? 'active' : '' }}" data-key="t-chat"> Sub Category</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="{{route("admin.brand.index")}}" class="nav-link {{ request()->routeIs('admin.brand.index') ? 'active' : '' }}"
+                                        data-key="t-basic-action"> Brand </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route("admin.colors.index")}}" class="nav-link {{ request()->routeIs('admin.calors.index') ? 'active' : '' }}"
+                                            data-key="t-ecommerce-action"> Color
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route("admin.size.index")}}" class="nav-link {{ request()->routeIs('admin.size.index') ? 'active' : '' }}"
+                                            data-key="t-ecommerce-action"> Size
+                                        </a>
+                                    </li>
+                                    {{-- <li class="nav-item">
                                         <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse"
                                             role="button" aria-expanded="false" aria-controls="sidebarEmail"
                                             data-key="t-email">
                                             Email
-                                        </a>
-                                        <div class="collapse menu-dropdown" id="sidebarEmail">
+                                        </a> --}}
+                                        {{-- <div class="collapse menu-dropdown" id="sidebarEmail">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
                                                     <a href="apps-mailbox.html" class="nav-link"
                                                         data-key="t-mailbox"> Mailbox </a>
-                                                </li>
-                                                <li class="nav-item">
+                                                </li> --}}
+                                                {{-- <li class="nav-item">
                                                     <a href="#sidebaremailTemplates" class="nav-link"
                                                         data-bs-toggle="collapse" role="button"
                                                         aria-expanded="false" aria-controls="sidebaremailTemplates"
                                                         data-key="t-email-templates">
                                                         Email Templates
-                                                    </a>
-                                                    <div class="collapse menu-dropdown" id="sidebaremailTemplates">
+                                                    </a> --}}
+                                                    {{-- <div class="collapse menu-dropdown" id="sidebaremailTemplates">
                                                         <ul class="nav nav-sm flex-column">
                                                             <li class="nav-item">
-                                                                <a href="apps-email-basic.html" class="nav-link"
-                                                                    data-key="t-basic-action"> Basic Action </a>
+                                                               
                                                             </li>
-                                                            <li class="nav-item">
-                                                                <a href="apps-email-ecommerce.html" class="nav-link"
-                                                                    data-key="t-ecommerce-action"> Ecommerce Action
-                                                                </a>
-                                                            </li>
+                                                         
                                                         </ul>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                    </div> --}}
+                                                {{-- </li> --}}
+                                            {{-- </ul> --}}
                                         </div>
                                     </li>
                                     <li class="nav-item">
