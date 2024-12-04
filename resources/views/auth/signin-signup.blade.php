@@ -1,29 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Themezhub" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Kumo- Fashion eCommerce HTML Template</title>
-
-    <!-- Custom CSS -->
-    <link href="assets/css/plugins/animation.css" rel="stylesheet">
-    <link href="assets/css/plugins/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/plugins/flaticon.css" rel="stylesheet">
-    <link href="assets/css/plugins/font-awesome.css" rel="stylesheet">
-    <link href="assets/css/plugins/iconfont.css" rel="stylesheet">
-    <link href="assets/css/plugins/ion.rangeSlider.min.css" rel="stylesheet">
-    <link href="assets/css/plugins/light-box.css" rel="stylesheet">
-    <link href="assets/css/plugins/line-icons.css" rel="stylesheet">
-    <link href="assets/css/plugins/slick-theme.css" rel="stylesheet">
-    <link href="assets/css/plugins/slick.css" rel="stylesheet">
-    <link href="assets/css/plugins/snackbar.min.css" rel="stylesheet">
-    <link href="assets/css/plugins/themify.css" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
-
-</head>
+@include('partials.head');
 
 <body>
 
@@ -37,7 +15,7 @@
     <!-- ============================================================== -->
     <div id="main-wrapper">
 
-        <x-admin.nav-bar />
+        <x-nav-bar />
 
         <!-- ======================= Top Breadcrubms ======================== -->
         <div class="gray py-3">

@@ -3,7 +3,7 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-cover.html by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 22 Mar 2023 05:43:05 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signup-cover.html by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 22 Mar 2023 05:43:06 GMT -->
 <head>
 
     <meta charset="utf-8" />
@@ -37,8 +37,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden">
-                            <div class="row g-0">
+                        <div class="card overflow-hidden m-0">
+                            <div class="row justify-content-center g-0">
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100">
                                         <div class="bg-overlay"></div>
@@ -72,52 +72,72 @@
                                                     </div>
                                                 </div>
                                                 <!-- end carousel -->
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
 
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <h5 class="text-primary">Register Account</h5>
+                                            <p class="text-muted">Get your Free Velzon account now.</p>
                                         </div>
 
                                         <div class="mt-4">
-                                            <form action="{{ route('admin.login') }}" method="POST">
+                                            <form class="needs-validation" action="{{ route('admin.register') }}" method="POST">
                                                 @csrf
-                                                @method('POST')
-
                                                 <div class="mb-3">
-                                                    <label for="email" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                                                    <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter name
+                                                    </div>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
+                                                    <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" id="useremail" name="email" placeholder="Enter email address" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter email
                                                     </div>
+                                                </div>
+                                                
+
+                                                <div class="mb-3">
                                                     <label class="form-label" for="password-input">Password</label>
-                                                    <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" name="password" id="password-input">
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                    <div class="position-relative auth-pass-inputgroup">
+                                                        <input type="password" class="form-control pe-5 password-input" name="password" placeholder="Enter password" id="password-input" required>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="password-input">Confirm Password</label>
+                                                    <div class="position-relative auth-pass-inputgroup">
+                                                        <input type="password" class="form-control pe-5 password-input" name="password_confirmation" placeholder="Enter Confirm password" id="password-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
+                                                </div>
+
+                                                <div id="password-contain" class="p-3 bg-light mb-2 rounded">
+                                                    <h5 class="fs-13">Password must contain:</h5>
+                                                    <p id="pass-length" class="invalid fs-12 mb-2">Minimum <b>8 characters</b></p>
+                                                    <p id="pass-lower" class="invalid fs-12 mb-2">At <b>lowercase</b> letter (a-z)</p>
+                                                    <p id="pass-upper" class="invalid fs-12 mb-2">At least <b>uppercase</b> letter (A-Z)</p>
+                                                    <p id="pass-number" class="invalid fs-12 mb-0">A least <b>number</b> (0-9)</p>
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                                    <button class="btn btn-success w-100" type="submit">Sign Up</button>
                                                 </div>
 
                                                 <div class="mt-4 text-center">
                                                     <div class="signin-other-title">
-                                                        <h5 class="fs-13 mb-4 title">Sign In with</h5>
+                                                        <h5 class="fs-13 mb-4 title text-muted">Create account with</h5>
                                                     </div>
 
                                                     <div>
@@ -127,18 +147,15 @@
                                                         <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
                                                     </div>
                                                 </div>
-
                                             </form>
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a href="auth-signup-cover.html" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
+                                            <p class="mb-0">Already have an account ? <a href="auth-signin-cover.html" class="fw-semibold text-primary text-decoration-underline"> Signin</a> </p>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end col -->
                             </div>
-                            <!-- end row -->
                         </div>
                         <!-- end card -->
                     </div>
@@ -182,5 +199,4 @@
 </body>
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-cover.html by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 22 Mar 2023 05:43:05 GMT -->
 </html>
