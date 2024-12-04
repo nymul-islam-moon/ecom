@@ -64,7 +64,7 @@
 							</div>
 
 							<div class="currency-selector dropdown js-dropdown float-right mr-3">
-								<a href="javascript:void(0);" class="text-muted medium"><i class="lni lni-user mr-1"></i>Sign In / Register</a>
+								<a href="{{ route('profile.index') }}" class="text-muted medium"><i class="lni lni-user mr-1"></i>{{ Auth::user()->name }}</a>
 							</div>
 						</div>
 
