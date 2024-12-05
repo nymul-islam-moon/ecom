@@ -32,6 +32,7 @@ class LoginController extends Controller
      */
     public function store(AdminLoginRequest $request): RedirectResponse
     {
+        dd($request->all());
         $request->authenticate();
 
         $request->session()->regenerate();
