@@ -13,29 +13,54 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('sku', 100);
+            
+            // Basic Product Details
+            $table->string('sku', 100)->unique(); // Unique SKU
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();
+            
+            // Pricing
             $table->decimal('price', 10, 2);
             $table->decimal('sale_price', 10, 2)->nullable();
+            
+            // Stock and Inventory
             $table->integer('stock_quantity')->default(0);
+            $table->integer('low_stock_threshold')->nullable(); // Notify on low stock
+            $table->timestamp('restock_date')->nullable(); // Expected restock date
+            // Product type
+            $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
+
+            // Physical and Digital Products
             $table->decimal('weight', 10, 2)->nullable();
             $table->string('dimensions')->nullable();
             $table->boolean('is_digital')->default(false);
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
+
+            // Subscription Products
             $table->boolean('is_subscription')->default(false);
             $table->string('subscription_interval', 50)->nullable();
+
+            // Return and Policies
             $table->text('return_policy')->nullable();
             $table->integer('return_days')->nullable();
+
+            // SEO
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('subcategory_id')->constrained('sub_categories')->onDelete('cascade');
-            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+
+            // Product Lifecycle and Publish Scheduling
             $table->enum('status', ['active', 'inactive', 'discontinued', 'out_of_stock'])->default('active');
+            $table->timestamp('publish_date')->nullable(); // Scheduled publishing
+            $table->boolean('is_published')->default(false); // Visibility
+
+            // Relationships
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('cascade');
+            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
