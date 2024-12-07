@@ -26,8 +26,6 @@ Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('/brand', BrandController::class);
-Route::resource('/colors', ColorController::class);
-Route::resource('/size', SizeController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('sub-category', SubCategoryController::class);
 // });

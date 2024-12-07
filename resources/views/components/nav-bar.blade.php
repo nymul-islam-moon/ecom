@@ -34,7 +34,7 @@
 
                 <div class="currency-selector dropdown js-dropdown float-right mr-3">
                     @if ( Auth::user() )
-                        <a href="{{ route('profile.index') }}" class="text-muted medium"><i class="lni lni-user mr-1"></i>{{ Auth::user()->name }}</a>
+                        <a href="{{ route('profile.edit') }}" class="text-muted medium"><i class="lni lni-user mr-1"></i>{{ Auth::user()->name }}</a>
                     @else
                         <a href="{{ route('signin-signup') }}" class="text-muted medium"><i class="lni lni-user mr-1"></i>Sign In / Register</a>
                     @endif

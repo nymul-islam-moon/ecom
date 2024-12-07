@@ -78,6 +78,8 @@
 									</ul>
 								</div>
 
+								@include('profile.partials.delete-user-form')
+
 							</div>
 						</div>
 
