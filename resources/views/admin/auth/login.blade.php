@@ -86,11 +86,13 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <form action="https://themesbrand.com/velzon/html/default/index.html">
+                                            <form action="{{ route('admin.login') }}" method="POST">
+                                                @csrf
+                                                @method('POST')
 
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
                                                 </div>
 
                                                 <div class="mb-3">
@@ -99,7 +101,7 @@
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input">
+                                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" name="password" id="password-input">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>

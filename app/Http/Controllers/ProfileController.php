@@ -11,10 +11,10 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request): View
+    public function edit(Request $request): View
     {
 
-        return view('profile.index', [
+        return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -24,7 +24,6 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        dd('profile update');
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
