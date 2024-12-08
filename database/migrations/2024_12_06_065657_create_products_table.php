@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            
+
             // Basic Product Details
             $table->string('sku', 100)->unique(); // Unique SKU
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();
-            
+
             // Pricing
             $table->decimal('price', 10, 2);
             $table->decimal('sale_price', 10, 2)->nullable();
-            
+
             // Stock and Inventory
             $table->integer('stock_quantity')->default(0);
-            $table->integer('low_stock_threshold')->nullable(); // Notify on low stock
-            $table->timestamp('restock_date')->nullable(); // Expected restock date
+            $table->integer('low_stock_threshold')->nullable();
+            $table->timestamp('restock_date')->nullable();
             // Product type
             $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
 
@@ -53,8 +53,8 @@ return new class extends Migration
 
             // Product Lifecycle and Publish Scheduling
             $table->enum('status', ['active', 'inactive', 'discontinued', 'out_of_stock'])->default('active');
-            $table->timestamp('publish_date')->nullable(); // Scheduled publishing
-            $table->boolean('is_published')->default(false); // Visibility
+            $table->timestamp('publish_date')->nullable();
+            $table->boolean('is_published')->default(false);
 
             // Relationships
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

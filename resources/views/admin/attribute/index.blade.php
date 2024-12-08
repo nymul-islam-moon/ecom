@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute.index') }}">Attribute</a></li>
                         <li class="breadcrumb-item active">Invoice List</li>
                     </ol>
                 </div>
@@ -150,11 +150,11 @@
             <div class="card" id="invoiceList">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 flex-grow-1">Categories</h5>
+                        <h5 class="card-title mb-0 flex-grow-1">Attributes</h5>
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Category</a>
+                                <a href="{{ route('admin.attribute.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Attribute</a>
                             </div>
                         </div>
                     </div>
@@ -168,26 +168,24 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Icon</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $key =>  $category)
+                                @foreach ($attributes as $key =>  $attribute)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->icon }}</td>
+                                        <td>{{ $attribute->name }}</td>
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
-                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
+                                                <a href="{{ route('admin.attribute.edit', $attribute->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
                                                     <i class="ri-edit-2-line"></i>
                                                 </a>
                                                 
-                                                <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('admin.attribute.destroy', $attribute->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this category?')">
+                                                    <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this attribute?')">
                                                         <i class="ri-delete-bin-line"></i>
                                                     </button>
                                                 </form>
@@ -200,7 +198,7 @@
                         </table>
                         <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
-                                {{ $categories->links() }}
+                                {{ $attributes->links() }}
                             </div>
                         </div>
                     </div>
