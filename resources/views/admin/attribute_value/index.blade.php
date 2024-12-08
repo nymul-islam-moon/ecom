@@ -17,11 +17,9 @@
             </div>
         </div>
     </div>
-    <!-- end page title -->
 
     <div class="row">
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -45,12 +43,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+            
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -74,12 +72,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+            
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -103,12 +101,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+            
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -132,10 +130,10 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-    </div> <!-- end row-->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
        
@@ -145,7 +143,6 @@
                     <strong> {{ $value }} </strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
             @endsession
             <div class="card" id="invoiceList">
                 <div class="card-header border-0">
