@@ -13,10 +13,4 @@ class Attribute extends Model
     protected $table = 'attributes';
 
     protected $fillable = ['name'];
-
-    // Define relationship with AttributeValue
-    // public function values()
-    // {
-    //     return $this->hasMany(AttributeValue::class);
-    // }
 }

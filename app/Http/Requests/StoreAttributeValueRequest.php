@@ -22,7 +22,7 @@ class StoreAttributeValueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'value' => 'required|string|max:255|unique:attribute_values,name',
+            'name' => 'required|string|max:255|unique:attribute_values,name',
             'attribute_id' => 'required|exists:attributes,id',
         ];
     }

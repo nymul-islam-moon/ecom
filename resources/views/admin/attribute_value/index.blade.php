@@ -154,7 +154,7 @@
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.attribute.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Attribute Value</a>
+                                <a href="{{ route('admin.attribute-value.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Attribute Value</a>
                             </div>
                         </div>
                     </div>
@@ -177,14 +177,14 @@
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $attributeValue->attribute->name }}</td>
-                                        <td>{{ $attributeValue->value }}</td>
+                                        <td>{{ $attributeValue->name }}</td>
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
-                                                <a href="{{ route('admin.attribute-value.edit', $attribute->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
+                                                <a href="{{ route('admin.attribute-value.edit', $attributeValue->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
                                                     <i class="ri-edit-2-line"></i>
                                                 </a>
                                                 
-                                                <form action="{{ route('admin.attribute-value.destroy', $attribute->id) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('admin.attribute-value.destroy', $attributeValue->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-link link-danger fs-15 p-0 m-0 border-0" onclick="return confirm('Are you sure you want to delete this attribute?')">

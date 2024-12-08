@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute-value.index') }}">Attrinute</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute-value.index') }}">Attrinute Value</a></li>
                         <li class="breadcrumb-item active">Attrinute Create</li>
                     </ol>
                 </div>
@@ -28,7 +28,23 @@
         <form class="row g-3 was-validated" action="{{ route('admin.attribute-value.store') }}" method="POST" novalidate>
             @csrf
             <div class="col-md-6 has-validation">
-                <label for="attribute_value" class="form-label">Name</label>
+                <label for="attribure" class="form-label">Attribute</label>
+
+                <select class="form-select" name="attribute_id" id="validationCustom04" required>
+                    <option selected value="">Select Attribute</option>
+                    @foreach ($attributes as $attribute)
+                        <option value="{{ $attribute->id }}" {{ old('attribute_id') == $attribute->id ? 'selected' : '' }}>{{ $attribute->name }}</option>
+                    @endforeach
+                </select>
+                @error('attribute_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            
+            <div class="col-md-6 has-validation">
+                <label for="attribute_value" class="form-label">Attribute Value</label>
                 <input 
                     type="text" 
                     name="name" 
@@ -36,7 +52,7 @@
                     id="attribute_value" 
                     value="{{ old('name') }}" 
                     required 
-                    placeholder="Attribute Name">
+                    placeholder="Attribute Value">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -44,21 +60,7 @@
                 @enderror
             </div>
 
-            <div class="col-md-6 has-validation">
-                <label for="sub_category_name" class="form-label">Category</label>
-
-                <select class="form-select" name="category_id" id="validationCustom04" required>
-                    <option selected value="">Select Category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                @error('category_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
+            
             
             
             <div class="col-12">

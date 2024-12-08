@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttributeValueRequest;
 use App\Http\Requests\UpdateAttributeValueRequest;
+use App\Models\Attribute;
 use App\Models\AttributeValue;
 
 class AttributeValueController extends Controller
@@ -24,7 +25,9 @@ class AttributeValueController extends Controller
      */
     public function create()
     {
-        return view('admin.attribute_value.create');
+        $attributes = Attribute::all();
+
+        return view('admin.attribute_value.create', compact('attributes'));
     }
 
     /**
@@ -48,7 +51,9 @@ class AttributeValueController extends Controller
      */
     public function edit(AttributeValue $attributeValue)
     {
-        return view('admin.attribute_value.edit', compact('attributeValue'));
+        $attributes = Attribute::all();
+
+        return view('admin.attribute_value.edit', compact('attributeValue', 'attributes'));
     }
 
     /**
