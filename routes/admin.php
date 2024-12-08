@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -28,8 +28,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::resource('/brand', BrandController::class);
 Route::resource('/category', CategoryController::class);
-Route::resource('/sub-category', SubCategoryController::class);
-Route::resource('/attribute', AttributeController::class);
+Route::resource('sub-category', SubCategoryController::class);
+Route::resource('customer', CustomerController::class);
 // });
 // Route::resource('subcategory', SubCategoryController::class);
 // Route::resource('color', ColorController::class);
