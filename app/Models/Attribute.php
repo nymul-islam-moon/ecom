@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    /** @use HasFactory<\Database\Factories\ArrtibuteFactory> */
+    /** @use HasFactory<\Database\Factories\AttributeFactory> */
     use HasFactory;
+
+    protected $table = 'attributes';
 
     protected $fillable = ['name'];
 
     // Define relationship with AttributeValue
-    public function values()
-    {
-        return $this->hasMany(AttributeValue::class);
-    }
+    // public function values()
+    // {
+    //     return $this->hasMany(AttributeValue::class);
+    // }
 }

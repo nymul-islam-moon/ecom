@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\BrandController;
@@ -29,6 +31,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('brand', BrandController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('sub-category', SubCategoryController::class);
+Route::resource('attribute', AttributeController::class);
+Route::resource('attribute-value', AttributeValueController::class);
 Route::resource('customer', CustomerController::class);
 // });
 // Route::resource('subcategory', SubCategoryController::class);

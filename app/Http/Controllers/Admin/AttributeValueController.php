@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\AttributeValue;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttributeValueRequest;
 use App\Http\Requests\UpdateAttributeValueRequest;
+use App\Models\AttributeValue;
 
 class AttributeValueController extends Controller
 {
@@ -13,7 +14,9 @@ class AttributeValueController extends Controller
      */
     public function index()
     {
-        //
+        $attributeValues = AttributeValue::simplePaginate(2);
+
+        return view('admin.attribute_value.index', compact('attributeValues'));
     }
 
     /**
@@ -21,7 +24,7 @@ class AttributeValueController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.attribute_value.create');
     }
 
     /**
@@ -29,23 +32,23 @@ class AttributeValueController extends Controller
      */
     public function store(StoreAttributeValueRequest $request)
     {
-        //
+        $formData = $request->validated();
+        AttributeValue::create($formData);
+
+        return back()->with('success', 'Attribute Value created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(AttributeValue $attributeValue)
-    {
-        //
-    }
+    public function show(AttributeValue $attributeValue) {}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(AttributeValue $attributeValue)
     {
-        //
+        return view('admin.attribute_value.edit', compact('attributeValue'));
     }
 
     /**
@@ -53,7 +56,11 @@ class AttributeValueController extends Controller
      */
     public function update(UpdateAttributeValueRequest $request, AttributeValue $attributeValue)
     {
-        //
+        $formData = $request->validated();
+
+        $attributeValue->update($formData);
+
+        return back()->with('success', 'Attribute Value updated successfully');
     }
 
     /**
@@ -61,6 +68,8 @@ class AttributeValueController extends Controller
      */
     public function destroy(AttributeValue $attributeValue)
     {
-        //
+        $attributeValue->delete();
+
+        return back()->with('success', 'Attribute Value Value deleted successfully');
     }
 }

@@ -5,12 +5,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Attribute Create</h4>
+                <h4 class="mb-sm-0">Attrinute Create</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute.index') }}">Attribute</a></li>
-                        <li class="breadcrumb-item active">Attribute Create</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute-value.index') }}">Attrinute</a></li>
+                        <li class="breadcrumb-item active">Attrinute Create</li>
                     </ol>
                 </div>
 
@@ -25,17 +25,16 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.attribute.update', $attribute->id) }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.attribute-value.store') }}" method="POST" novalidate>
             @csrf
-            @method('PUT')
             <div class="col-md-6 has-validation">
-                <label for="attribute_name" class="form-label">Name</label>
+                <label for="attribute_value" class="form-label">Name</label>
                 <input 
                     type="text" 
                     name="name" 
                     class="form-control @error('name') is-invalid @enderror" 
-                    id="attribute_name" 
-                    value="{{ $attribute->name }}" 
+                    id="attribute_value" 
+                    value="{{ old('name') }}" 
                     required 
                     placeholder="Attribute Name">
                 @error('name')
@@ -44,10 +43,26 @@
                     </div>
                 @enderror
             </div>
+
+            <div class="col-md-6 has-validation">
+                <label for="sub_category_name" class="form-label">Category</label>
+
+                <select class="form-select" name="category_id" id="validationCustom04" required>
+                    <option selected value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
             
             
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Update Attribute</button>
+                <button class="btn btn-primary" type="submit">Create Attrinute</button>
             </div>
         </form>
     </div>

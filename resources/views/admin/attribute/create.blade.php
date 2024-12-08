@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Attrinute</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.attribute.index') }}">Attrinute</a></li>
                         <li class="breadcrumb-item active">Attrinute Create</li>
                     </ol>
                 </div>
@@ -25,17 +25,25 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.category.store') }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.attribute.store') }}" method="POST" novalidate>
             @csrf
             <div class="col-md-6 has-validation">
-                <label for="attrinute_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="attrinute_name" value="{{ old('name') }}" required placeholder="Attrinute Name">
+                <label for="attribute_name" class="form-label">Name</label>
+                <input 
+                    type="text" 
+                    name="name" 
+                    class="form-control @error('name') is-invalid @enderror" 
+                    id="attribute_name" 
+                    value="{{ old('name') }}" 
+                    required 
+                    placeholder="Attribute Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+            
             
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Create Attrinute</button>

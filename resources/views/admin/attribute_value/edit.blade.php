@@ -25,7 +25,7 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.attribute.update', $attribute->id) }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.attribute-value.update', $attribute->id) }}" method="POST" novalidate>
             @csrf
             @method('PUT')
             <div class="col-md-6 has-validation">

@@ -49,19 +49,16 @@ class AttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Attribute $attrinute)
+    public function edit(Attribute $attribute)
     {
-        return view('admin.attribute.edit', compact('attrinute'));
+        return view('admin.attribute.edit', compact('attribute'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAttributeRequest $request, Attribute $attrinute)
+    public function update(UpdateAttributeRequest $request, Attribute $attribute)
     {
         $formData = $request->validated();
 
-        $attrinute->update($formData);
+        $attribute->update($formData);
 
         return back()->with('success', 'Attribute updated successfully');
     }
@@ -69,9 +66,9 @@ class AttributeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attribute $attrinute)
+    public function destroy(Attribute $attribute)
     {
-        $attrinute->delete();
+        $attribute->delete();
 
         return back()->with('success', 'Attribute deleted successfully');
     }
