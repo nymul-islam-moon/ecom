@@ -1142,3 +1142,9 @@
     </div>
     <!--end row-->
 @endsection
+
+@push('js')
+    <script>
+        // alert('from admin app');
+    </script>
+@endpush

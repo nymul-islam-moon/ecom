@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@push('css')
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.0.0/ckeditor5.css" />
+@endpush
+
 @section('admin_content')
     <!-- start page title -->
     <div class="row">
@@ -211,3 +215,16 @@
     </div>
     <!--end row-->
 @endsection
+
+@push('js')
+<script src="https://cdn.ckeditor.com/ckeditor5/44.0.0/ckeditor5.umd.js"></script>
+
+<style>
+    .ckeditor-content {
+        width: 795px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@endpush

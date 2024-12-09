@@ -1,4 +1,5 @@
 @include('partials.admin.head')
+@stack('css')
 <body>
 
     <!-- Begin page -->
@@ -1805,5 +1806,6 @@
     </div>
 
     @include('partials.admin.scripts')
+    @stack('js')
 </body>
 </html>
