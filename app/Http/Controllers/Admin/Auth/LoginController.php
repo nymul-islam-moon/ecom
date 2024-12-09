@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AdminLoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     /**
      * Display the login view.
@@ -32,12 +25,11 @@ class LoginController extends Controller
      */
     public function store(AdminLoginRequest $request): RedirectResponse
     {
-        dd($request->all());
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
     /**
@@ -51,6 +43,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin/login');
     }
 }
