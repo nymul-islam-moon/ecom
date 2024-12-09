@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('stock_quantity')->default(0);
             $table->integer('low_stock_threshold')->nullable();
             $table->timestamp('restock_date')->nullable();
+            
             // Product type
             $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
 
@@ -37,6 +38,12 @@ return new class extends Migration
             $table->boolean('is_digital')->default(false);
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
+
+            // Backorder Option
+            $table->enum('allow_backorders', ['no', 'notify', 'yes'])->default('no');
+            // - 'no': Backorders not allowed.
+            // - 'notify': Allow backorders with customer notification.
+            // - 'yes': Allow backorders without any restriction.
 
             // Subscription Products
             $table->boolean('is_subscription')->default(false);
