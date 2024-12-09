@@ -70,11 +70,12 @@
                                                 <i class="lni lni-power-switch mr-2"></i>Log Out
                                             </a>
                                         </li>
+									
 
                                         <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                                             @csrf
                                         </form>
-
+										
 									</ul>
 								</div>
 
