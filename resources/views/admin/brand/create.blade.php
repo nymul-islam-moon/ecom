@@ -25,7 +25,7 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.brand.store') }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="col-md-6 has-validation">
                 <label for="brand_name" class="form-label">Name</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-6">
                 <label for="brand_icon" class="form-label">Logo</label>
-                <input type="text" name="logo" class="form-control" id="brand_icon" value="{{ old('icon') }}" required placeholder="Brand Logo">
+                <input type="file" name="logo" class="form-control" id="brand_icon" value="{{ old('icon') }}" required placeholder="Brand Logo">
                 @error('icon')
                     <div class="invalid-feedback">
                         {{ $message }}

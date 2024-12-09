@@ -31,8 +31,14 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreBrandRequest $request)
-    {
+    {  
         $formData = $request->validated();
+        if($formData['logo']){
+            $logo = $formData['logo'];
+            $filename = time().'_'.$logo->getClientOriginalName();
+            $filePath = $logo->storeAs('photos', $filename, 'public');
+            $formData['logo'] = $filePath;
+        }
         Brand::create($formData);
 
         return back()->with('success', 'Brand created successfully');
