@@ -154,11 +154,11 @@
             <div class="card" id="invoiceList">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 flex-grow-1">Categories</h5>
+                        <h5 class="card-title mb-0 flex-grow-1">Products</h5>
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Category</a>
+                                <a href="{{ route('admin.product.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Product</a>
                             </div>
                         </div>
                     </div>

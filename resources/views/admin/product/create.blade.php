@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Category Create</h4>
+                <h4 class="mb-sm-0">Product Create</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
-                        <li class="breadcrumb-item active">Category Create</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.product.index') }}">Product</a></li>
+                        <li class="breadcrumb-item active">Product Create</li>
                     </ol>
                 </div>
 
@@ -28,26 +28,44 @@
         </div>
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
-    <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
+    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="needs-validation" novalidate method="POST">
+        @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
-                            <label class="form-label" for="product-title-input">Product Title</label>
-                            <input type="text" class="form-control" id="product-title-input" value="" placeholder="Enter product title" required>
+                            <label class="form-label" for="product-title-input">Product Name</label>
+                            <input type="text" class="form-control" name="name" id="product-title-input" value="" placeholder="Enter product title" required>
                             
                         </div>
-                        
+
                         <div class="mb-3">
-                            <label class="form-label" for="product-title-input">Product Description</label>
-                            <textarea class="" id="" cols="30" rows="10"></textarea>
+                            <label class="form-label" for="product-long-description">Product Long Description</label>
+
+                            <textarea class="form-control" name="description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                         </div>
 
                     </div>
                 </div>
                 <!-- end card -->
 
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Product Prices</h5>
+                    </div>
+                    <div class="card-body d-flex">
+                        <div class="mb-3 me-3 w-50">
+                            <label class="form-label" for="product-price-1">Product Price</label>
+                            <input type="text" class="form-control" name="price" id="product-price" value="{{ old('price') }}" placeholder="Enter product price" required>
+                        </div>
+                        <div class="mb-3 w-50">
+                            <label class="form-label" for="product-price-2">Product Selling Price</label>
+                            <input type="text" class="form-control" name="sale_price" id="product-sale-price" value="{{ old('sale_price') }}" placeholder="Enter product sale price" required>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Product Gallery</h5>
@@ -246,10 +264,11 @@
                         <div class="mb-3">
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 
-                            <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                <option value="Published" selected>Published</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Draft">Draft</option>
+                            <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="discontinued">Discontinued</option>
+                                <option value="out_of_stock">Out of stock</option>
                             </select>
                         </div>
 
@@ -287,14 +306,20 @@
                         <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
                         <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
-                            <option value="Appliances">Appliances</option>
-                            <option value="Automotive Accessories">Automotive Accessories</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Fashion">Fashion</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Grocery">Grocery</option>
-                            <option value="Kids">Kids</option>
-                            <option value="Watches">Watches</option>
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
+                                New</a>Select product sub-category</p>
+                        <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
+                            <option value="">Select Sub-Category</option>
+                            @foreach ($SubCategories as $SubCategory)
+                                <option value="{{ $SubCategory->id }}">{{ $SubCategory->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <!-- end card body -->
@@ -321,7 +346,7 @@
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-2">Add short description for product</p>
-                        <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                        <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                     </div>
                     <!-- end card body -->
                 </div>
@@ -338,14 +363,16 @@
 @push('js')
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script>
-    // Initialize CKEditor
-    ClassicEditor
-        .create(document.querySelector('textarea'))
-        .then(editor => {
-            console.log('Editor was initialized', editor);
-        })
-        .catch(error => {
-            console.error('Error during initialization of the editor', error);
-        });
+    // Initialize CKEditor for all textarea elements
+    document.querySelectorAll('textarea').forEach((textarea) => {
+        ClassicEditor
+            .create(textarea)
+            .then(editor => {
+                console.log('Editor initialized for:', textarea);
+            })
+            .catch(error => {
+                console.error('Error initializing editor for:', textarea, error);
+            });
+    });
 </script>
 @endpush

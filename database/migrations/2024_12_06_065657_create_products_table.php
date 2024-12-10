@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             // Basic Product Details
-            $table->string('sku', 100)->unique(); // Unique SKU
+            $table->string('sku', 100)->unique();
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();

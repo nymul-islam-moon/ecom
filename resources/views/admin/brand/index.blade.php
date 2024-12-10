@@ -166,20 +166,16 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-    </div> <!-- end row-->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
 
         <div class="col-lg-12">
             @session('success')
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong> {{ $value }} </strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
+                <x-admin.alert type="danger" message="{{ $value }}" />
             @endsession
             <div class="card" id="BrandList">
                 <div class="card-header border-0">
@@ -198,7 +194,7 @@
 
                 <div class="card-body">
                     <div>
-                        <!-- Hoverable Rows -->
+                        
                         <table class="table table-hover table-striped align-middle table-nowrap mb-0 ">
                             <thead>
                                 <tr>

@@ -18,11 +18,7 @@
         </div>
     </div>
     @session('success')
-        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-            <strong> {{ $value }} </strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
+        <x-admin.alert type="success" message="{{ $value }}" />
     @endsession
     <div class="row">
         <form class="row g-3 was-validated" action="{{ route('admin.brand.store') }}" method="POST"
