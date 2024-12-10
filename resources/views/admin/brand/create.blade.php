@@ -25,11 +25,13 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.brand.store') }}" method="POST"
+            enctype="multipart/form-data" novalidate>
             @csrf
             <div class="col-md-6 has-validation">
                 <label for="brand_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="brand_name" value="{{ old('name') }}" required placeholder="Brand Name">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                    id="brand_name" value="{{ old('name') }}" required placeholder="Brand Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -37,15 +39,16 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label for="brand_icon" class="form-label">Logo</label>
-                <input type="file" name="logo" class="form-control" id="brand_icon" value="{{ old('icon') }}" required placeholder="Brand Logo">
-                @error('icon')
+                <label for="brand_logo" class="form-label">Logo</label>
+                <input type="file" name="logo" class="form-control @error('logo') is-invalid @enderror"
+                    id="brand_logo" required placeholder="Brand Logo">
+                @error('logo')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            
+
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Create Brand</button>
             </div>

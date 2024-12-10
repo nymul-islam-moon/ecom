@@ -22,8 +22,8 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'logo' => 'required|mimes:png,jpg',
+            'name' => 'required|string|max:255|unique:brands,name',
+            'logo' => 'required|mimes:jpg,bmp,png',
         ];
     }
 }
