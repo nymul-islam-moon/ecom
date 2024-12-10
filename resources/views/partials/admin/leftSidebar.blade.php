@@ -6,7 +6,8 @@
         <ul class="navbar-nav" id="navbar-nav">
             <li class="menu-title"><span data-key="t-menu">Menu</span></li>
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarDashboards">
                     <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarDashboards">
@@ -30,129 +31,110 @@
                             <a href="dashboard-nft.html" class="nav-link" data-key="t-nft"> NFT</a>
                         </li>
                         <li class="nav-item">
-                            <a href="dashboard-job.html" class="nav-link"><span data-key="t-job">Job</span> <span class="badge badge-pill bg-success" data-key="t-new">New</span></a>
+                            <a href="dashboard-job.html" class="nav-link"><span data-key="t-job">Job</span> <span
+                                    class="badge badge-pill bg-success" data-key="t-new">New</span></a>
                         </li>
                     </ul>
                 </div>
             </li> <!-- end Dashboard Menu -->
             <li class="nav-item">
-                <a 
-                    class="nav-link menu-link {{ request()->is('admin/product*') ? 'active' : '' }}" 
-                    href="#sidebarApps" 
-                    data-bs-toggle="collapse" 
-                    role="button" 
-                    aria-expanded="{{ request()->is('admin/product*') ? 'true' : 'false' }}" 
-                    aria-controls="sidebarApps"
-                >
-                    <i class="ri-apps-2-line"></i> 
-                    <span data-key="t-apps">Ecommerce</span>
+                <a class="nav-link menu-link {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*') ? 'active' : '' }}"
+                    href="#sidebarApps" data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ request()->is('admin/product*') ? 'true' : 'false' }}"
+                    aria-controls="sidebarApps">
+                    <i class="ri-apps-2-line"></i>
+                    <span data-key="t-apps">Product Management</span>
                 </a>
-                <div 
-                    class="collapse menu-dropdown {{ request()->is('admin/product*') ? 'show' : '' }}" 
-                    id="sidebarApps"
-                >
+                <div class="collapse menu-dropdown {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*') ? 'show' : '' }}"
+                    id="sidebarApps">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a 
-                                href="{{ route('admin.product.index') }}" 
-                                class="nav-link {{ request()->routeIs('admin.product.index') || request()->routeIs('admin.product.edit') ? 'active' : '' }}" 
-                                data-key="t-calendar"
-                            > 
-                                Product 
+                            <a href="{{ route('admin.category.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.category.index') || request()->routeIs('admin.category.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Category
                             </a>
                         </li>
-                        
                         <li class="nav-item">
-                            <a href="apps-chat.html" class="nav-link" data-key="t-chat"> Chat </a>
-                        </li>
-                        <li class="nav-item">
-                            <a 
-                                href="#sidebarEmail" 
-                                class="nav-link" 
-                                data-bs-toggle="collapse" 
-                                role="button" 
-                                aria-expanded="" 
-                                aria-controls="sidebarEmail" 
-                                data-key="t-email"
-                            >
-                                Email
+                            <a href="{{ route('admin.sub-category.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.sub-category.index') || request()->routeIs('admin.sub-category.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Sub-Category
                             </a>
-                            <div 
-                                class="collapse menu-dropdown" 
-                                id="sidebarEmail"
-                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.brand.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.brand.index') || request()->routeIs('admin.brand.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Brand
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#sidebarEmail"
+                                class="nav-link {{ request()->is('admin/attribute*') || request()->is('admin/attribute-value*') ? 'active' : '' }}"
+                                data-bs-toggle="collapse" role="button"
+                                aria-expanded="{{ request()->is('admin/attribute*') || request()->is('admin/attribute-value*') ? 'true' : 'false' }}"
+                                aria-controls="sidebarEmail" data-key="t-email">
+                                Attributes
+                            </a>
+                            <div class="collapse menu-dropdown {{ request()->is('admin/attribute*') || request()->is('admin/attribute-value*') ? 'show' : '' }}"
+                                id="sidebarEmail">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a 
-                                            href="apps-mailbox.html" 
-                                            class="nav-link" 
-                                            data-key="t-mailbox"
-                                        > 
-                                            Mailbox 
+                                        <a href="{{ route('admin.attribute.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.attribute.index') || request()->routeIs('admin.attribute.edit') ? 'active' : '' }}"
+                                            data-key="t-mailbox">
+                                            Attribute Name
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a 
-                                            href="#sidebaremailTemplates" 
-                                            class="nav-link " 
-                                            data-bs-toggle="collapse" 
-                                            role="button" 
-                                            aria-expanded="" 
-                                            aria-controls="sidebaremailTemplates" 
-                                            data-key="t-email-templates"
-                                        >
-                                            Email Templates
+                                        <a href="{{ route('admin.attribute-value.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.attribute-value.index') || request()->routeIs('admin.attribute-value.edit') ? 'active' : '' }}"
+                                            data-key="t-mailbox">
+                                            Attribute Value
                                         </a>
-                                        <div 
-                                            class="collapse menu-dropdown " 
-                                            id="sidebaremailTemplates"
-                                        >
-                                            <ul class="nav nav-sm flex-column">
-                                                <li class="nav-item">
-                                                    <a 
-                                                        href="apps-email-basic.html" 
-                                                        class="nav-link " 
-                                                        data-key="t-basic-action"
-                                                    > 
-                                                        Basic Action 
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a 
-                                                        href="apps-email-ecommerce.html" 
-                                                        class="nav-link " 
-                                                        data-key="t-ecommerce-action"
-                                                    > 
-                                                        Ecommerce Action 
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.product.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.product.index') || request()->routeIs('admin.product.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Product
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </li>
-            
+
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                    <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Layouts</span> <span class="badge badge-pill bg-danger" data-key="t-hot">Hot</span>
+                <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarLayouts">
+                    <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Layouts</span> <span
+                        class="badge badge-pill bg-danger" data-key="t-hot">Hot</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarLayouts">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="layouts-horizontal.html" target="_blank" class="nav-link" data-key="t-horizontal">Horizontal</a>
+                            <a href="layouts-horizontal.html" target="_blank" class="nav-link"
+                                data-key="t-horizontal">Horizontal</a>
                         </li>
                         <li class="nav-item">
-                            <a href="layouts-detached.html" target="_blank" class="nav-link" data-key="t-detached">Detached</a>
+                            <a href="layouts-detached.html" target="_blank" class="nav-link"
+                                data-key="t-detached">Detached</a>
                         </li>
                         <li class="nav-item">
-                            <a href="layouts-two-column.html" target="_blank" class="nav-link" data-key="t-two-column">Two Column</a>
+                            <a href="layouts-two-column.html" target="_blank" class="nav-link"
+                                data-key="t-two-column">Two Column</a>
                         </li>
                         <li class="nav-item">
-                            <a href="layouts-vertical-hovered.html" target="_blank" class="nav-link" data-key="t-hovered">Hovered</a>
+                            <a href="layouts-vertical-hovered.html" target="_blank" class="nav-link"
+                                data-key="t-hovered">Hovered</a>
                         </li>
                     </ul>
                 </div>
@@ -161,13 +143,15 @@
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAuth">
+                <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarAuth">
                     <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Authentication</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAuth">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="#sidebarSignIn" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSignIn" data-key="t-signin"> Sign In
+                            <a href="#sidebarSignIn" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarSignIn" data-key="t-signin"> Sign In
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarSignIn">
                                 <ul class="nav nav-sm flex-column">
@@ -183,7 +167,8 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarSignUp" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSignUp" data-key="t-signup"> Sign Up
+                            <a href="#sidebarSignUp" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarSignUp" data-key="t-signup"> Sign Up
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarSignUp">
                                 <ul class="nav nav-sm flex-column">
@@ -200,7 +185,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#sidebarResetPass" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarResetPass" data-key="t-password-reset">
+                            <a href="#sidebarResetPass" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarResetPass" data-key="t-password-reset">
                                 Password Reset
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarResetPass">
@@ -218,7 +204,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#sidebarchangePass" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarchangePass" data-key="t-password-create">
+                            <a href="#sidebarchangePass" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarchangePass" data-key="t-password-create">
                                 Password Create
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarchangePass">
@@ -236,7 +223,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#sidebarLockScreen" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLockScreen" data-key="t-lock-screen">
+                            <a href="#sidebarLockScreen" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarLockScreen" data-key="t-lock-screen">
                                 Lock Screen
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarLockScreen">
@@ -254,7 +242,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#sidebarLogout" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLogout" data-key="t-logout"> Logout
+                            <a href="#sidebarLogout" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarLogout" data-key="t-logout"> Logout
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarLogout">
                                 <ul class="nav nav-sm flex-column">
@@ -270,7 +259,9 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarSuccessMsg" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSuccessMsg" data-key="t-success-message"> Success Message
+                            <a href="#sidebarSuccessMsg" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarSuccessMsg" data-key="t-success-message">
+                                Success Message
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarSuccessMsg">
                                 <ul class="nav nav-sm flex-column">
@@ -286,7 +277,9 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarTwoStep" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTwoStep" data-key="t-two-step-verification"> Two Step Verification
+                            <a href="#sidebarTwoStep" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarTwoStep"
+                                data-key="t-two-step-verification"> Two Step Verification
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarTwoStep">
                                 <ul class="nav nav-sm flex-column">
@@ -302,7 +295,8 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarErrors" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarErrors" data-key="t-errors"> Errors
+                            <a href="#sidebarErrors" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarErrors" data-key="t-errors"> Errors
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarErrors">
                                 <ul class="nav nav-sm flex-column">
@@ -322,7 +316,8 @@
                                         <a href="auth-500.html" class="nav-link" data-key="t-500"> 500 </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="auth-offline.html" class="nav-link" data-key="t-offline-page"> Offline Page </a>
+                                        <a href="auth-offline.html" class="nav-link" data-key="t-offline-page">
+                                            Offline Page </a>
                                     </li>
                                 </ul>
                             </div>
@@ -332,7 +327,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarPages">
                     <i class="ri-pages-line"></i> <span data-key="t-pages">Pages</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarPages">
@@ -341,7 +337,8 @@
                             <a href="pages-starter.html" class="nav-link" data-key="t-starter"> Starter </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarProfile" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile"> Profile
+                            <a href="#sidebarProfile" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile"> Profile
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarProfile">
                                 <ul class="nav nav-sm flex-column">
@@ -350,7 +347,8 @@
                                             Simple Page </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-profile-settings.html" class="nav-link" data-key="t-settings"> Settings </a>
+                                        <a href="pages-profile-settings.html" class="nav-link" data-key="t-settings">
+                                            Settings </a>
                                     </li>
                                 </ul>
                             </div>
@@ -382,20 +380,26 @@
                             <a href="pages-sitemap.html" class="nav-link" data-key="t-sitemap"> Sitemap </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages-search-results.html" class="nav-link" data-key="t-search-results"> Search Results </a>
+                            <a href="pages-search-results.html" class="nav-link" data-key="t-search-results"> Search
+                                Results </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages-privacy-policy.html" class="nav-link"><span data-key="t-privacy-policy">Privacy Policy</span> <span class="badge badge-pill bg-success" data-key="t-new">New</span></a>
+                            <a href="pages-privacy-policy.html" class="nav-link"><span
+                                    data-key="t-privacy-policy">Privacy Policy</span> <span
+                                    class="badge badge-pill bg-success" data-key="t-new">New</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages-term-conditions.html" class="nav-link"><span data-key="t-term-conditions">Term & Conditions</span> <span class="badge badge-pill bg-success" data-key="t-new">New</span></a>
+                            <a href="pages-term-conditions.html" class="nav-link"><span
+                                    data-key="t-term-conditions">Term & Conditions</span> <span
+                                    class="badge badge-pill bg-success" data-key="t-new">New</span></a>
                         </li>
                     </ul>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
+                <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarLanding">
                     <i class="ri-rocket-line"></i> <span data-key="t-landing">Landing</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarLanding">
@@ -407,7 +411,8 @@
                             <a href="nft-landing.html" class="nav-link" data-key="t-nft-landing"> NFT Landing </a>
                         </li>
                         <li class="nav-item">
-                            <a href="job-landing.html" class="nav-link"><span data-key="t-job">Job</span> <span class="badge badge-pill bg-success" data-key="t-new">New</span></a>
+                            <a href="job-landing.html" class="nav-link"><span data-key="t-job">Job</span> <span
+                                    class="badge badge-pill bg-success" data-key="t-new">New</span></a>
                         </li>
                     </ul>
                 </div>
@@ -416,7 +421,8 @@
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Components</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
+                <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarUI">
                     <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Base UI</span>
                 </a>
                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
@@ -458,7 +464,8 @@
                                     <a href="ui-tabs.html" class="nav-link" data-key="t-tabs">Tabs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ui-accordions.html" class="nav-link" data-key="t-accordion-collapse">Accordion & Collapse</a>
+                                    <a href="ui-accordions.html" class="nav-link"
+                                        data-key="t-accordion-collapse">Accordion & Collapse</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="ui-modals.html" class="nav-link" data-key="t-modals">Modals</a>
@@ -467,13 +474,15 @@
                                     <a href="ui-offcanvas.html" class="nav-link" data-key="t-offcanvas">Offcanvas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ui-placeholders.html" class="nav-link" data-key="t-placeholders">Placeholders</a>
+                                    <a href="ui-placeholders.html" class="nav-link"
+                                        data-key="t-placeholders">Placeholders</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="ui-progress.html" class="nav-link" data-key="t-progress">Progress</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ui-notifications.html" class="nav-link" data-key="t-notifications">Notifications</a>
+                                    <a href="ui-notifications.html" class="nav-link"
+                                        data-key="t-notifications">Notifications</a>
                                 </li>
                             </ul>
                         </div>
@@ -488,7 +497,8 @@
                                         Video</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ui-typography.html" class="nav-link" data-key="t-typography">Typography</a>
+                                    <a href="ui-typography.html" class="nav-link"
+                                        data-key="t-typography">Typography</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="ui-lists.html" class="nav-link" data-key="t-lists">Lists</a>
@@ -509,7 +519,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
+                <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarAdvanceUI">
                     <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Advance UI</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
@@ -555,7 +566,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarForms">
+                <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarForms">
                     <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Forms</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarForms">
@@ -568,7 +580,8 @@
                             <a href="forms-select.html" class="nav-link" data-key="t-form-select"> Form Select </a>
                         </li>
                         <li class="nav-item">
-                            <a href="forms-checkboxs-radios.html" class="nav-link" data-key="t-checkboxs-radios">Checkboxs & Radios</a>
+                            <a href="forms-checkboxs-radios.html" class="nav-link"
+                                data-key="t-checkboxs-radios">Checkboxs & Radios</a>
                         </li>
                         <li class="nav-item">
                             <a href="forms-pickers.html" class="nav-link" data-key="t-pickers"> Pickers </a>
@@ -607,7 +620,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
+                <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarTables">
                     <i class="ri-layout-grid-line"></i> <span data-key="t-tables">Tables</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarTables">
@@ -629,13 +643,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCharts">
+                <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarCharts">
                     <i class="ri-pie-chart-line"></i> <span data-key="t-charts">Charts</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarCharts">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="#sidebarApexcharts" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApexcharts" data-key="t-apexcharts">
+                            <a href="#sidebarApexcharts" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarApexcharts" data-key="t-apexcharts">
                                 Apexcharts
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarApexcharts">
@@ -664,7 +680,8 @@
                                             Timeline </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="charts-apex-candlestick.html" class="nav-link" data-key="t-candlstick"> Candlstick </a>
+                                        <a href="charts-apex-candlestick.html" class="nav-link"
+                                            data-key="t-candlstick"> Candlstick </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="charts-apex-boxplot.html" class="nav-link" data-key="t-boxplot">
@@ -690,7 +707,8 @@
                                         <a href="charts-apex-pie.html" class="nav-link" data-key="t-pie"> Pie </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="charts-apex-radialbar.html" class="nav-link" data-key="t-radialbar"> Radialbar </a>
+                                        <a href="charts-apex-radialbar.html" class="nav-link" data-key="t-radialbar">
+                                            Radialbar </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="charts-apex-radar.html" class="nav-link" data-key="t-radar"> Radar
@@ -714,7 +732,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarIcons">
+                <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarIcons">
                     <i class="ri-compasses-2-line"></i> <span data-key="t-icons">Icons</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarIcons">
@@ -726,7 +745,8 @@
                             <a href="icons-boxicons.html" class="nav-link" data-key="t-boxicons">Boxicons</a>
                         </li>
                         <li class="nav-item">
-                            <a href="icons-materialdesign.html" class="nav-link" data-key="t-material-design">Material Design</a>
+                            <a href="icons-materialdesign.html" class="nav-link"
+                                data-key="t-material-design">Material Design</a>
                         </li>
                         <li class="nav-item">
                             <a href="icons-lineawesome.html" class="nav-link" data-key="t-line-awesome">Line
@@ -736,14 +756,16 @@
                             <a href="icons-feather.html" class="nav-link" data-key="t-feather">Feather</a>
                         </li>
                         <li class="nav-item">
-                            <a href="icons-crypto.html" class="nav-link"> <span data-key="t-crypto-svg">Crypto SVG</span></a>
+                            <a href="icons-crypto.html" class="nav-link"> <span data-key="t-crypto-svg">Crypto
+                                    SVG</span></a>
                         </li>
                     </ul>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarMaps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMaps">
+                <a class="nav-link menu-link" href="#sidebarMaps" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarMaps">
                     <i class="ri-map-pin-line"></i> <span data-key="t-maps">Maps</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarMaps">
@@ -768,7 +790,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMultilevel">
+                <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarMultilevel">
                     <i class="ri-share-line"></i> <span data-key="t-multi-level">Multi Level</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarMultilevel">
@@ -777,7 +800,8 @@
                             <a href="#" class="nav-link" data-key="t-level-1.1"> Level 1.1 </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarAccount" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAccount" data-key="t-level-1.2"> Level
+                            <a href="#sidebarAccount" class="nav-link" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarAccount" data-key="t-level-1.2"> Level
                                 1.2
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarAccount">
@@ -786,16 +810,20 @@
                                         <a href="#" class="nav-link" data-key="t-level-2.1"> Level 2.1 </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#sidebarCrm" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCrm" data-key="t-level-2.2"> Level 2.2
+                                        <a href="#sidebarCrm" class="nav-link" data-bs-toggle="collapse"
+                                            role="button" aria-expanded="false" aria-controls="sidebarCrm"
+                                            data-key="t-level-2.2"> Level 2.2
                                         </a>
                                         <div class="collapse menu-dropdown" id="sidebarCrm">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link" data-key="t-level-3.1"> Level 3.1
+                                                    <a href="#" class="nav-link" data-key="t-level-3.1"> Level
+                                                        3.1
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="#" class="nav-link" data-key="t-level-3.2"> Level 3.2
+                                                    <a href="#" class="nav-link" data-key="t-level-3.2"> Level
+                                                        3.2
                                                     </a>
                                                 </li>
                                             </ul>
