@@ -14,6 +14,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = User::simplePaginate(2);
+
         return view('admin.customer.index', compact('customers'));
     }
 
