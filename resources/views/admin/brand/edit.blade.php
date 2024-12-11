@@ -26,7 +26,8 @@
             @method('PUT')
             <div class="col-md-6 has-validation">
                 <label for="brand_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="brand_name" value="{{ $brand->name }}" required placeholder="Brand Name">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                    id="brand_name" value="{{ $brand->name }}" required placeholder="Brand Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -34,8 +35,8 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label for="brand_icon" class="form-label">Logo</label>
-                <input type="text" name="logo" class="form-control" id="brand_icon" value="{{ $brand->logo }}" required placeholder="Brand Logo">
+                <label for="brand_logo" class="form-label">Logo</label>
+                <input type="file" name="logo" class="form-control @error('logo') is-invalid @enderror" id="brand_logo" placeholder="Brand Logo">
                 @error('logo')
                     <div class="invalid-feedback">
                         {{ $message }}

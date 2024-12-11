@@ -67,6 +67,15 @@ class BrandController extends Controller
     {
         $formData = $request->validated();
 
+        if ( $formData['logo'] ) {
+
+            // store new image in storage / public / photos
+            $logo = $formData['logo'];
+            $filename = time().'_'.$logo->getClientOriginalName();
+            $filePath = $logo->storeAs('photos', $filename, 'public');
+            $formData['logo'] = $filePath;
+        }
+
         $brand->update($formData);
 
         return back()->with('success', 'Brand updated successfully');
