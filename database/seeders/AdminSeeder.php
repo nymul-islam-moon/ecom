@@ -18,7 +18,6 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'user_type' => 'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('adminpassword'),
             'created_at' => now(),
@@ -29,7 +28,6 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             'name' => 'Vendor User',
             'email' => 'vendor@example.com',
-            'user_type' => 'vendor',
             'email_verified_at' => now(),
             'password' => Hash::make('vendorpassword'),
             'created_at' => now(),
