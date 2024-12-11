@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
@@ -36,7 +37,7 @@ class BrandController extends Controller
         if($formData['logo']){
             $logo = $formData['logo'];
             $filename = time().'_'.$logo->getClientOriginalName();
-            $filePath = $logo->storeAs('photos', $filename, 'public');
+            $filePath = $logo->move(public_path('photos'), 'file_name.jpg');
             $formData['logo'] = $filePath;
         }
         Brand::create($formData);
@@ -67,13 +68,17 @@ class BrandController extends Controller
     {
         $formData = $request->validated();
 
-        if ( $formData['logo'] ) {
+        if ($request->hasFile('logo')) {
+            // Delete the old image if it exists
+            if ($brand->logo && File::exists(public_path($brand->logo))) {
+                File::delete(public_path($brand->logo));
+            }
 
-            // store new image in storage / public / photos
-            $logo = $formData['logo'];
-            $filename = time().'_'.$logo->getClientOriginalName();
-            $filePath = $logo->storeAs('photos', $filename, 'public');
-            $formData['logo'] = $filePath;
+            // Upload and save the new logo
+            $logo = $request->file('logo');
+            $filename = time() . '_' . $logo->getClientOriginalName();
+            $logo->move(public_path('photos'), $filename);
+            $formData['logo'] = 'photos/' . $filename; // Save relative path
         }
 
         $brand->update($formData);
