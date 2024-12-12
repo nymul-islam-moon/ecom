@@ -22,8 +22,8 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:brands,name,'.$this->id,
-            'logo' => 'required|mimes:jpg,bmp,png',
+            'name' => 'required|string|max:255|unique:brands,name,'.$this->brand->id,
+            'logo' => 'sometimes|nullable|mimes:jpg,bmp,png',
         ];
     }
 }

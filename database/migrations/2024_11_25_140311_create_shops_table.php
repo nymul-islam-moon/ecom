@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('contact_email')->nullable();
             $table->string('contact_phone', 15)->nullable();
             $table->string('website_url')->nullable();
+            $table->string('shop_logo')->nullable();
+            $table->string('profile_photo')->nullable();
+            $table->string('nid')->nullable();
             $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -26,6 +29,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
     }
 
     /**
