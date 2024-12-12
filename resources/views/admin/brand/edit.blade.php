@@ -21,7 +21,7 @@
         <x-admin.alert type="success" message="{{ $value }}" />
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.brand.update', $brand->id) }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.brand.update', $brand->id) }}" method="POST" novalidate enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="col-md-6 has-validation">

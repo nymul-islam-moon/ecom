@@ -23,7 +23,7 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:brands,name,'.$this->brand->id,
-            'logo' => 'sometimes|nullable|mimes:jpg,bmp,png',
+            'logo' => 'sometimes|nullable|mimes:jpg,jpeg,bmp,png',
         ];
     }
 }

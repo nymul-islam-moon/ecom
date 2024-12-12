@@ -212,7 +212,7 @@
                                         <td>
                                             <div class="d-flex gap-2 align-items-center">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ asset('storage/' . $brand->logo) }}" alt=""
+                                                    <img src="{{ asset('photos/' . $brand->logo) }}" alt=""
                                                         class="avatar-xs rounded-circle">
                                                 </div>
                                             </div>

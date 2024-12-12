@@ -32,15 +32,36 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreBrandRequest $request)
-    {  
+    {
+        // Validate and retrieve form data
         $formData = $request->validated();
-        if($formData['logo']){
+
+        if (isset($formData['logo']) && $request->hasFile('logo')) {
             $logo = $formData['logo'];
-            $filename = time().'_'.$logo->getClientOriginalName();
-            $filePath = $logo->move(public_path('photos'), 'file_name.jpg');
-            $formData['logo'] = $filePath;
+
+            // Generate a unique filename
+            $filename = time().'_'.uniqid().'.'.$logo->getClientOriginalExtension();
+
+            // Define a directory for storing the file
+            $destinationPath = public_path('photos');
+
+            try {
+                // Move the uploaded file to the designated directory
+                $logo->move($destinationPath, $filename);
+
+                // Store the filename in the form data
+                $formData['logo'] = $filename;
+            } catch (\Exception $e) {
+                return back()->withErrors(['logo' => 'Failed to upload logo: '.$e->getMessage()]);
+            }
         }
-        Brand::create($formData);
+
+        try {
+            // Create the brand using the form data
+            Brand::create($formData);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to create brand: '.$e->getMessage()]);
+        }
 
         return back()->with('success', 'Brand created successfully');
     }
@@ -66,22 +87,40 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
+        // Validate and retrieve form data
         $formData = $request->validated();
 
-        if ($request->hasFile('logo')) {
-            // Delete the old image if it exists
-            if ($brand->logo && File::exists(public_path($brand->logo))) {
-                File::delete(public_path($brand->logo));
-            }
+        if (isset($formData['logo']) && $request->hasFile('logo')) {
+            $logo = $formData['logo'];
 
-            // Upload and save the new logo
-            $logo = $request->file('logo');
-            $filename = time() . '_' . $logo->getClientOriginalName();
-            $logo->move(public_path('photos'), $filename);
-            $formData['logo'] = 'photos/' . $filename; // Save relative path
+            // Generate a unique filename
+            $filename = time().'_'.uniqid().'.'.$logo->getClientOriginalExtension();
+
+            // Define a directory for storing the file
+            $destinationPath = public_path('photos');
+
+            try {
+                // Remove the existing logo if it exists
+                if ($brand->logo && file_exists(public_path('photos/'.$brand->logo))) {
+                    unlink(public_path('photos/'.$brand->logo));
+                }
+
+                // Move the uploaded file to the designated directory
+                $logo->move($destinationPath, $filename);
+
+                // Store the filename in the form data
+                $formData['logo'] = $filename;
+            } catch (\Exception $e) {
+                return back()->withErrors(['logo' => 'Failed to upload logo: '.$e->getMessage()]);
+            }
         }
 
-        $brand->update($formData);
+        try {
+            // Update the brand using the form data
+            $brand->update($formData);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to update brand: '.$e->getMessage()]);
+        }
 
         return back()->with('success', 'Brand updated successfully');
     }
