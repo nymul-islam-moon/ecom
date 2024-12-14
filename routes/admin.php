@@ -31,6 +31,6 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('attribute', AttributeController::class);
     Route::resource('attribute-value', AttributeValueController::class);
-    Route::resource('customer', CustomerController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('customer', CustomerController::class);
 });

@@ -13,7 +13,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::simplePaginate(50);
+        $customers = User::whereNotNull('email_verified_at')->simplePaginate(50);
 
         return view('admin.customer.index', compact('customers'));
     }

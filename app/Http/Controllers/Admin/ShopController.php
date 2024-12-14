@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -12,7 +13,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        $shops = Shop::where('email_verified_at')->simplePagination(15);
+
+        return view('admin.shop.index');
     }
 
     /**

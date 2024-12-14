@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('stock_quantity')->default(0);
             $table->integer('low_stock_threshold')->nullable();
             $table->timestamp('restock_date')->nullable();
-            
+         
             // Product type
             $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
 
