@@ -39,15 +39,17 @@ return new class extends Migration
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
 
-            // Backorder Option
-            $table->enum('allow_backorders', ['no', 'notify', 'yes'])->default('no');
-            // - 'no': Backorders not allowed.
-            // - 'notify': Allow backorders with customer notification.
-            // - 'yes': Allow backorders without any restriction.
+           
 
             // Subscription Products
             $table->boolean('is_subscription')->default(false);
             $table->string('subscription_interval', 50)->nullable();
+
+             // Backorder Option
+             $table->enum('allow_backorders', ['no', 'notify', 'yes'])->default('no');
+             // - 'no': Backorders not allowed.
+             // - 'notify': Allow backorders with customer notification.
+             // - 'yes': Allow backorders without any restriction.
 
             // Return and Policies
             $table->text('return_policy')->nullable();
