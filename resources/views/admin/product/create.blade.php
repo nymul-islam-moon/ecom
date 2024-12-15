@@ -180,7 +180,7 @@
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="stocks-input">Stocks</label>
-                                            <input type="text" class="form-control" id="stocks-input" placeholder="Stocks" required>
+                                            <input type="text" class="form-control" name="stock_quantity" id="stocks-input" placeholder="Stocks" required>
                                             <div class="invalid-feedback">Please Enter a product stocks.</div>
                                         </div>
                                     </div>
