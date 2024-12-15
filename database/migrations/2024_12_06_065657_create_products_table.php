@@ -39,7 +39,6 @@ return new class extends Migration
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
 
-           
 
             // Subscription Products
             $table->boolean('is_subscription')->default(false);
