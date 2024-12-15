@@ -37,9 +37,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $formData = $request->validated();
-        $formData['sku'] = 'hi';
-        $formData['price'] = 12;
-        Product::create($formData);
+        dd($formData);
+        // Product::create($formData);
 
         return redirect('admin.product.index')->with('success', 'Product created successfully');
 
