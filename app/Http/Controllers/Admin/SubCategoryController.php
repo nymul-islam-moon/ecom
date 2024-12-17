@@ -7,6 +7,7 @@ use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -81,4 +82,17 @@ class SubCategoryController extends Controller
 
         return back()->with('success', 'Sub-Category deleted successfully');
     }
+
+    public function select_subcategories(Request $request)
+    {
+        dd($request->all());
+        $categoryId = $request->input('dependency'); // Category ID passed by 'dependsOn'
+        $query = $request->input('query', '');
+
+        return Subcategory::where('category_id', $categoryId)
+            ->where('name', 'LIKE', "%$query%")
+            ->select('id', 'name')
+            ->get();
+    }
+
 }
