@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $SubCategories = SubCategory::all();
+
         return view('admin.product.create', compact('categories', 'SubCategories'));
     }
 
@@ -37,8 +39,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $formData = $request->validated();
+
+        $formData['sku'] = Str::slug($formData['name']);
         dd($formData);
-        // Product::create($formData);
+        Product::create($formData);
 
         return redirect('admin.product.index')->with('success', 'Product created successfully');
 

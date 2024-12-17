@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Product Name</label>
-                            <input type="text" class="form-control" name="name" id="product-title-input" value="" placeholder="Enter product title" required>
+                            <input type="text" class="form-control" name="name" id="product-title-input" value="" placeholder="Enter product name" required>
                             
                         </div>
 
@@ -50,21 +50,7 @@
                 </div>
                 <!-- end card -->
 
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Product Prices</h5>
-                    </div>
-                    <div class="card-body d-flex">
-                        <div class="mb-3 me-3 w-50">
-                            <label class="form-label" for="product-price-1">Product Price</label>
-                            <input type="text" class="form-control" name="price" id="product-price" value="{{ old('price') }}" placeholder="Enter product price" required>
-                        </div>
-                        <div class="mb-3 w-50">
-                            <label class="form-label" for="product-price-2">Product Selling Price</label>
-                            <input type="text" class="form-control" name="sale_price" id="product-sale-price" value="{{ old('sale_price') }}" placeholder="Enter product sale price" required>
-                        </div>
-                    </div>
-                </div>
+                
                 
                 <div class="card">
                     <div class="card-header">
@@ -189,7 +175,7 @@
                                             <label class="form-label" for="product-price-input">Price</label>
                                             <div class="input-group has-validation mb-3">
                                                 <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                <input type="text" class="form-control" id="product-price-input" name="price" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
                                                 <div class="invalid-feedback">Please Enter a product price.</div>
                                             </div>
 
@@ -250,7 +236,7 @@
                 </div>
                 <!-- end card -->
                 <div class="text-end mb-3">
-                    <button type="submit" class="btn btn-success w-sm">Submit</button>
+                    <button type="submit" class="btn btn-success w-sm">Submits</button>
                 </div>
             </div>
             <!-- end col -->
@@ -374,5 +360,6 @@
                 console.error('Error initializing editor for:', textarea, error);
             });
     });
+
 </script>
 @endpush
