@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @push('css')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('admin_content')
@@ -28,7 +28,8 @@
         </div>
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
-    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="needs-validation" novalidate method="POST">
+    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="needs-validation"
+        novalidate method="POST">
         @csrf
         <div class="row">
             <div class="col-lg-8">
@@ -36,8 +37,9 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Product Name</label>
-                            <input type="text" class="form-control" name="name" id="product-title-input" value="" placeholder="Enter product title" required>
-                            
+                            <input type="text" class="form-control" name="name" id="product-title-input"
+                                value="" placeholder="Enter product title" required>
+
                         </div>
 
                         <div class="mb-3">
@@ -57,15 +59,17 @@
                     <div class="card-body d-flex">
                         <div class="mb-3 me-3 w-50">
                             <label class="form-label" for="product-price-1">Product Price</label>
-                            <input type="text" class="form-control" name="price" id="product-price" value="{{ old('price') }}" placeholder="Enter product price" required>
+                            <input type="text" class="form-control" name="price" id="product-price"
+                                value="{{ old('price') }}" placeholder="Enter product price" required>
                         </div>
                         <div class="mb-3 w-50">
                             <label class="form-label" for="product-price-2">Product Selling Price</label>
-                            <input type="text" class="form-control" name="sale_price" id="product-sale-price" value="{{ old('sale_price') }}" placeholder="Enter product sale price" required>
+                            <input type="text" class="form-control" name="sale_price" id="product-sale-price"
+                                value="{{ old('sale_price') }}" placeholder="Enter product sale price" required>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Product Gallery</h5>
@@ -77,14 +81,17 @@
                             <div class="text-center">
                                 <div class="position-relative d-inline-block">
                                     <div class="position-absolute top-100 start-100 translate-middle">
-                                        <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                        <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip"
+                                            data-bs-placement="right" title="Select Image">
                                             <div class="avatar-xs">
-                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                <div
+                                                    class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
                                                     <i class="ri-image-fill"></i>
                                                 </div>
                                             </div>
                                         </label>
-                                        <input class="form-control d-none" value="" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
+                                        <input class="form-control d-none" value="" id="product-image-input"
+                                            type="file" accept="image/png, image/gif, image/jpeg">
                                     </div>
                                     <div class="avatar-lg">
                                         <div class="avatar-title bg-light rounded">
@@ -118,7 +125,8 @@
                                         <div class="d-flex p-2">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar-sm bg-light rounded">
-                                                    <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Product-Image" />
+                                                    <img data-dz-thumbnail class="img-fluid rounded d-block"
+                                                        src="#" alt="Product-Image" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -145,7 +153,8 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info" role="tab">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
+                                    role="tab">
                                     General Info
                                 </a>
                             </li>
@@ -163,14 +172,18 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
-                                            <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Enter manufacturer name">
+                                            <label class="form-label" for="manufacturer-name-input">Manufacturer
+                                                Name</label>
+                                            <input type="text" class="form-control" id="manufacturer-name-input"
+                                                placeholder="Enter manufacturer name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Enter manufacturer brand">
+                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
+                                                Brand</label>
+                                            <input type="text" class="form-control" id="manufacturer-brand-input"
+                                                placeholder="Enter manufacturer brand">
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +193,8 @@
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="stocks-input">Stocks</label>
-                                            <input type="text" class="form-control" name="stock_quantity" id="stocks-input" placeholder="Stocks" required>
+                                            <input type="text" class="form-control" name="stock_quantity"
+                                                id="stocks-input" placeholder="Stocks" required>
                                             <div class="invalid-feedback">Please Enter a product stocks.</div>
                                         </div>
                                     </div>
@@ -189,7 +203,9 @@
                                             <label class="form-label" for="product-price-input">Price</label>
                                             <div class="input-group has-validation mb-3">
                                                 <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                <input type="text" class="form-control" id="product-price-input"
+                                                    placeholder="Enter price" aria-label="Price"
+                                                    aria-describedby="product-price-addon" required>
                                                 <div class="invalid-feedback">Please Enter a product price.</div>
                                             </div>
 
@@ -200,14 +216,17 @@
                                             <label class="form-label" for="product-discount-input">Discount</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text" class="form-control" id="product-discount-input" placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
+                                                <input type="text" class="form-control" id="product-discount-input"
+                                                    placeholder="Enter discount" aria-label="discount"
+                                                    aria-describedby="product-discount-addon">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="orders-input">Orders</label>
-                                            <input type="text" class="form-control" id="orders-input" placeholder="Orders" required>
+                                            <input type="text" class="form-control" id="orders-input"
+                                                placeholder="Orders" required>
                                             <div class="invalid-feedback">Please Enter a product orders.</div>
                                         </div>
                                     </div>
@@ -222,7 +241,8 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="meta-title-input">Meta title</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta title" id="meta-title-input">
+                                            <input type="text" class="form-control" placeholder="Enter meta title"
+                                                id="meta-title-input">
                                         </div>
                                     </div>
                                     <!-- end col -->
@@ -230,7 +250,8 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta keywords" id="meta-keywords-input">
+                                            <input type="text" class="form-control" placeholder="Enter meta keywords"
+                                                id="meta-keywords-input">
                                         </div>
                                     </div>
                                     <!-- end col -->
@@ -264,7 +285,8 @@
                         <div class="mb-3">
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 
-                            <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
+                            <select class="form-select" name="status" id="choices-publish-status-input" data-choices
+                                data-choices-search-false>
                                 <option value="active" selected>Active</option>
                                 <option value="inactive">Inactive</option>
                                 <option value="discontinued">Discontinued</option>
@@ -274,7 +296,8 @@
 
                         <div>
                             <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
-                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                            <select class="form-select" id="choices-publish-visibility-input" data-choices
+                                data-choices-search-false>
                                 <option value="Public" selected>Public</option>
                                 <option value="Hidden">Hidden</option>
                             </select>
@@ -292,7 +315,9 @@
                     <div class="card-body">
                         <div>
                             <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                            <input type="text" id="datepicker-publish-input" class="form-control" placeholder="Enter publish date" data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
+                            <input type="text" id="datepicker-publish-input" class="form-control"
+                                placeholder="Enter publish date" data-provider="flatpickr" data-date-format="d.m.y"
+                                data-enable-time>
                         </div>
                     </div>
                 </div>
@@ -303,23 +328,16 @@
                         <h5 class="card-title mb-0">Product Categories</h5>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                New</a>Select product category</p>
-                        <select class="form-select select2" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
-                            <option value="">Select Category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
+                        <p class="test-muted mb-2">Select Category</p>
+                        <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category"
+                            route="{{ route('admin.categories.select') }}" />
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
                                 New</a>Select product sub-category</p>
-                        <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
-                            <option value="">Select Sub-Category</option>
-                            @foreach ($SubCategories as $SubCategory)
-                                <option value="{{ $SubCategory->id }}">{{ $SubCategory->name }}</option>
-                            @endforeach
+                        <select class="form-select select2" id="subcategory_id" name="subcategory_id" data-choices
+                            data-choices-search-false>
+                            <!-- Populated dynamically by Select2 -->
                         </select>
                     </div>
                     <!-- end card body -->
@@ -332,7 +350,8 @@
                     <div class="card-body">
                         <div class="hstack gap-3 align-items-start">
                             <div class="flex-grow-1">
-                                <input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" value="Cotton" />
+                                <input class="form-control" data-choices data-choices-multiple-remove="true"
+                                    placeholder="Enter tags" type="text" value="Cotton" />
                             </div>
                         </div>
                     </div>
@@ -346,7 +365,8 @@
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-2">Add short description for product</p>
-                        <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                        <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters"
+                            rows="3"></textarea>
                     </div>
                     <!-- end card body -->
                 </div>
@@ -364,50 +384,66 @@
 @endsection
 
 @push('js')
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    
-    $( document ).ready( function() {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
-        document.querySelectorAll('textarea').forEach((textarea) => {
-            ClassicEditor.create(textarea)
-                .catch(error => {
-                    console.error(error);
-                });
-        });
+            document.querySelectorAll('textarea').forEach((textarea) => {
+                ClassicEditor.create(textarea)
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
 
-        if (typeof jQuery === 'undefined') {
-            console.error('jQuery is not defined!');
-        } else {
-            console.log('jQuery is loaded and ready to use.');
-        }
-    
-        $('.select2').select2({
-            placeholder: 'Select a Category',
-            ajax: {
-                url: "{{ route('admin.categories.search') }}",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        query: params.term
-                    };
-                },
-                processResults: function (data) {
-                    return {
-                        results: data.map(function (category) {
-                            return {
-                                id: category.id,
-                                text: category.name
-                            };
-                        })
-                    };
-                },
-                cache: true
+            if (typeof jQuery === 'undefined') {
+                console.error('jQuery is not defined!');
+            } else {
+                console.log('jQuery is loaded and ready to use.');
             }
+
+            // Initialize Select2 for Subcategory
+            const subcategorySelect = $('#subcategory_id').select2({
+                placeholder: 'Select a Subcategory',
+                ajax: {
+                    url: "", // Initially empty, dynamically updated later
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            query: params.term // Search term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function (subcategory) {
+                                return {
+                                    id: subcategory.id,
+                                    text: subcategory.name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            $('#category_id').on('change', function () {
+                const selectedCategoryId = $(this).val(); // Get selected category_id
+
+                if (selectedCategoryId) {
+                    // Update the AJAX URL for Subcategory
+                    const subcategoryUrl = "{{ route('admin.subcategories.select', ['category_id' => ':category_id']) }}".replace(':category_id', selectedCategoryId);
+
+                    subcategorySelect.data('select2').options.options.ajax.url = subcategoryUrl;
+
+                    // Clear Subcategory Dropdown
+                    $('#subcategory_id').val(null).trigger('change');
+                }
+            });
+
         });
-    });
-</script>
+    </script>
 @endpush
