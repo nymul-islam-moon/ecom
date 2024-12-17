@@ -13,4 +13,16 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [ 'name', 'icon' ];
+
+    /**
+     * Get the categories
+     */
+    public function scopeGetCategory($query, $search = null)
+    {
+        if ($search) {
+            return $query->where('name', 'LIKE', '%' . $search . '%');
+        }
+
+        return $query->limit(10);
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @push('css')
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('admin_content')
@@ -305,7 +305,7 @@
                     <div class="card-body">
                         <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
-                        <select class="form-select" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
+                        <select class="form-select select2" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
                             <option value="">Select Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -358,21 +358,56 @@
         <!-- end row -->
 
     </form>
+    <input type="text" id="search" placeholder="Search categories..." />
+    <input type="checkbox" id="get-all" /> <label for="get-all">Get All</label>
+    <div id="results">HI</div>
 @endsection
 
 @push('js')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    // Initialize CKEditor for all textarea elements
-    document.querySelectorAll('textarea').forEach((textarea) => {
-        ClassicEditor
-            .create(textarea)
-            .then(editor => {
-                console.log('Editor initialized for:', textarea);
-            })
-            .catch(error => {
-                console.error('Error initializing editor for:', textarea, error);
-            });
+    
+    $( document ).ready( function() {
+
+        document.querySelectorAll('textarea').forEach((textarea) => {
+            ClassicEditor.create(textarea)
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+
+        if (typeof jQuery === 'undefined') {
+            console.error('jQuery is not defined!');
+        } else {
+            console.log('jQuery is loaded and ready to use.');
+        }
+    
+        $('.select2').select2({
+            placeholder: 'Select a Category',
+            ajax: {
+                url: "{{ route('admin.categories.search') }}",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        query: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.map(function (category) {
+                            return {
+                                id: category.id,
+                                text: category.name
+                            };
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
     });
 </script>
 @endpush

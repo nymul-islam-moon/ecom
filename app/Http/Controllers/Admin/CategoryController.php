@@ -6,14 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->boolean('all')) {
+            // If 'all=true', use the scope to get the data without pagination
+            $search = $request->input('search');
+            $categories = Category::getCategory($search)->get();
+
+            return response()->json($categories);
+        }
+
         $categories = Category::simplePaginate(2);
         return view('admin.category.index', compact('categories'));
     }
@@ -35,7 +46,6 @@ class CategoryController extends Controller
         Category::create($formData);
 
         return back()->with('success', 'Category created successfully');
-
     }
 
     /**
@@ -72,5 +82,15 @@ class CategoryController extends Controller
     {
         $category->delete();
         return back()->with('success', 'Category deleted successfully');
+    }
+
+    public function searchCategories(Request $request): JsonResponse
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'LIKE', "%{$query}%")
+            ->take(10)
+            ->get(['id', 'name']);
+
+        return response()->json($categories);
     }
 }

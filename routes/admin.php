@@ -33,4 +33,5 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
     Route::resource('attribute-value', AttributeValueController::class);
     Route::resource('product', ProductController::class);
     Route::resource('customer', CustomerController::class);
+    Route::get('/categories/search', [CategoryController::class, 'searchCategories'])->name('categories.search');
 });
