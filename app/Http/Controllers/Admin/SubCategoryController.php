@@ -83,10 +83,8 @@ class SubCategoryController extends Controller
         return back()->with('success', 'Sub-Category deleted successfully');
     }
 
-    public function select_subcategories(Request $request)
+    public function select_subcategories(Request $request, $categoryId)
     {
-        dd($request->all());
-        $categoryId = $request->input('dependency'); // Category ID passed by 'dependsOn'
         $query = $request->input('query', '');
 
         return Subcategory::where('category_id', $categoryId)

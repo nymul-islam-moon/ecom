@@ -34,5 +34,5 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
     Route::resource('product', ProductController::class);
     Route::resource('customer', CustomerController::class);
     Route::get('/categories-select', [CategoryController::class, 'searchCategories'])->name('categories.select');
-    Route::get('subcategories-select', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
+    Route::get('/subcategories-select/{categoryId}', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
 });

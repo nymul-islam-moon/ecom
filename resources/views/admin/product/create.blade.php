@@ -333,12 +333,9 @@
                             route="{{ route('admin.categories.select') }}" />
                     </div>
                     <div class="card-body">
-                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                New</a>Select product sub-category</p>
-                        <select class="form-select select2" id="subcategory_id" name="subcategory_id" data-choices
-                            data-choices-search-false>
-                            <!-- Populated dynamically by Select2 -->
-                        </select>
+                        <p class="test-muted mb-2">Select Sub-Category</p>
+                        <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category"
+                            route="{{ route('admin.subcategories.select', 1) }}" />
                     </div>
                     <!-- end card body -->
                 </div>
@@ -404,45 +401,8 @@
                 console.log('jQuery is loaded and ready to use.');
             }
 
-            // Initialize Select2 for Subcategory
-            const subcategorySelect = $('#subcategory_id').select2({
-                placeholder: 'Select a Subcategory',
-                ajax: {
-                    url: "", // Initially empty, dynamically updated later
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            query: params.term // Search term
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data.map(function (subcategory) {
-                                return {
-                                    id: subcategory.id,
-                                    text: subcategory.name
-                                };
-                            })
-                        };
-                    },
-                    cache: true
-                }
-            });
-
-            $('#category_id').on('change', function () {
-                const selectedCategoryId = $(this).val(); // Get selected category_id
-
-                if (selectedCategoryId) {
-                    // Update the AJAX URL for Subcategory
-                    const subcategoryUrl = "{{ route('admin.subcategories.select', ['category_id' => ':category_id']) }}".replace(':category_id', selectedCategoryId);
-
-                    subcategorySelect.data('select2').options.options.ajax.url = subcategoryUrl;
-
-                    // Clear Subcategory Dropdown
-                    $('#subcategory_id').val(null).trigger('change');
-                }
-            });
+            
+            
 
         });
     </script>
