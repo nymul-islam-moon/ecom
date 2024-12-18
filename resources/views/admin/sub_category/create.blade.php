@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
+
 @section('admin_content')
     <!-- start page title -->
     <div class="row">
@@ -39,17 +43,7 @@
             <div class="col-md-6 has-validation">
                 <label for="sub_category_name" class="form-label">Category</label>
 
-                <select class="form-select" name="category_id" id="validationCustom04" required>
-                    <option selected value="">Select Category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                @error('category_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category" route="{{ route('admin.categories.select') }}" />
             </div>
             
             <div class="col-12">
@@ -58,3 +52,10 @@
         </form>
     </div>
 @endsection
+
+@push('js')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+@endpush
