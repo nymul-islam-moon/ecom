@@ -335,7 +335,7 @@
                     <div class="card-body">
                         <p class="test-muted mb-2">Select Sub-Category</p>
                         <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category"
-                            route="{{ route('admin.subcategories.select', 1) }}" />
+                            route="" />
                     </div>
                     <!-- end card body -->
                 </div>
@@ -401,8 +401,49 @@
                 console.log('jQuery is loaded and ready to use.');
             }
 
-            
-            
+            $('#category_id').change(function() {
+                const categoryId = $(this).val();
+
+                // Generate the dynamic route for subcategories based on selected categoryId
+                const route =
+                    `{{ route('admin.subcategories.select', ['categoryId' => '__categoryId__']) }}`.replace(
+                        '__categoryId__', categoryId);
+
+                // Set the dynamically updated route for the subcategory select dropdown
+                $('#sub_category_id').data('route', route);
+
+                // Optionally, log the route for verification
+                console.log('Selected category route: ' + route);
+
+                // Update the route for the subcategory Select2 component
+                $('#sub_category_id').select2({
+                    ajax: {
+                        url: route, // Set the new route
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            let data = {
+                                query: params.term
+                            };
+                            return data;
+                        },
+                        processResults: function(data) {
+                            return {
+                                results: data.map(function(item) {
+                                    return {
+                                        id: item.id,
+                                        text: item.name
+                                    };
+                                })
+                            };
+                        },
+                        cache: true
+                    }
+                });
+            });
+
+
+
 
         });
     </script>

@@ -90,7 +90,7 @@ class SubCategoryController extends Controller
         return Subcategory::where('category_id', $categoryId)
             ->where('name', 'LIKE', "%$query%")
             ->select('id', 'name')
+            ->take(5) // Limit the results to 5 items
             ->get();
     }
-
 }

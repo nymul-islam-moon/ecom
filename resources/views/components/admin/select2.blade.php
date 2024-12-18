@@ -3,7 +3,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let {{ $id }} = $('#{{ $id }}').select2({
+        let selectElement = $('#{{ $id }}').select2({
             placeholder: '{{ $placeholder }}',
             ajax: {
                 url: '{{ $route }}',
@@ -33,7 +33,7 @@
         @if ($dependsOn)
             // Clear selection when dependency changes
             $('#{{ $dependsOn }}').on('change', function () {
-                {{ $id }}.val(null).trigger('change');
+                selectElement.val(null).trigger('change');
             });
         @endif
     });
