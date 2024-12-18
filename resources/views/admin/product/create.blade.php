@@ -271,7 +271,7 @@
                 </div>
                 <!-- end card -->
                 <div class="text-end mb-3">
-                    <button type="submit" class="btn btn-success w-sm">Submit</button>
+                    <button type="submit" class="btn btn-success w-sm">Submits</button>
                 </div>
             </div>
             <!-- end col -->

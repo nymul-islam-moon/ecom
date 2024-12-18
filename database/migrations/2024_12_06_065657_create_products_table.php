@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('stock_quantity')->default(0);
             $table->integer('low_stock_threshold')->nullable();
             $table->timestamp('restock_date')->nullable();
-         
+
             // Product type
             $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
 
@@ -39,16 +39,15 @@ return new class extends Migration
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
 
-
             // Subscription Products
             $table->boolean('is_subscription')->default(false);
             $table->string('subscription_interval', 50)->nullable();
 
-             // Backorder Option
-             $table->enum('allow_backorders', ['no', 'notify', 'yes'])->default('no');
-             // - 'no': Backorders not allowed.
-             // - 'notify': Allow backorders with customer notification.
-             // - 'yes': Allow backorders without any restriction.
+            // Backorder Option
+            $table->enum('allow_backorders', ['no', 'notify', 'yes'])->default('no');
+            // - 'no': Backorders not allowed.
+            // - 'notify': Allow backorders with customer notification.
+            // - 'yes': Allow backorders without any restriction.
 
             // Return and Policies
             $table->text('return_policy')->nullable();
@@ -65,10 +64,10 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
 
             // Relationships
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('cascade');
-            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
-            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
+            $table->foreignId('shop_id')->nullable()->constrained('shops')->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
 
             $table->timestamps();
         });
