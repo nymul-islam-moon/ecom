@@ -28,24 +28,30 @@
         </div>
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
-    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="needs-validation"
-        novalidate method="POST">
+    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="was-validated" novalidate method="POST">
         @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label" for="product-title-input">Product Name</label>
-                            <input type="text" class="form-control" name="name" id="product-title-input"
-                                value="" placeholder="Enter product title" required>
-
+                        <div class="mb-3 has-validation">
+                            <label class="form-label" for="product_name">Product Name</label>
+                            <input type="text" class="form-control" name="name" id="product_name" value="{{ old('name') }}" placeholder="Enter product title" required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="product-long-description">Product Long Description</label>
-
-                            <textarea class="form-control" name="description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                        <div class="mb-3 has-validation">
+                            <label class="form-label" for="product_description">Product Long Description</label>
+                            <textarea class="form-control" name="description" placeholder="Must enter minimum of a 100 characters" rows="3">{{ old('description') }}</textarea>
+                            @error('description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                     </div>
@@ -230,12 +236,8 @@
                                             <div class="invalid-feedback">Please Enter a product orders.</div>
                                         </div>
                                     </div>
-                                    <!-- end col -->
                                 </div>
-                                <!-- end row -->
                             </div>
-                            <!-- end tab-pane -->
-
                             <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -245,8 +247,6 @@
                                                 id="meta-title-input">
                                         </div>
                                     </div>
-                                    <!-- end col -->
-
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
@@ -254,27 +254,19 @@
                                                 id="meta-keywords-input">
                                         </div>
                                     </div>
-                                    <!-- end col -->
                                 </div>
-                                <!-- end row -->
-
                                 <div>
                                     <label class="form-label" for="meta-description-input">Meta Description</label>
                                     <textarea class="form-control" id="meta-description-input" placeholder="Enter meta description" rows="3"></textarea>
                                 </div>
                             </div>
-                            <!-- end tab pane -->
                         </div>
-                        <!-- end tab content -->
                     </div>
-                    <!-- end card body -->
                 </div>
-                <!-- end card -->
                 <div class="text-end mb-3">
                     <button type="submit" class="btn btn-success w-sm">Submits</button>
                 </div>
             </div>
-            <!-- end col -->
 
             <div class="col-lg-4">
                 <div class="card">
@@ -303,15 +295,12 @@
                             </select>
                         </div>
                     </div>
-                    <!-- end card body -->
                 </div>
-                <!-- end card -->
 
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Publish Schedule</h5>
                     </div>
-                    <!-- end card body -->
                     <div class="card-body">
                         <div>
                             <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
@@ -321,7 +310,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- end card -->
 
                 <div class="card">
                     <div class="card-header">
@@ -337,9 +325,7 @@
                         <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category"
                             route="" />
                     </div>
-                    <!-- end card body -->
                 </div>
-                <!-- end card -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Product Tags</h5>
@@ -352,9 +338,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end card body -->
                 </div>
-                <!-- end card -->
 
                 <div class="card">
                     <div class="card-header">
@@ -365,19 +349,10 @@
                         <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters"
                             rows="3"></textarea>
                     </div>
-                    <!-- end card body -->
                 </div>
-                <!-- end card -->
-
             </div>
-            <!-- end col -->
         </div>
-        <!-- end row -->
-
     </form>
-    <input type="text" id="search" placeholder="Search categories..." />
-    <input type="checkbox" id="get-all" /> <label for="get-all">Get All</label>
-    <div id="results">HI</div>
 @endsection
 
 @push('js')
