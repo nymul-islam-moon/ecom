@@ -28,27 +28,27 @@
         </div>
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
-    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="was-validated" novalidate method="POST">
+    <form id="createproduct-form" action="{{ route('admin.product.store') }}" autocomplete="off" class="" method="POST">
         @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="mb-3 has-validation">
+                        <div class="mb-3">
                             <label class="form-label" for="product_name">Product Name</label>
-                            <input type="text" class="form-control" name="name" id="product_name" value="{{ old('name') }}" placeholder="Enter product title" required>
+                            <input type="text" class="form-control" name="name" id="product_name" value="{{ old('name') }}" placeholder="Enter product title">
                             @error('name')
-                                <div class="invalid-feedback">
+                                <div class="">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
 
-                        <div class="mb-3 has-validation">
+                        <div class="mb-3">
                             <label class="form-label" for="product_description">Product Long Description</label>
                             <textarea class="form-control" name="description" placeholder="Must enter minimum of a 100 characters" rows="3">{{ old('description') }}</textarea>
                             @error('description')
-                                <div class="invalid-feedback">
+                                <div class="">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -58,7 +58,7 @@
                 </div>
                 <!-- end card -->
 
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Product Prices</h5>
                     </div>
@@ -74,7 +74,7 @@
                                 value="{{ old('sale_price') }}" placeholder="Enter product sale price" required>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -165,6 +165,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#addproduct-prysical" role="tab">
+                                    Physical
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
                                     Meta Data
                                 </a>
@@ -185,6 +190,19 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
+                                        <label for="product_type" class="form-label">Product Type</label>
+            
+                                        <select class="form-select" name="product_type" id="product_type">
+                                            <option value="" selected>Select Type</option>
+                                            <option value="physical">physical</option>
+                                            <option value="digital">Digital</option>
+                                            <option value="subscription">Subscription</option>
+                                        </select>
+                                        @error('product_type')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="manufacturer-brand-input">Manufacturer
                                                 Brand</label>
@@ -196,44 +214,146 @@
                                 <!-- end row -->
 
                                 <div class="row">
+                                    
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="stocks-input">Stocks</label>
-                                            <input type="text" class="form-control" name="stock_quantity"
-                                                id="stocks-input" placeholder="Stocks" required>
-                                            <div class="invalid-feedback">Please Enter a product stocks.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="product-price-input">Price</label>
-                                            <div class="input-group has-validation mb-3">
-                                                <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input"
-                                                    placeholder="Enter price" aria-label="Price"
-                                                    aria-describedby="product-price-addon" required>
-                                                <div class="invalid-feedback">Please Enter a product price.</div>
+                                            <label class="form-label" for="price">Price</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="price">$</span>
+                                                <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
+                                                @error('price')
+                                                    {{ $message }}
+                                                @enderror            
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="product-discount-input">Discount</label>
+                                            <label class="form-label" for="sale_price">Sale Price</label>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text" class="form-control" id="product-discount-input"
-                                                    placeholder="Enter discount" aria-label="discount"
-                                                    aria-describedby="product-discount-addon">
+                                                <span class="input-group-text" id="sale_price">$</span>
+                                                <input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Enter sale price">
+                                                @error('sales_price')
+                                                    {{ $message }}
+                                                @enderror
                                             </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="stock_quantity">Stocks</label>
+                                            <input type="text" class="form-control" name="stock_quantity" id="stock_quantity" placeholder="Stocks">
+                                            @error('stock_quantity')
+                                                {{ $message }}
+                                            @enderror            
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="orders-input">Orders</label>
-                                            <input type="text" class="form-control" id="orders-input"
-                                                placeholder="Orders" required>
-                                            <div class="invalid-feedback">Please Enter a product orders.</div>
+                                            <label class="form-label" for="low_stock_threshold">Low Stock Threshold</label>
+                                            <input type="text" class="form-control" name="low_stock_threshold" id="low_stock_threshold" placeholder="Stocks">
+                                            @error('low_stock_threshold')
+                                                {{ $message }}
+                                            @enderror            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="restock_date">Restock Date</label>
+                                            <input type="text" class="form-control" name="restock_date" id="restock_date" placeholder="Stocks">
+                                            @error('restock_date')
+                                                {{ $message }}
+                                            @enderror            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="addproduct-prysical" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="weight">Weight</label>
+                                            <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="dimensions">Dimensions</label>
+                                            <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
+                                                Brand</label>
+                                            <input type="text" class="form-control" id="manufacturer-brand-input"
+                                                placeholder="Enter manufacturer brand">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row">
+                                    
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="price">Price</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="price">$</span>
+                                                <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
+                                                @error('price')
+                                                    {{ $message }}
+                                                @enderror            
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sale_price">Sale Price</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="sale_price">$</span>
+                                                <input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Enter sale price">
+                                                @error('sales_price')
+                                                    {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="stock_quantity">Stocks</label>
+                                            <input type="text" class="form-control" name="stock_quantity" id="stock_quantity" placeholder="Stocks">
+                                            @error('stock_quantity')
+                                                {{ $message }}
+                                            @enderror            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="low_stock_threshold">Low Stock Threshold</label>
+                                            <input type="text" class="form-control" name="low_stock_threshold" id="low_stock_threshold" placeholder="Stocks">
+                                            @error('low_stock_threshold')
+                                                {{ $message }}
+                                            @enderror            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="restock_date">Restock Date</label>
+                                            <input type="text" class="form-control" name="restock_date" id="restock_date" placeholder="Stocks">
+                                            @error('restock_date')
+                                                {{ $message }}
+                                            @enderror            
                                         </div>
                                     </div>
                                 </div>
@@ -274,6 +394,8 @@
                         <h5 class="card-title mb-0">Publish</h5>
                     </div>
                     <div class="card-body">
+                        
+
                         <div class="mb-3">
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 

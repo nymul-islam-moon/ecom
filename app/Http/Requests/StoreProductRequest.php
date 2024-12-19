@@ -26,8 +26,12 @@ class StoreProductRequest extends FormRequest
             'description' => 'required',
             'short_description' => 'required',
 
-            'price' => 'required|integer',
-            'sale_price' => 'sometimes|nullable|integer',
+            'price' => 'required|numeric',
+            'sale_price' => 'sometimes|nullable|numeric',
+
+            'stock_quantity' => 'required|numeric',
+            'low_stock_threshold' => 'required|numeric',
+            'restock_date' => 'required',
 
         ];
     }

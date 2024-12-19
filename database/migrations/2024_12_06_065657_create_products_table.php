@@ -35,12 +35,12 @@ return new class extends Migration
             // Physical and Digital Products
             $table->decimal('weight', 10, 2)->nullable();
             $table->string('dimensions')->nullable();
-            $table->boolean('is_digital')->default(false);
+            
+            // Digital Products
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();
 
             // Subscription Products
-            $table->boolean('is_subscription')->default(false);
             $table->string('subscription_interval', 50)->nullable();
 
             // Backorder Option
