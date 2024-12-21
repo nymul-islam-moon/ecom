@@ -15,6 +15,18 @@ class StoreProductRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Product Name'
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -22,9 +34,9 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
-            'short_description' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'short_description' => 'required|string',
 
             'price' => 'required|numeric',
             'sale_price' => 'sometimes|nullable|numeric',
@@ -33,6 +45,22 @@ class StoreProductRequest extends FormRequest
             'low_stock_threshold' => 'required|numeric',
             'restock_date' => 'required',
 
+            'product_type' => 'required|numeric',
+            'weight' => ['required_if:product_type,1'],
+
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Product Name Required',
+            'description.required' => 'Product Description Required',
         ];
     }
 }

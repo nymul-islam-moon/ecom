@@ -38,7 +38,7 @@
                             <label class="form-label" for="product_name">Product Name</label>
                             <input type="text" class="form-control" name="name" id="product_name" value="{{ old('name') }}" placeholder="Enter product title">
                             @error('name')
-                                <div class="">
+                                <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -279,6 +279,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="weight">Weight</label>
                                             <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight">
+                                            @error('weight')
+                                                {{ $message }}
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -468,8 +471,12 @@
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-2">Add short description for product</p>
-                        <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters"
-                            rows="3"></textarea>
+                        <textarea class="form-control" name="short_description" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                        @error('short_description')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
             </div>
