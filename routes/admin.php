@@ -22,6 +22,10 @@ Route::middleware('guest:admin')->group(function () {
 
 Route::group(['middleware' => ['web',  'auth:admin']], function () {
 
+    Route::fallback(function () {
+        dd('now found');
+    });
+
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
