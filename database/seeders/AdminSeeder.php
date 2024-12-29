@@ -24,14 +24,5 @@ class AdminSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Insert vendor user
-        DB::table('admins')->insert([
-            'name' => 'Vendor User',
-            'email' => 'vendor@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('vendorpassword'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 }
