@@ -22,7 +22,8 @@ class StoreProductRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Product Name'
+            'name' => 'Product Name',
+            'description' => 'Product Description',
         ];
     }
 

@@ -48,7 +48,7 @@
                             <label class="form-label" for="product_description">Product Long Description</label>
                             <textarea class="form-control" name="description" placeholder="Must enter minimum of a 100 characters" rows="3">{{ old('description') }}</textarea>
                             @error('description')
-                                <div class="">
+                                <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -199,7 +199,9 @@
                                             <option value="subscription">Subscription</option>
                                         </select>
                                         @error('product_type')
-                                            {{ $message }}
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                     <div class="col-lg-6">
@@ -222,7 +224,9 @@
                                                 <span class="input-group-text" id="price">$</span>
                                                 <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
                                                 @error('price')
-                                                    {{ $message }}
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror            
                                             </div>
 
@@ -235,7 +239,9 @@
                                                 <span class="input-group-text" id="sale_price">$</span>
                                                 <input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Enter sale price">
                                                 @error('sales_price')
-                                                    {{ $message }}
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -249,7 +255,9 @@
                                             <label class="form-label" for="stock_quantity">Stocks</label>
                                             <input type="text" class="form-control" name="stock_quantity" id="stock_quantity" placeholder="Stocks">
                                             @error('stock_quantity')
-                                                {{ $message }}
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror            
                                         </div>
                                     </div>
@@ -267,7 +275,9 @@
                                             <label class="form-label" for="restock_date">Restock Date</label>
                                             <input type="text" class="form-control" name="restock_date" id="restock_date" placeholder="Stocks">
                                             @error('restock_date')
-                                                {{ $message }}
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror            
                                         </div>
                                     </div>
@@ -280,7 +290,9 @@
                                             <label class="form-label" for="weight">Weight</label>
                                             <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight">
                                             @error('weight')
-                                                {{ $message }}
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                         </div>
                                     </div>
@@ -310,7 +322,9 @@
                                                 <span class="input-group-text" id="price">$</span>
                                                 <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
                                                 @error('price')
-                                                    {{ $message }}
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror            
                                             </div>
 
