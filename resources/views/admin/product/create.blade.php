@@ -170,6 +170,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#addproduct-digital" role="tab">
+                                    Digital
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#addproduct-subscription" role="tab">
+                                    Subscription
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
                                     Meta Data
                                 </a>
@@ -313,7 +323,7 @@
                                 </div>
                                 <!-- end row -->
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
@@ -373,7 +383,67 @@
                                             @enderror            
                                         </div>
                                     </div>
+                                </div> --}}
+                            </div>
+                            <div class="tab-pane" id="addproduct-digital" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="weight">Weight</label>
+                                            <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight">
+                                            @error('weight')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="dimensions">Dimensions</label>
+                                            <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
+                                                Brand</label>
+                                            <input type="text" class="form-control" id="manufacturer-brand-input"
+                                                placeholder="Enter manufacturer brand">
+                                        </div>
+                                    </div>
                                 </div>
+                                
+                            </div>
+                            <div class="tab-pane" id="addproduct-subscription" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="weight">download_url</label>
+                                            <input type="text" class="form-control" name="download_url" id="download_url" placeholder="Enter download url">
+                                            @error('download_url')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="dimensions">Dimensions</label>
+                                            <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
+                                                Brand</label>
+                                            <input type="text" class="form-control" id="manufacturer-brand-input"
+                                                placeholder="Enter manufacturer brand">
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
                                 <div class="row">
