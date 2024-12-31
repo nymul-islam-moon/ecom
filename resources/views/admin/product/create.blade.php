@@ -192,12 +192,13 @@
                             <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-name-input">Manufacturer
-                                                Name</label>
-                                            <input type="text" class="form-control" id="manufacturer-name-input"
-                                                placeholder="Enter manufacturer name">
-                                        </div>
+                                        <label for="product_type" class="form-label">Brand</label>
+                                        <x-admin.select2 id="brand_id" name="brand_id" placeholder="Select a Brand" route="{{ route('admin.brands.select') }}" />
+                                        @error('brand_id')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="product_type" class="form-label">Product Type</label>
@@ -310,16 +311,14 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="dimensions">Dimensions</label>
                                             <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
+                                            @error('dimensions')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
-                                                Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input"
-                                                placeholder="Enter manufacturer brand">
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <!-- end row -->
 
@@ -401,15 +400,12 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="dimensions">Dimensions</label>
-                                            <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
-                                                Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input"
-                                                placeholder="Enter manufacturer brand">
+                                            <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter Dimensions">
+                                            @error('dimensions')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -434,14 +430,7 @@
                                             <input type="text" class="form-control" name="dimensions" id="dimensions" placeholder="Enter dimensions">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer
-                                                Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input"
-                                                placeholder="Enter manufacturer brand">
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                                 
                             </div>
@@ -526,13 +515,11 @@
                     </div>
                     <div class="card-body">
                         <p class="test-muted mb-2">Select Category</p>
-                        <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category"
-                            route="{{ route('admin.categories.select') }}" />
+                        <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category" route="{{ route('admin.categories.select') }}" />
                     </div>
                     <div class="card-body">
                         <p class="test-muted mb-2">Select Sub-Category</p>
-                        <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category"
-                            route="" />
+                        <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category" route="" />
                     </div>
                 </div>
                 <div class="card">

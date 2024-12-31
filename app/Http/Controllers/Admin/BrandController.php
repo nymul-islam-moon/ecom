@@ -7,6 +7,9 @@ use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+
 
 class BrandController extends Controller
 {
@@ -133,5 +136,15 @@ class BrandController extends Controller
         $brand->delete();
 
         return back()->with('success', 'Brand deleted successfully');
+    }
+
+    public function searchBrands(Request $request): JsonResponse
+    {
+        $query = $request->input('query');
+        $brands = Brand::where('name', 'LIKE', "%{$query}%")    
+            ->take(10)
+            ->get(['id', 'name']);
+
+        return response()->json($brands);
     }
 }
