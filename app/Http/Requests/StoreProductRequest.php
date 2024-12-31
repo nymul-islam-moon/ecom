@@ -48,7 +48,10 @@ class StoreProductRequest extends FormRequest
 
             'product_type' => 'required|string|in:subscription,digital,physical',
             'weight' => ['required_if:product_type,physical'],
-            'dimensions' => ['required_if:product_type,physical']
+            'dimensions' => ['required_if:product_type,physical'],
+
+            'download_url' => ['required_if:product_type,digital'],
+            'license_key' => ['required_if:product_type,digital'],
         ];
     }
 
@@ -66,6 +69,8 @@ class StoreProductRequest extends FormRequest
             'product_type.in' => 'Invalid product type selected. The allowed types are Physical, Digital, or Subscription.',
             'weight.required_if' => 'The weight field is required when the product type is Physical.',
             'dimensions.required_if' => 'The dimensions field is required when the product type is Physical.',
+            'download_url.required_if' => 'The download URL field is required when the product type is Digital.',
+            'license_key.required_if' => 'The license key field is required when the product type is Digital.',
         ];
     }
 }
