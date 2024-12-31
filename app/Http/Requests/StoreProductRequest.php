@@ -46,8 +46,8 @@ class StoreProductRequest extends FormRequest
             'low_stock_threshold' => 'required|numeric',
             'restock_date' => 'required',
 
-            'product_type' => 'required|numeric',
-            'weight' => ['required_if:product_type,1'],
+            'product_type' => 'required|string|in:subscription,digital,physical',
+            'weight' => ['required_if:product_type,physical'],
 
         ];
     }
@@ -62,6 +62,9 @@ class StoreProductRequest extends FormRequest
         return [
             'name.required' => 'Product Name Required',
             'description.required' => 'Product Description Required',
+            'product_type.required' => 'Please select a product type. The available types are Physical, Digital, or Subscription.',
+            'product_type.in' => 'Invalid product type selected. The allowed types are Physical, Digital, or Subscription.',
+            'weight.required_if' => 'The weight field is required when the product type is Physical.',
         ];
     }
 }
