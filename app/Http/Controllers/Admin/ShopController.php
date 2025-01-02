@@ -13,9 +13,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $shops = Shop::where('email_verified_at')->simplePagination(15);
+        $shops = Shop::where('email_verified_at')->simplePaginate(15);
 
-        return view('admin.shop.index');
+        return view('admin.shop.index', compact('shops'));
     }
 
     /**

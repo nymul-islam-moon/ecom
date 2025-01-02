@@ -449,22 +449,20 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="meta-title-input">Meta title</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta title"
-                                                id="meta-title-input">
+                                            <label class="form-label" for="meta_title">Meta title</label>
+                                            <input type="text" class="form-control" name="meta_title" placeholder="Enter meta title" id="meta_title">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta keywords"
-                                                id="meta-keywords-input">
+                                            <label class="form-label" for="meta_keywords">Meta Keywords</label>
+                                            <input type="text" class="form-control" name="meta_keywords" placeholder="Enter meta keywords" id="meta_keywords">
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="form-label" for="meta-description-input">Meta Description</label>
-                                    <textarea class="form-control" id="meta-description-input" placeholder="Enter meta description" rows="3"></textarea>
+                                    <label class="form-label" for="meta_description">Meta Description</label>
+                                    <textarea class="form-control" id="meta_description" name="meta_description" placeholder="Enter meta description" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>

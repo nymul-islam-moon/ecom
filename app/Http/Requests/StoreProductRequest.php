@@ -35,25 +35,38 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            /** General Information */
             'name' => 'required|string',
             'description' => 'required|string',
             'short_description' => 'required|string',
-
+            
+            /** Pricing */
             'price' => 'required|numeric',
             'sale_price' => 'sometimes|nullable|numeric',
-
+            
+            /** Stock Managment */
             'stock_quantity' => 'required|numeric',
             'low_stock_threshold' => 'required|numeric',
             'restock_date' => 'required',
 
+            /** Product type */
             'product_type' => 'required|string|in:subscription,digital,physical',
+            
+            /** Physical Product */
             'weight' => ['required_if:product_type,physical'],
             'dimensions' => ['required_if:product_type,physical'],
 
+            /** Digital Product */
             'download_url' => ['required_if:product_type,digital'],
             'license_key' => ['required_if:product_type,digital'],
 
-            'subscription_interval' => ['required_if:product_type,subscription']
+            /** Subscription Based Product */
+            'subscription_interval' => ['required_if:product_type,subscription'],
+
+            // seo
+            'meta_title' => 'nullable',
+            'meta_keywords' => 'nullable',
+            'meta_description' => 'nullable',
         ];
     }
 

@@ -13,17 +13,23 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('shop_name');
+            $table->string('shop_email')->unique();
+            $table->string('shop_phone', 15)->nullable();
+            $table->string('owner_name')->nullable();
+            $table->string('owner_phone')->unique();
+            $table->string('owner_nid')->nullable();
+            $table->string('owner_photo')->nullable();
             $table->string('contact_email')->nullable();
-            $table->string('contact_phone', 15)->nullable();
-            $table->string('website_url')->nullable();
+            $table->string('tin')->nullable()->comment('Tax Identification Number');
+            $table->string('dbid')->nullable()->comment('Digital Business Identification');
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_number')->nullable();
+            $table->string('bank_branch')->nullable();
             $table->string('shop_logo')->nullable();
-            $table->string('profile_photo')->nullable();
-            $table->string('nid')->nullable();
+            $table->string('website_url')->nullable();
             $table->text('description')->nullable();
-            $table->text('address')->nullable();
+            $table->text('business_address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

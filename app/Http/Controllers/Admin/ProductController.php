@@ -39,7 +39,7 @@ class ProductController extends Controller
         $formData = $request->validated();
 
         $formData['sku'] = Str::slug($formData['name']);
-        dd($formData);
+        // dd($formData);
         Product::create($formData);
 
         return redirect('admin.product.index')->with('success', 'Product created successfully');

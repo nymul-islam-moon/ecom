@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
 
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('shops', ShopController::class);
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('attribute', AttributeController::class);
     Route::resource('attribute-value', AttributeValueController::class);
@@ -37,5 +39,6 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
     Route::resource('customer', CustomerController::class);
     Route::get('/categories-select', [CategoryController::class, 'searchCategories'])->name('categories.select');
     Route::get('/brands-select', [BrandController::class, 'searchBrands'])->name('brands.select');
+    Route::get('/shops-select', [ShopController::class, 'searchShops'])->name('shops.select');
     Route::get('/subcategories-select/{categoryId}', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
 });
