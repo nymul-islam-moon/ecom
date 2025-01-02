@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('shop_name');
             $table->string('shop_email')->unique();
             $table->string('shop_phone', 15)->nullable();
-            $table->string('owner_name')->nullable();
-            $table->string('owner_phone')->unique();
-            $table->string('owner_nid')->nullable();
-            $table->string('owner_photo')->nullable();
-            $table->string('contact_email')->nullable();
+            $table->string('name')->nullable()->comment('owner name');
+            $table->string('phone')->unique()->comment('owner phone');
+            $table->string('nid')->nullable()->comment('owner NID');
+            $table->string('photo')->nullable()->comment('owner photo');;
+            $table->string('email')->nullable()->comment('owner email');
             $table->string('tin')->nullable()->comment('Tax Identification Number');
             $table->string('dbid')->nullable()->comment('Digital Business Identification');
             $table->string('bank_name')->nullable();
