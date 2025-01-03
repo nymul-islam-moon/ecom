@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChildCategoryRequest;
 use App\Http\Requests\UpdateChildCategoryRequest;
 use App\Models\ChildCategory;
@@ -13,7 +14,8 @@ class ChildCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $childCategories = ChildCategory::simplePaginate(15);
+        return view('admin.child_category.index', compact('childCategories'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ChildCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.child_category.create');
     }
 
     /**
@@ -29,7 +31,9 @@ class ChildCategoryController extends Controller
      */
     public function store(StoreChildCategoryRequest $request)
     {
-        //
+        $formData = $request->validated();
+        ChildCategory::create($formData);
+        return redirect()->route('admin.child-category.index')->with('success', 'Child Category created successfully');
     }
 
     /**
@@ -45,7 +49,7 @@ class ChildCategoryController extends Controller
      */
     public function edit(ChildCategory $childCategory)
     {
-        //
+        return view('admin.child_category.edit', ['childCategory' => $childCategory]);
     }
 
     /**
@@ -53,7 +57,9 @@ class ChildCategoryController extends Controller
      */
     public function update(UpdateChildCategoryRequest $request, ChildCategory $childCategory)
     {
-        //
+        $formData = $request->validated();
+        $childCategory->update($formData);
+        return redirect()->route('admin.child-category.index')->with('success', 'Child Category Update Success');
     }
 
     /**
@@ -61,6 +67,7 @@ class ChildCategoryController extends Controller
      */
     public function destroy(ChildCategory $childCategory)
     {
-        //
+        $childCategory->delete();
+        return redirect()->route('admin.child-category.index')->with('success', 'Child Category Delete Success');
     }
 }

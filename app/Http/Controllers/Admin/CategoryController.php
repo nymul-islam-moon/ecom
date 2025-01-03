@@ -72,7 +72,6 @@ class CategoryController extends Controller
     {
         $formData = $request->validated();
         $category->update($formData);
-
         return redirect()->route('admin.category.index')->with('success', 'Category updated successfully');
     }
 

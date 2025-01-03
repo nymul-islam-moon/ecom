@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
 
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('child-category', ChildCategoryController::class);
     // Route::resource('shop', ShopController::class);
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('attribute', AttributeController::class);
