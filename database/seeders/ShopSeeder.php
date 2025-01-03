@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Shop;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class ShopSeeder extends Seeder
@@ -34,7 +33,7 @@ class ShopSeeder extends Seeder
             'description' => $faker->paragraph,
             'address' => $faker->address,
             'email_verified_at' => now(),
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
     }
 }

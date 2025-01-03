@@ -39,11 +39,11 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required|string',
             'short_description' => 'required|string',
-            
+
             /** Pricing */
             'price' => 'required|numeric',
             'sale_price' => 'sometimes|nullable|numeric',
-            
+
             /** Stock Managment */
             'stock_quantity' => 'required|numeric',
             'low_stock_threshold' => 'required|numeric',
@@ -51,7 +51,7 @@ class StoreProductRequest extends FormRequest
 
             /** Product type */
             'product_type' => 'required|string|in:subscription,digital,physical',
-            
+
             /** Physical Product */
             'weight' => ['required_if:product_type,physical'],
             'dimensions' => ['required_if:product_type,physical'],

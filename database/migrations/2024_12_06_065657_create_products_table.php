@@ -36,7 +36,7 @@ return new class extends Migration
             // Physical and Digital Products
             $table->decimal('weight', 10, 2)->nullable();
             $table->string('dimensions')->nullable();
-            
+
             // Digital Products
             $table->string('download_url')->nullable();
             $table->string('license_key')->nullable();

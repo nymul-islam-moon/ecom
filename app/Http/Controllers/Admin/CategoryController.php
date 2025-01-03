@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -26,6 +26,7 @@ class CategoryController extends Controller
         }
 
         $categories = Category::simplePaginate(2);
+
         return view('admin.category.index', compact('categories'));
     }
 
@@ -61,7 +62,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit', array('category' => $category));
+        return view('admin.category.edit', ['category' => $category]);
     }
 
     /**
@@ -72,6 +73,7 @@ class CategoryController extends Controller
         $formData = $request->validated();
 
         $category->update($formData);
+
         return back()->with('success', 'Category updated successfully');
     }
 
@@ -81,6 +83,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return back()->with('success', 'Category deleted successfully');
     }
 
@@ -93,5 +96,4 @@ class CategoryController extends Controller
 
         return response()->json($categories);
     }
-
 }

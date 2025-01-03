@@ -27,8 +27,8 @@
     <div class="row">
         <form class="row g-3 was-validated" action="{{ route('admin.shop.store') }}" method="POST" novalidate>
             @csrf
-            <div class="col-md-6 has-validation">
-                <label for="shop_name" class="form-label">Name</label>
+            <div class="col-md-3 has-validation">
+                <label for="shop_name" class="form-label">Shop Name</label>
                 <input type="text" name="name" class="form-control" id="shop_name" value="{{ old('name') }}" required placeholder="Shop Name">
                 @error('name')
                     <div class="invalid-feedback">

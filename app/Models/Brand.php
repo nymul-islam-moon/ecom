@@ -12,7 +12,7 @@ class Brand extends Model
 
     protected $table = 'brands';
 
-    protected $fillable = [ 'name', 'logo' ];
+    protected $fillable = ['name', 'logo'];
 
     /**
      * Get the brands
@@ -20,7 +20,7 @@ class Brand extends Model
     public function scopeGetBrand($query, $search = null)
     {
         if ($search) {
-            return $query->where('name', 'LIKE', '%' . $search . '%');
+            return $query->where('name', 'LIKE', '%'.$search.'%');
         }
 
         return $query->limit(10);

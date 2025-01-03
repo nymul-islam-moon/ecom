@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
-use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
@@ -141,7 +140,7 @@ class BrandController extends Controller
     public function searchBrands(Request $request): JsonResponse
     {
         $query = $request->input('query');
-        $brands = Brand::where('name', 'LIKE', "%{$query}%")    
+        $brands = Brand::where('name', 'LIKE', "%{$query}%")
             ->take(10)
             ->get(['id', 'name']);
 

@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.shops.index') }}">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.shop.index') }}">Shop</a></li>
                         <li class="breadcrumb-item active">Shop List</li>
                     </ol>
                 </div>
@@ -154,7 +154,7 @@
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.shops.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Shop</a>
+                                <a href="{{ route('admin.shop.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Shop</a>
                             </div>
                         </div>
                     </div>

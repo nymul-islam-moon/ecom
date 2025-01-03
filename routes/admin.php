@@ -23,15 +23,13 @@ Route::middleware('guest:admin')->group(function () {
 
 Route::group(['middleware' => ['web',  'auth:admin']], function () {
 
-
-
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('shops', ShopController::class);
+    Route::resource('shop', ShopController::class);
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('attribute', AttributeController::class);
     Route::resource('attribute-value', AttributeValueController::class);

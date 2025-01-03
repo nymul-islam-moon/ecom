@@ -77,7 +77,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('ADMIN_MODEL', App\Models\Admin::class),
         ],
-        
+
         'shops' => [
             'driver' => 'eloquent',
             'model' => env('SHOP_MODEL', App\Models\Shop::class),

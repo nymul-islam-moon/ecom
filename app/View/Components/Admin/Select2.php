@@ -8,11 +8,14 @@ use Illuminate\View\Component;
 
 class Select2 extends Component
 {
-
     public $id;
+
     public $name;
+
     public $placeholder;
+
     public $route;
+
     public $dependsOn;
 
     /**

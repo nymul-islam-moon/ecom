@@ -38,7 +38,7 @@
                 </div>
             </li> <!-- end Dashboard Menu -->
             <li class="nav-item">
-                <a class="nav-link menu-link {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*') ? 'active' : '' }}"
+                <a class="nav-link menu-link {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*') || request()->is('admin/shop*') ? 'active' : '' }}"
                     href="#sidebarApps" data-bs-toggle="collapse" role="button"
                     aria-expanded="{{ request()->is('admin/product*') ? 'true' : 'false' }}"
                     aria-controls="sidebarApps">
@@ -68,6 +68,14 @@
                                 class="nav-link {{ request()->routeIs('admin.brand.index') || request()->routeIs('admin.brand.edit') ? 'active' : '' }}"
                                 data-key="t-calendar">
                                 Brand
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.shop.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.shop.index') || request()->routeIs('admin.shop.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Shop
                             </a>
                         </li>
 

@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\SubCategory;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller

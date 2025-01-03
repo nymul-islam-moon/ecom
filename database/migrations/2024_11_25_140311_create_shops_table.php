@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->nullable()->comment('owner name');
             $table->string('phone')->unique()->comment('owner phone');
             $table->string('nid')->nullable()->comment('owner NID');
-            $table->string('photo')->nullable()->comment('owner photo');;
+            $table->string('photo')->nullable()->comment('owner photo');
             $table->string('email')->nullable()->comment('owner email');
             $table->string('tin')->nullable()->comment('Tax Identification Number');
             $table->string('dbid')->nullable()->comment('Digital Business Identification');
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        
+
     }
 
     /**
