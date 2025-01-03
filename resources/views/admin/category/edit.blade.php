@@ -37,7 +37,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <label for="category_icon" class="form-label">Icon</label>
                 <input type="text" name="icon" class="form-control" id="category_icon" value="{{ $category->icon }}" required placeholder="Icon">
                 @error('icon')
@@ -45,7 +45,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
             
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Update Category</button>

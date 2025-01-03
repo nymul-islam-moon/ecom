@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $formData = $request->validated();
         Category::create($formData);
 
-        return back()->with('success', 'Category created successfully');
+        return redirect()->route('admin.category.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -71,10 +71,9 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $formData = $request->validated();
-
         $category->update($formData);
 
-        return back()->with('success', 'Category updated successfully');
+        return redirect()->route('admin.category.index')->with('success', 'Category updated successfully');
     }
 
     /**

@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
 require __DIR__.'/auth.php';

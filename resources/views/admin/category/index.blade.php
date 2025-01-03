@@ -168,7 +168,7 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Icon</th>
+                                    {{-- <th scope="col">Icon</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -177,7 +177,7 @@
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->icon }}</td>
+                                        {{-- <td>{{ $category->icon }}</td> --}}
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
                                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-link link-success fs-15 p-0 m-0 border-0">
