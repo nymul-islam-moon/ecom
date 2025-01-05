@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('admin_content')
-    <!-- start page title -->
+   
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -9,7 +9,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Category</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.child-category.index') }}">Category</a></li>
                         <li class="breadcrumb-item active">Child Category List</li>
                     </ol>
                 </div>
@@ -17,11 +17,11 @@
             </div>
         </div>
     </div>
-    <!-- end page title -->
+    
 
     <div class="row">
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+          
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -45,12 +45,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+           
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -74,12 +74,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+           
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -103,12 +103,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-3 col-md-6">
-            <!-- card -->
+            
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -132,10 +132,10 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-    </div> <!-- end row-->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
        
@@ -154,7 +154,7 @@
                         <div class="flex-shrink-0">
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn btn-primary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{ route('admin.sub-category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Category</a>
+                                <a href="{{ route('admin.child-category.create') }}" class="btn btn-danger"><i class="ri-add-line align-bottom me-1"></i> Create Child-Category</a>
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,6 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                            
                                         </td>
                                     </tr>
                                 @endforeach

@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Sub-Category Create</h4>
+                <h4 class="mb-sm-0">child-category Create</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.sub-category.index') }}">Sub-Category</a></li>
-                        <li class="breadcrumb-item active">Sub-Category Create</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.child-category.index') }}">child-category</a></li>
+                        <li class="breadcrumb-item active">child-category Create</li>
                     </ol>
                 </div>
 
@@ -26,14 +26,13 @@
             <strong> {{ $value }} </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.sub-category.store') }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.child-category.store') }}" method="POST" novalidate>
             @csrf
             <div class="col-md-6 has-validation">
-                <label for="sub_category_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="sub_category_name" value="{{ old('name') }}" required placeholder="Sub-Category Name">
+                <label for="category_name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="child-category_name" value="{{ old('name') }}" required placeholder="Sub-Category Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -41,13 +40,29 @@
                 @enderror
             </div>
             <div class="col-md-6 has-validation">
-                <label for="sub_category_name" class="form-label">Category</label>
+                <label for="category_id" class="form-label">Category</label>
 
                 <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category" route="{{ route('admin.categories.select') }}" />
+                @error('category_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="col-md-6 has-validation">
+                <label for="sub_category_id" class="form-label">Sub-Category</label>
+
+                <x-admin.select2 id="sub_category_id" name="sub_category_id" placeholder="Select a Sub-Category" route="" />
+                @error('sub_category_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Create Sub-Category</button>
+                <button class="btn btn-primary" type="submit">Create Child-Category</button>
             </div>
         </form>
     </div>
@@ -57,5 +72,31 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('#category_id').change(function() {
+            const route = `{{ route('admin.subcategories.select', ['categoryId' => '__categoryId__']) }}`.replace('__categoryId__', $(this).val());
     
+            // console.log('Selected category route: ' + route);
+    
+            $('#sub_category_id').select2({
+                ajax: {
+                    url: route,
+                    dataType: 'json',
+                    delay: 250,
+                    data: params => ({
+                        query: params.term
+                    }),
+                    processResults: data => ({
+                        results: data.map(item => ({
+                            id: item.id,
+                            text: item.name
+                        }))
+                    }),
+                    cache: true
+                }
+            });
+        });
+    </script>
+
+
 @endpush

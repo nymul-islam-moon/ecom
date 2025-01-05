@@ -23,6 +23,7 @@ class StoreChildCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:4|max:100|unique:child_categories,name',
+            'category_id' => 'required|exists:categories,id',
             'sub_category_id' => 'required|exists:sub_categories,id'
         ];
     }

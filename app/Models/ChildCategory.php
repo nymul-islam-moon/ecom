@@ -9,4 +9,6 @@ class ChildCategory extends Model
 {
     /** @use HasFactory<\Database\Factories\ChildCategoryFactory> */
     use HasFactory;
+
+    protected $fillable = ['name', 'sub_category_id', 'category_id'];
 }
