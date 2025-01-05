@@ -93,6 +93,9 @@
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">User Name</label>
                                                     <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    @error('username')
+                                                        {{ $message }}
+                                                    @enderror
                                                 </div>
 
                                                 <div class="mb-3">

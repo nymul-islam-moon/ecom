@@ -38,7 +38,7 @@
                 </div>
             </li> <!-- end Dashboard Menu -->
             <li class="nav-item">
-                <a class="nav-link menu-link {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*') ? 'active' : '' }}"
+                <a class="nav-link menu-link {{ request()->is('admin/product*') || request()->is('admin/category*') || request()->is('admin/sub-category*') || request()->is('admin/brand*') || request()->is('admin/attribute*')|| request()->is('admin/child-category*') ? 'active' : '' }}"
                     href="#sidebarApps" data-bs-toggle="collapse" role="button"
                     aria-expanded="{{ request()->is('admin/product*') ? 'true' : 'false' }}"
                     aria-controls="sidebarApps">
@@ -55,11 +55,20 @@
                                 Category
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{ route('admin.sub-category.index') }}"
                                 class="nav-link {{ request()->routeIs('admin.sub-category.index') || request()->routeIs('admin.sub-category.edit') ? 'active' : '' }}"
                                 data-key="t-calendar">
                                 Sub-Category
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.child-category.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.child-category.index') || request()->routeIs('admin.child-category.edit') ? 'active' : '' }}"
+                                data-key="t-calendar">
+                                Child-Category
                             </a>
                         </li>
 
