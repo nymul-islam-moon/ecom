@@ -26,7 +26,6 @@
             <strong> {{ $value }} </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
         <form class="row g-3 was-validated" action="{{ route('admin.sub-category.store') }}" method="POST" novalidate>

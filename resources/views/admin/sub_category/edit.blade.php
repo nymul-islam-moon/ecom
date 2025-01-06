@@ -54,7 +54,7 @@
             </div>
             
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Update Category</button>
+                <button class="btn btn-primary" type="submit">Update Sub-category</button>
             </div>
         </form>
     </div>
