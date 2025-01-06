@@ -5,12 +5,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Sub-Category Create</h4>
+                <h4 class="mb-sm-0">Child-Category Create</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.sub-category.index') }}">Sub-Category</a></li>
-                        <li class="breadcrumb-item active">Sub-Category Edit</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.child-category.index') }}">Child-Category</a></li>
+                        <li class="breadcrumb-item active">Child-Category Edit</li>
                     </ol>
                 </div>
 
@@ -25,12 +25,12 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.sub-category.update', $subCategory->id) }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.child-category.update', $childCategory->id) }}" method="POST" novalidate>
             @csrf
             @method('PUT')
             <div class="col-md-6 has-validation">
-                <label for="category_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="category_name" value="{{ $subCategory->name }}" required placeholder="Category Name">
+                <label for="child_category_name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="child_category_name" value="{{ $childCategory->name }}" required placeholder="Child-Category Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -38,7 +38,7 @@
                 @enderror
             </div>
             <div class="col-md-6 has-validation">
-                <label for="sub_category_name" class="form-label">Category</label>
+                <label for="category_id" class="form-label">Category</label>
 
                 <select class="form-select" name="category_id" id="validationCustom04" required>
                     <option selected value="">Select Category</option>

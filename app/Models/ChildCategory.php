@@ -11,4 +11,8 @@ class ChildCategory extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'sub_category_id', 'category_id'];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }
