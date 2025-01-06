@@ -22,19 +22,16 @@
             <strong> {{ $value }} </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.category.update', $category->id) }}" method="POST" novalidate>
+        <form class="row g-3" action="{{ route('admin.category.update', $category->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="col-md-6 has-validation">
                 <label for="category_name" class="form-label">Name</label>
                 <input type="text" name="name" class="form-control" id="category_name" value="{{ $category->name }}" required placeholder="Category Name">
                 @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                    {{ $message }}
                 @enderror
             </div>
             {{-- <div class="col-md-6">

@@ -30,15 +30,16 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
 
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
-    // Route::resource('shop', ShopController::class);
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('child-category', ChildCategoryController::class);
+    // Route::resource('shop', ShopController::class);
     Route::resource('attribute', AttributeController::class);
     Route::resource('attribute-value', AttributeValueController::class);
     Route::resource('product', ProductController::class);
     Route::resource('customer', CustomerController::class);
     Route::get('/categories-select', [CategoryController::class, 'searchCategories'])->name('categories.select');
+    Route::get('/subcategories-select/{categoryId}', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
+    Route::get('/childcategories-select/{subCategoryId}', [ChildCategoryController::class, 'select_childcategories'])->name('childCategories.select');
     Route::get('/brands-select', [BrandController::class, 'searchBrands'])->name('brands.select');
     Route::get('/shops-select', [ShopController::class, 'searchShops'])->name('shops.select');
-    Route::get('/subcategories-select/{categoryId}', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
 });

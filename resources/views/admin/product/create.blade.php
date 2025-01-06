@@ -209,6 +209,16 @@
                                             </div>
                                         @enderror
                                     </div>
+
+                                    <div class="col-lg-6">
+                                        <label for="child_category_id" class="form-label">Child-Category</label>
+                                        <x-admin.select2 id="child_category_id" name="child_category_id" placeholder="Select a Sub-Category" route="" />
+                                        @error('child_category_id')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                     <div class="col-lg-6">
                                         <label for="product_type" class="form-label">Brand</label>
                                         <x-admin.select2 id="brand_id" name="brand_id" placeholder="Select a Brand" route="{{ route('admin.brands.select') }}" />
@@ -581,6 +591,30 @@
                 // console.log('Selected category route: ' + route);
 
                 $('#sub_category_id').select2({
+                    ajax: {
+                        url: route,
+                        dataType: 'json',
+                        delay: 250,
+                        data: params => ({
+                            query: params.term
+                        }),
+                        processResults: data => ({
+                            results: data.map(item => ({
+                                id: item.id,
+                                text: item.name
+                            }))
+                        }),
+                        cache: true
+                    }
+                });
+            });
+
+            $('#sub_category_id').change(function() {
+                const route = `{{ route('admin.childCategories.select', ['subCategoryId' => '__subCategoryId__']) }}`.replace('__subCategoryId__', $(this).val());
+
+                // console.log('Selected category route: ' + route);
+
+                $('#child_category_id').select2({
                     ajax: {
                         url: route,
                         dataType: 'json',

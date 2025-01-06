@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateChildCategoryRequest extends FormRequest
 {
@@ -22,7 +23,13 @@ class UpdateChildCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:4|max:100|unique:child_categories,name,'.$this->id,
+            'name' => [
+                'required',
+                'string',
+                'min:4',
+                'max:100',
+                Rule::unique('child_categories')->ignore($this->child_category->id),
+            ],
             'category_id' => 'required|exists:categories,id',
             'sub_category_id' => 'required|exists:sub_categories,id'
         ];
