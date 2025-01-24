@@ -18,6 +18,7 @@ class ChildCategoryController extends Controller
     public function index()
     {
         $childCategories = ChildCategory::simplePaginate(15);
+
         return view('admin.child_category.index', compact('childCategories'));
     }
 
@@ -36,6 +37,7 @@ class ChildCategoryController extends Controller
     {
         $formData = $request->validated();
         ChildCategory::create($formData);
+
         return redirect()->route('admin.child-category.index')->with('success', 'Child Category created successfully');
     }
 
@@ -54,6 +56,7 @@ class ChildCategoryController extends Controller
     {
         $categories = Category::all();
         $subCategories = SubCategory::all();
+
         return view('admin.child_category.edit', ['childCategory' => $childCategory, 'categories' => $categories, 'subCategories' => $subCategories]);
     }
 
@@ -64,6 +67,7 @@ class ChildCategoryController extends Controller
     {
         $formData = $request->validated();
         $child_category->update($formData);
+
         return redirect()->route('admin.child-category.index')->with('success', 'Child Category Update Success');
     }
 
@@ -73,10 +77,12 @@ class ChildCategoryController extends Controller
     public function destroy(ChildCategory $childCategory)
     {
         $childCategory->delete();
+
         return redirect()->route('admin.child-category.index')->with('success', 'Child Category Delete Success');
     }
 
-    public function select_childcategories(Request $request, $subCategoryId) {
+    public function select_childcategories(Request $request, $subCategoryId)
+    {
         $query = $request->input('query', '');
 
         return ChildCategory::where('sub_category_id', $subCategoryId)

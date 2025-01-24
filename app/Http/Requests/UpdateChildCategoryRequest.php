@@ -31,7 +31,7 @@ class UpdateChildCategoryRequest extends FormRequest
                 Rule::unique('child_categories')->ignore($this->child_category->id),
             ],
             'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'required|exists:sub_categories,id'
+            'sub_category_id' => 'required|exists:sub_categories,id',
         ];
     }
 }
