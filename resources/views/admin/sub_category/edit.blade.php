@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
+
 @section('admin_content')
     <!-- start page title -->
     <div class="row">
@@ -25,12 +29,14 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.sub-category.update', $subCategory->id) }}" method="POST" novalidate>
+        <form class="row g-3 was-validated" action="{{ route('admin.sub-category.update', $subCategory->id) }}"
+            method="POST" novalidate>
             @csrf
             @method('PUT')
             <div class="col-md-6 has-validation">
                 <label for="category_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="category_name" value="{{ $subCategory->name }}" required placeholder="Category Name">
+                <input type="text" name="name" class="form-control" id="category_name"
+                    value="{{ $subCategory->name }}" required placeholder="Category Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -39,23 +45,25 @@
             </div>
             <div class="col-md-6 has-validation">
                 <label for="sub_category_name" class="form-label">Category</label>
+                <x-admin.select2 id="category-select" name="category_id" placeholder="Select a category"
+                    route="{{ route('admin.categories.select') }}" selectedId="{{ $subCategory->category_id }}"
+                    selectedText="{{ $subCategory->category->name }}" />
 
-                <select class="form-select" name="category_id" id="validationCustom04" required>
-                    <option selected value="">Select Category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $subCategory->id == $category->id ? "SELECTED" : "" }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
                 @error('category_id')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            
+
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Update Sub-category</button>
             </div>
         </form>
     </div>
 @endsection
+@push('js')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endpush

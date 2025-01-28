@@ -37,9 +37,11 @@ Route::group(['middleware' => ['web',  'auth:admin']], function () {
     Route::resource('attribute-value', AttributeValueController::class);
     Route::resource('product', ProductController::class);
     Route::resource('customer', CustomerController::class);
+
     Route::get('/categories-select', [CategoryController::class, 'searchCategories'])->name('categories.select');
     Route::get('/subcategories-select/{categoryId}', [SubcategoryController::class, 'select_subcategories'])->name('subcategories.select');
     Route::get('/childcategories-select/{subCategoryId}', [ChildCategoryController::class, 'select_childcategories'])->name('childCategories.select');
     Route::get('/brands-select', [BrandController::class, 'searchBrands'])->name('brands.select');
     Route::get('/shops-select', [ShopController::class, 'searchShops'])->name('shops.select');
+    Route::get('/attribute-select', [AttributeController::class, 'searchAttribute'])->name('attribute.select');
 });

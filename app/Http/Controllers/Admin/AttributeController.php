@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttributeRequest;
 use App\Http\Requests\UpdateAttributeRequest;
 use App\Models\Attribute;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AttributeController extends Controller
 {
@@ -71,5 +73,15 @@ class AttributeController extends Controller
         $attribute->delete();
 
         return back()->with('success', 'Attribute deleted successfully');
+    }
+
+    public function searchAttribute(Request $request): JsonResponse
+    {
+        $query = $request->input('query');
+        $attributes = Attribute::where('name', 'LIKE', "%{$query}%")
+            ->take(10)
+            ->get(['id', 'name']);
+
+        return response()->json($attributes);
     }
 }

@@ -1,16 +1,19 @@
-<select class="form-select select2" id="{{ $id }}" name="{{ $name }}" data-choices data-choices-search-false>
+<select class="form-select select2" id="{{ $id }}" name="{{ $name }}" data-choices
+    data-choices-search-false>
 </select>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         let selectElement = $('#{{ $id }}').select2({
             placeholder: '{{ $placeholder }}',
             ajax: {
                 url: '{{ $route }}',
                 dataType: 'json',
                 delay: 250,
-                data: function (params) {
-                    let data = { query: params.term };
+                data: function(params) {
+                    let data = {
+                        query: params.term
+                    };
                     @if ($dependsOn)
                         let dependsValue = $('#{{ $dependsOn }}').val();
                         if (dependsValue) {
@@ -19,10 +22,13 @@
                     @endif
                     return data;
                 },
-                processResults: function (data) {
+                processResults: function(data) {
                     return {
-                        results: data.map(function (item) {
-                            return { id: item.id, text: item.name };
+                        results: data.map(function(item) {
+                            return {
+                                id: item.id,
+                                text: item.name
+                            };
                         })
                     };
                 },
@@ -30,9 +36,15 @@
             }
         });
 
+        // Pre-select the value if provided
+        @if ($selectedId && $selectedText)
+            let selectedOption = new Option('{{ $selectedText }}', '{{ $selectedId }}', true, true);
+            selectElement.append(selectedOption).trigger('change');
+        @endif
+
         @if ($dependsOn)
             // Clear selection when dependency changes
-            $('#{{ $dependsOn }}').on('change', function () {
+            $('#{{ $dependsOn }}').on('change', function() {
                 selectElement.val(null).trigger('change');
             });
         @endif
