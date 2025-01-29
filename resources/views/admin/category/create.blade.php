@@ -25,30 +25,22 @@
         {{-- <div class="alert alert-success" role="alert"> {{ $value }} </div> --}}
     @endsession
     <div class="row">
-        <form class="row g-3 was-validated" action="{{ route('admin.category.store') }}" method="POST" novalidate>
+        <form class="row g-3" action="{{ route('admin.category.store') }}" method="POST">
             @csrf
-            <div class="col-md-6 has-validation">
+            <div class="col-md-6">
                 <label for="category_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="category_name" value="{{ old('name') }}" required placeholder="Category Name">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                    id="category_name" value="{{ old('name') }}" placeholder="Category Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            {{-- <div class="col-md-6">
-                <label for="category_icon" class="form-label">Icon</label>
-                <input type="text" name="icon" class="form-control" id="category_icon" value="{{ old('icon') }}" required placeholder="Icon">
-                @error('icon')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div> --}}
-            
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Create Category</button>
             </div>
         </form>
+
     </div>
 @endsection

@@ -32,7 +32,8 @@
             @csrf
             <div class="col-md-6 has-validation">
                 <label for="sub_category_name" class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" id="sub_category_name" value="{{ old('name') }}" required placeholder="Sub-Category Name">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                    id="sub_category_name" value="{{ old('name') }}" required placeholder="Sub-Category Name">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -40,15 +41,22 @@
                 @enderror
             </div>
             <div class="col-md-6 has-validation">
-                <label for="sub_category_name" class="form-label">Category</label>
+                <label for="category_id" class="form-label">Category</label>
+                <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category"
+                    route="{{ route('admin.categories.select') }}"
+                    class="form-control @error('category_id') is-invalid @enderror" />
+                @error('category_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
 
-                <x-admin.select2 id="category_id" name="category_id" placeholder="Select a Category" route="{{ route('admin.categories.select') }}" />
             </div>
-            
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Create Sub-Category</button>
             </div>
         </form>
+
     </div>
 @endsection
 
@@ -56,5 +64,4 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
 @endpush
