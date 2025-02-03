@@ -15,19 +15,21 @@ class Select2 extends Component
     public $dependsOn;
     public $selectedId;
     public $selectedText;
+    public $required;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($id, $name, $placeholder, $route, $dependsOn = null, $selectedId = null, $selectedText = null)
+    public function __construct($id, $name, $placeholder, $route, $dependsOn = null, $selectedId = null, $selectedText = null, $required = false)
     {
         $this->id = $id;
         $this->name = $name;
         $this->placeholder = $placeholder;
         $this->route = $route;
         $this->dependsOn = $dependsOn;
-        $this->selectedId = $selectedId;
-        $this->selectedText = $selectedText;
+        $this->selectedId = old($name, $selectedId); // Retain old value after validation
+        $this->selectedText = old($name) ? null : $selectedText; // Avoid overriding if validation failed
+        $this->required = $required;
     }
 
     /**
