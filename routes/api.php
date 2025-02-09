@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\Admin\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,4 +9,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Admin routes
-Route::apiResource('category', CategoryController::class);
+Route::apiResources([
+    'category' => CategoryController::class,
+]);

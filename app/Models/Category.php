@@ -4,25 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Category extends Model
 {
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
     protected $table = 'categories';
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = [
+        'name',
+        'status',
+    ];
 
-    /**
-     * Get the categories
-     */
-    public function scopeGetCategory($query, $search = null)
+    // Scope for searching by name
+    public function scopeSearch(Builder $query, $term): Builder
     {
-        if ($search) {
-            return $query->where('name', 'LIKE', '%'.$search.'%');
-        }
+        return $query->when($term, function ($q) use ($term) {
+            $q->where('name', 'LIKE', "%{$term}%");
+        });
+    }
 
-        return $query->limit(10);
+    // Scope for filtering by status
+    public function scopeFilterStatus(Builder $query, $status): Builder
+    {
+        return $query->when($status !== null, function ($q) use ($status) {
+            $q->where('status', $status);
+        });
     }
 }
