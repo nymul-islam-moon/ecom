@@ -20,7 +20,7 @@ class Category extends Model
     public function scopeGetCategory($query, $search = null)
     {
         if ($search) {
-            return $query->where('name', 'LIKE', '%' . $search . '%');
+            return $query->where('name', 'LIKE', '%'.$search.'%');
         }
 
         return $query->limit(10);

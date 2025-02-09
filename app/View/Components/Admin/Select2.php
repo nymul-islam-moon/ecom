@@ -9,12 +9,19 @@ use Illuminate\View\Component;
 class Select2 extends Component
 {
     public $id;
+
     public $name;
+
     public $placeholder;
+
     public $route;
+
     public $dependsOn;
+
     public $selectedId;
+
     public $selectedText;
+
     public $required;
 
     /**

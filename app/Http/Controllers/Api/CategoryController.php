@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => $categories
+                'data' => $categories,
             ]);
         }
 
@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $categories
+            'data' => $categories,
         ]);
     }
 
@@ -46,10 +46,9 @@ class CategoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Category created successfully',
-            'data' => $category
+            'data' => $category,
         ], 201); // 201 Created status code
     }
-
 
     /**
      * Display the specified resource.
@@ -72,10 +71,9 @@ class CategoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Category updated successfully',
-            'data' => $category
+            'data' => $category,
         ]);
     }
-
 
     /**
      * Remove the specified resource from storage.
