@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Admin\UpdateCategoryRequest;
 use App\Http\Resources\Api\Admin\CategoryResource;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Classes\ApiResponseClass;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -45,13 +46,12 @@ class CategoryController extends Controller
         return ApiResponseClass::sendResponse(new CategoryResource($category), "Category fetched successfully", 200);
     }
 
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         DB::beginTransaction();
-        dd($id);
         try {
             $formData = $request->validated();
-            $category = $this->categoryRepository->update($id, $formData);
+            $category = $this->categoryRepository->update($formData, $category);
             DB::commit();
             return ApiResponseClass::sendResponse(new CategoryResource($category), "Category updated successfully", 200);
         } catch (\Exception $e) {
