@@ -48,6 +48,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id)
     {
         DB::beginTransaction();
+        dd($id);
         try {
             $formData = $request->validated();
             $category = $this->categoryRepository->update($id, $formData);

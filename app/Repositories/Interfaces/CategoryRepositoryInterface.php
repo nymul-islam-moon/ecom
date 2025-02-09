@@ -7,6 +7,6 @@ interface CategoryRepositoryInterface
     public function get();
     public function store(array $data);
     public function show(int $id);
-    public function update(int $id, array $data);
+    public function update(array $data, int $id);
     public function destroy(int $id);
 }
