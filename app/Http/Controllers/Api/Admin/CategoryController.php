@@ -40,9 +40,8 @@ class CategoryController extends Controller
         }
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = $this->categoryRepository->show($id);
         return ApiResponseClass::sendResponse(new CategoryResource($category), "Category fetched successfully", 200);
     }
 
@@ -59,9 +58,15 @@ class CategoryController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $this->categoryRepository->destroy($id);
-        return ApiResponseClass::sendResponse(null, "Category deleted successfully", 204);
+        DB::beginTransaction();
+        try {
+            $this->categoryRepository->destroy($category);
+            DB::commit();
+            return ApiResponseClass::sendResponse(new CategoryResource($category), "Category deleted successfully", 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, "Failed to delete category!");
+        }
     }
 }
