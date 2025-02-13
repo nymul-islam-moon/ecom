@@ -7,9 +7,12 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    public function get()
+    public function get($request)
     {
-        return Category::latest()->get();
+        return Category::latest()
+            ->search($request->query('search'))
+            ->filterStatus($request->query('status'))
+            ->get();
     }
 
     public function store(array $data)
@@ -22,7 +25,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::findOrFail($category);
     }
 
-    public function update(array $data, $category)
+    public function update(array $data, Category $category)
     {
         $category->update($data);
         return $category;
