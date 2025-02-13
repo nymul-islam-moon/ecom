@@ -6,7 +6,7 @@ interface CategoryRepositoryInterface
 {
     public function get();
     public function store(array $data);
-    public function show(int $id);
-    public function update(array $data, $category);
-    public function destroy(int $id);
+    public function show($category); // Updated to accept model instance
+    public function update(array $data, $category); // Already correct
+    public function destroy($category); // Updated to accept model instance
 }

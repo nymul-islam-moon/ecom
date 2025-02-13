@@ -40,28 +40,44 @@ class CategoryController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $category = $this->categoryRepository->show($id);
-        return ApiResponseClass::sendResponse(new CategoryResource($category), "Category fetched successfully", 200);
-    }
-
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function show($category)
     {
         DB::beginTransaction();
         try {
-            $formData = $request->validated();
-            $category = $this->categoryRepository->update($formData, $category);
+            $category_instance = Category::findOrFail($category);
             DB::commit();
-            return ApiResponseClass::sendResponse(new CategoryResource($category), "Category updated successfully", 200);
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category fetched successfully", 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, "Category not found!");
+        }
+    }
+
+
+    public function update(UpdateCategoryRequest $request, $category)
+    {
+        DB::beginTransaction();
+        try {
+            $category_instance = Category::findOrFail($category);
+            $formData = $request->validated();
+            $this->categoryRepository->update($formData, $category_instance);
+            DB::commit();
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category updated successfully", 200);
         } catch (\Exception $e) {
             ApiResponseClass::rollback($e, "Failed to update category!");
         }
     }
 
-    public function destroy($id)
+
+    public function destroy($category)
     {
-        $this->categoryRepository->destroy($id);
-        return ApiResponseClass::sendResponse(null, "Category deleted successfully", 204);
+        DB::beginTransaction();
+        try {
+            $category_instance = Category::findOrFail($category);
+            $this->categoryRepository->destroy($category_instance);
+            DB::commit();
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category deleted successfully", 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, "Failed to delete category!");
+        }
     }
 }

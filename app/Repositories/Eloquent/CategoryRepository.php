@@ -17,9 +17,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::create($data);
     }
 
-    public function show(int $id)
+    public function show($category)
     {
-        return Category::findOrFail($id);
+        return Category::findOrFail($category);
     }
 
     public function update(array $data, $category)
@@ -28,9 +28,8 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $category;
     }
 
-    public function destroy(int $id)
+    public function destroy($category)
     {
-        $category = Category::findOrFail($id);
         return $category->delete();
     }
 }
