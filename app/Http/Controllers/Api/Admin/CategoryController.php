@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\StoreCategoryRequest;
 use App\Http\Requests\Api\Admin\UpdateCategoryRequest;
 use App\Http\Resources\Api\Admin\CategoryResource;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use App\Classes\ApiResponseClass;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -24,7 +24,8 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = $this->categoryRepository->get($request);
-        return ApiResponseClass::sendResponse(CategoryResource::collection($categories), "Categories fetched successfully", 200);
+
+        return ApiResponseClass::sendResponse(CategoryResource::collection($categories), 'Categories fetched successfully', 200);
     }
 
     public function store(StoreCategoryRequest $request)
@@ -34,9 +35,10 @@ class CategoryController extends Controller
             $formData = $request->validated();
             $category = $this->categoryRepository->store($formData);
             DB::commit();
-            return ApiResponseClass::sendResponse(new CategoryResource($category), "Category created successfully", 201);
+
+            return ApiResponseClass::sendResponse(new CategoryResource($category), 'Category created successfully', 201);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, "Failed to create category!");
+            ApiResponseClass::rollback($e, 'Failed to create category!');
         }
     }
 
@@ -46,12 +48,12 @@ class CategoryController extends Controller
         try {
             $category_instance = Category::findOrFail($category);
             DB::commit();
-            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category fetched successfully", 200);
+
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), 'Category fetched successfully', 200);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, "Category not found!");
+            ApiResponseClass::rollback($e, 'Category not found!');
         }
     }
-
 
     public function update(UpdateCategoryRequest $request, $category)
     {
@@ -61,12 +63,12 @@ class CategoryController extends Controller
             $formData = $request->validated();
             $this->categoryRepository->update($formData, $category_instance);
             DB::commit();
-            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category updated successfully", 200);
+
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), 'Category updated successfully', 200);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, "Failed to update category!");
+            ApiResponseClass::rollback($e, 'Failed to update category!');
         }
     }
-
 
     public function destroy($category)
     {
@@ -75,9 +77,10 @@ class CategoryController extends Controller
             $category_instance = Category::findOrFail($category);
             $this->categoryRepository->destroy($category_instance);
             DB::commit();
-            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), "Category deleted successfully", 200);
+
+            return ApiResponseClass::sendResponse(new CategoryResource($category_instance), 'Category deleted successfully', 200);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, "Failed to delete category!");
+            ApiResponseClass::rollback($e, 'Failed to delete category!');
         }
     }
 }

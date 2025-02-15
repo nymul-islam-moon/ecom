@@ -28,6 +28,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function update(array $data, $category)
     {
         $category->update($data);
+
         return $category;
     }
 
