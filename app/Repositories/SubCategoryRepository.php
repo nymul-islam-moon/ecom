@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\SubCategoryRepositoryInterface;
 use App\Models\SubCategory;
 
-class SubCategoryRepository
+class SubCategoryRepository implements SubCategoryRepositoryInterface
 {
     public function get($request)
     {
