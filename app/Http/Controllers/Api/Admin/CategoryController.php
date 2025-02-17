@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\StoreCategoryRequest;
 use App\Http\Requests\Api\Admin\UpdateCategoryRequest;
 use App\Http\Resources\Api\Admin\CategoryResource;
+use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
