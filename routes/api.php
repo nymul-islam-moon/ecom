@@ -10,7 +10,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Admin routes
-Route::apiResources([
-    'category' => CategoryController::class,
-    'sub-category' => SubCategoryController::class,
-]);
+Route::prefix('admin')->group(function () {
+    Route::apiResources([
+        'category' => CategoryController::class,
+        'sub-category' => SubCategoryController::class,
+    ]);
+});
