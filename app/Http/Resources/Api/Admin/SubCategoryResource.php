@@ -17,11 +17,11 @@ class SubCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'status' => $this->status,
             'category' => [
                 'id' => $this->category_id,
-                'name' => $this->rel_to_category->name,
+                'name' => $this->rel_to_category?->name,
             ],
-            'status' => $this->status,
         ];
     }
 }

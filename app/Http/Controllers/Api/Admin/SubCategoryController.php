@@ -44,7 +44,7 @@ class SubCategoryController extends Controller
 
             return ApiResponseClass::sendResponse(new SubCategoryResource($subCategory), 'SubCategory created successfully', 201);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, 'Failed to create category!');
+            ApiResponseClass::rollback($e, 'Failed to create SubCategory!');
         }
     }
 

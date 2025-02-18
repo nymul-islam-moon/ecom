@@ -35,8 +35,8 @@ class SubCategory extends Model
         });
     }
 
-    public function category()
+    public function rel_to_category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }
