@@ -4,14 +4,14 @@ namespace App\Http\Requests\Api\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubCategoryRequest extends FormRequest
+class UpdateChildCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,9 @@ class StoreSubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'status' => 'required|boolean',
-            'category_id' => ['required', 'exists:categories,id'],
+            'name' => 'required|string|max:255|unique:categories,name,' . $this->child_category,
+            'status' => 'sometimes|nullable|boolean',
+            'sub_category_id' => ['sometimes', 'exists:sub_categories,id'],
         ];
     }
 }
