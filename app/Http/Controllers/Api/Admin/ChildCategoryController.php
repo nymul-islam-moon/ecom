@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class ChildCategoryController extends Controller
 {
-
     protected $childCategoryRepository;
 
     public function __construct(ChildCategoryRepositoryInterface $childCategoryRepositoryInterface)
