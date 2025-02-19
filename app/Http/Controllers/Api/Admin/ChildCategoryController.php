@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\StoreChildCategoryRequest;
 use App\Http\Resources\ChildCategoryResource;
 use App\Interfaces\ChildCategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChildCategoryController extends Controller
 {
@@ -39,9 +41,18 @@ class ChildCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreChildCategoryRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $formData = $request->validated();
+            $subCategory = $this->childCategoryRepository->store($formData);
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(new ChildCategoryResource($subCategory), 'SubCategory created successfully', 201);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Failed to create SubCategory!');
+        }
     }
 
     /**
