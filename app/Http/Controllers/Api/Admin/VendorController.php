@@ -13,9 +13,9 @@ class VendorController extends Controller
 
     private $vendorRepository;
 
-    public function __construct(VendorRepositoryInterface $vendorRepository)
+    public function __construct(VendorRepositoryInterface $vendorRepositoryInterface)
     {
-        $this->vendorRepository = $vendorRepository;
+        // $this->vendorRepository = $vendorRepositoryInterface;
     }
 
     /**
@@ -23,6 +23,7 @@ class VendorController extends Controller
      */
     public function index(Request $request)
     {
+        dd('hi');
         $vendors = $this->vendorRepository->get($request);
 
         return ApiResponseClass::sendResponse(VendorResource::collection($vendors), 'Vendor fetched successfully', 200);
