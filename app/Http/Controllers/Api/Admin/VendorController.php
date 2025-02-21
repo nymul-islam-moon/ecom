@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VendorResource;
+use App\Interfaces\VendorRepositoryInterface;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
+
+    protected $vendorRepository;
+
+    public function __construct(VendorRepositoryInterface $vendorRepositoryInterface)
+    {
+        $this->vendorRepository = $vendorRepositoryInterface;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $vendors = $this->vendorRepository->get($request);
+
+        return ApiResponseClass::sendResponse(VendorResource::collection($vendors), 'Vendor fetched successfully', 200);
     }
 
     /**
