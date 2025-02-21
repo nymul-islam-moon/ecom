@@ -11,13 +11,12 @@ use Illuminate\Http\Request;
 class VendorController extends Controller
 {
 
-    protected $vendorRepository;
+    private $vendorRepository;
 
-    public function __construct(VendorRepositoryInterface $vendorRepositoryInterface)
+    public function __construct(VendorRepositoryInterface $vendorRepository)
     {
-        $this->vendorRepository = $vendorRepositoryInterface;
+        $this->vendorRepository = $vendorRepository;
     }
-
 
     /**
      * Display a listing of the resource.
