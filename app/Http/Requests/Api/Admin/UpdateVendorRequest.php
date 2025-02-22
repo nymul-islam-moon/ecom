@@ -23,8 +23,8 @@ class UpdateVendorRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:vendors,email,' . $this->vendor, // Allow updating the same email for the same vendor
-            'phone' => 'required|string|max:15|unique:vendors,phone,' . $this->vendor, // Allow updating the same phone for the same vendor
+            'email' => 'nullable|email|unique:vendors,email,'.$this->vendor, // Allow updating the same email for the same vendor
+            'phone' => 'required|string|max:15|unique:vendors,phone,'.$this->vendor, // Allow updating the same phone for the same vendor
             'password' => 'nullable|string|min:8', // Password is optional and will be handled in the controller
             'company_name' => 'nullable|string|max:255',
             'address' => 'nullable|string',

@@ -22,7 +22,7 @@ class UpdateChildCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:categories,name,' . $this->child_category,
+            'name' => 'required|string|max:255|unique:categories,name,'.$this->child_category,
             'status' => 'sometimes|nullable|boolean',
             'sub_category_id' => ['sometimes', 'exists:sub_categories,id'],
         ];

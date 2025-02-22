@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
-
     private $vendorRepository;
 
     public function __construct(VendorRepositoryInterface $vendorRepositoryInterface)

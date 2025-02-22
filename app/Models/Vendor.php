@@ -15,7 +15,6 @@ class Vendor extends Model
 
     protected $fillable = ['name', 'email', 'phone', 'password', 'company_name', 'company_name', 'address', 'status', 'logo', 'cover_image', 'description', 'commission', 'business_license_number', 'business_license_document'];
 
-
     // Scope for searching by name
     public function scopeSearch(Builder $query, $term): Builder
     {

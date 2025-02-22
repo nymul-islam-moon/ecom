@@ -25,7 +25,7 @@ class ChildCategoryResource extends JsonResource
             'category' => [
                 'id' => $this->rel_to_subcategory?->category_id,
                 'name' => $this->rel_to_subcategory?->rel_to_category?->name,
-            ]
+            ],
         ];
     }
 }

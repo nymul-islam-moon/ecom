@@ -9,7 +9,7 @@ class CategoryTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testIndexReturnsCategories()
+    public function test_index_returns_categories()
     {
         // Arrange: Mock the CategoryRepository
         $categoryRepositoryMock = Mockery::mock(CategoryRepository::class);
@@ -24,7 +24,7 @@ class CategoryTest extends TestCase
             ->andReturn($categories);
 
         // Act: Make a request to the controller method
-        $request = new Request();
+        $request = new Request;
         $controller = new CategoryController($categoryRepositoryMock);
 
         // Here we call the `index` method
@@ -40,7 +40,7 @@ class CategoryTest extends TestCase
                     'id',
                     'name', // Adjust based on your CategoryResource structure
                 ],
-            ]
+            ],
         ]);
 
         $this->assertEquals('Categories fetched successfully', $response->json('message'));
