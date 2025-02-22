@@ -2,9 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\VendorRepositoryInterface;
 use App\Models\Vendor;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class VendorRepository
+class VendorRepository implements VendorRepositoryInterface
 {
     public function get($request)
     {
@@ -16,6 +19,8 @@ class VendorRepository
 
     public function store(array $data)
     {
+        $data['password'] = Hash::make(Str::random(10));
+
         return Vendor::create($data);
     }
 
