@@ -22,7 +22,7 @@ class StoreChildCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:child_categories,name'],
             'status' => 'required|boolean',
             'sub_category_id' => ['required', 'exists:sub_categories,id'],
         ];

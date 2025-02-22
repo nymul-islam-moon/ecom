@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ChildCategoryController;
 use App\Http\Controllers\Api\Admin\SubCategoryController;
+use App\Http\Controllers\Api\Admin\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,6 @@ Route::prefix('admin')->group(function () {
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,
+        'venodr' => VendorController::class,
     ]);
 });
