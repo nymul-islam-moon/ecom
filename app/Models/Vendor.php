@@ -27,7 +27,7 @@ class Vendor extends Model
         'description',
         'commission',
         'business_license_number',
-        'business_license_document'
+        'business_license_document',
     ];
 
     // Scope for searching by name
