@@ -9,11 +9,13 @@ use App\Http\Requests\Api\Admin\UpdateVendorRequest;
 use App\Http\Resources\Api\Admin\VendorResource;
 use App\Interfaces\VendorRepositoryInterface;
 use App\Jobs\ProcessVendorUpload;
+use App\Jobs\SendConfirmationMail;
+use App\Mail\VendorConfirmationMail;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class VendorController extends Controller
 {
@@ -44,10 +46,11 @@ class VendorController extends Controller
             $formData = $request->validated();
             $vendor = $this->vendorRepository->store($formData);
             DB::commit();
-
-            return ApiResponseClass::sendResponse(new VendorResource($vendor), 'Category created successfully', 201);
+            dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class));
+            return ApiResponseClass::sendResponse(new VendorResource($vendor), 'Vendor created successfully', 201);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, 'Failed to create vendor!');
+            DB::rollback();
+            return ApiResponseClass::rollback($e, 'Failed to create vendor!');
         }
     }
 

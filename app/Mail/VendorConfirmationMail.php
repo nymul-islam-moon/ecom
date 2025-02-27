@@ -13,12 +13,14 @@ class VendorConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $vendor;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($vendor)
     {
-        //
+        $this->vendor = $vendor;
     }
 
     /**
@@ -37,7 +39,7 @@ class VendorConfirmationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.VendorConfirmation',
         );
     }
 
