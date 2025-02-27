@@ -97,12 +97,12 @@ class VendorController extends Controller
         }
 
         $file = $request->file('file');
-        $filePath = storage_path('app/tmp/'.uniqid('vendor_upload_').'.csv');
+        $filePath = storage_path('app/tmp/' . uniqid('vendor_upload_') . '.csv');
 
         // Move file to storage before dispatching job
         $file->move(storage_path('app/tmp/'), basename($filePath));
 
-        Log::info('Stored CSV file at: '.$filePath);
+        Log::info('Stored CSV file at: ' . $filePath);
 
         // Dispatch job
         ProcessVendorUpload::dispatch($filePath);

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\VendorConfirmationMail;
 use App\Models\Vendor;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,7 +33,7 @@ class ProcessVendorUpload implements ShouldQueue
     {
         // Ensure file exists before proceeding
         if (! file_exists($this->filePath)) {
-            \Log::error('CSV file not found: '.$this->filePath);
+            \Log::error('CSV file not found: ' . $this->filePath);
 
             return;
         }
@@ -41,7 +42,7 @@ class ProcessVendorUpload implements ShouldQueue
         $csvData = array_map('str_getcsv', file($this->filePath));
 
         if (empty($csvData)) {
-            \Log::error('CSV file is empty: '.$this->filePath);
+            \Log::error('CSV file is empty: ' . $this->filePath);
 
             return;
         }
@@ -51,7 +52,7 @@ class ProcessVendorUpload implements ShouldQueue
         $expectedHeader = ['name', 'email', 'phone', 'status'];
 
         if ($header !== $expectedHeader) {
-            \Log::error('Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header));
+            \Log::error('Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header));
 
             return;
         }
@@ -62,7 +63,7 @@ class ProcessVendorUpload implements ShouldQueue
         // Process each vendor (skip first row since it's the header)
         foreach (array_slice($csvData, 1) as $row) {
             if (count($row) !== count($expectedHeader)) {
-                \Log::warning('Skipping invalid row: '.json_encode($row));
+                \Log::warning('Skipping invalid row: ' . json_encode($row));
 
                 continue;
             }
@@ -77,8 +78,7 @@ class ProcessVendorUpload implements ShouldQueue
             ]);
 
             // Send confirmation mail
-            // Mail::to($vendor->email)->send(new VendorConfirmationMail($vendor));
-            Log::info('Email Confirmation Message Sent to '.$vendor->email);
+            // dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class))->delay(now()->addSeconds(5));
         }
 
         // Delete the file after processing
