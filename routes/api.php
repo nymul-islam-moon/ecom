@@ -17,6 +17,7 @@ Route::prefix('admin')->group(function () {
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,
-        'venodr' => VendorController::class,
+        'vendor' => VendorController::class,
     ]);
+    Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
 });

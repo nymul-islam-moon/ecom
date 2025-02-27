@@ -8,9 +8,12 @@ use App\Http\Requests\Api\Admin\StoreVendorRequest;
 use App\Http\Requests\Api\Admin\UpdateVendorRequest;
 use App\Http\Resources\Api\Admin\VendorResource;
 use App\Interfaces\VendorRepositoryInterface;
+use App\Jobs\ProcessVendorUpload;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
 
 class VendorController extends Controller
 {
@@ -78,5 +81,30 @@ class VendorController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Upload CSV or EXCEL file to bulk store vendors
+     */
+
+    public function uploadVendorCSV(Request $request)
+    {
+        if (!$request->hasFile('file')) {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+
+        $file = $request->file('file');
+        $filePath = storage_path('app/tmp/' . uniqid('vendor_upload_') . '.csv');
+
+        // Move file to storage before dispatching job
+        $file->move(storage_path('app/tmp/'), basename($filePath));
+
+        Log::info("Stored CSV file at: " . $filePath);
+
+        // Dispatch job
+        ProcessVendorUpload::dispatch($filePath);
+
+        return ApiResponseClass::sendResponse(null, 'Vendor Uploaded Successfully', 200);
+        // return response()->json(['message' => 'Upload started'], 200);
     }
 }
