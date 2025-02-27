@@ -15,7 +15,6 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class VendorController extends Controller
 {
@@ -47,9 +46,11 @@ class VendorController extends Controller
             $vendor = $this->vendorRepository->store($formData);
             DB::commit();
             dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class));
+
             return ApiResponseClass::sendResponse(new VendorResource($vendor), 'Vendor created successfully', 201);
         } catch (\Exception $e) {
             DB::rollback();
+
             return ApiResponseClass::rollback($e, 'Failed to create vendor!');
         }
     }
@@ -89,20 +90,19 @@ class VendorController extends Controller
     /**
      * Upload CSV or EXCEL file to bulk store vendors
      */
-
     public function uploadVendorCSV(Request $request)
     {
-        if (!$request->hasFile('file')) {
+        if (! $request->hasFile('file')) {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
 
         $file = $request->file('file');
-        $filePath = storage_path('app/tmp/' . uniqid('vendor_upload_') . '.csv');
+        $filePath = storage_path('app/tmp/'.uniqid('vendor_upload_').'.csv');
 
         // Move file to storage before dispatching job
         $file->move(storage_path('app/tmp/'), basename($filePath));
 
-        Log::info("Stored CSV file at: " . $filePath);
+        Log::info('Stored CSV file at: '.$filePath);
 
         // Dispatch job
         ProcessVendorUpload::dispatch($filePath);

@@ -8,10 +8,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Log;
 
 class ProcessVendorUpload implements ShouldQueue
 {
@@ -33,8 +31,9 @@ class ProcessVendorUpload implements ShouldQueue
     public function handle()
     {
         // Ensure file exists before proceeding
-        if (!file_exists($this->filePath)) {
-            \Log::error("CSV file not found: " . $this->filePath);
+        if (! file_exists($this->filePath)) {
+            \Log::error('CSV file not found: '.$this->filePath);
+
             return;
         }
 
@@ -42,16 +41,18 @@ class ProcessVendorUpload implements ShouldQueue
         $csvData = array_map('str_getcsv', file($this->filePath));
 
         if (empty($csvData)) {
-            \Log::error("CSV file is empty: " . $this->filePath);
+            \Log::error('CSV file is empty: '.$this->filePath);
+
             return;
         }
 
         // Extract and validate header
         $header = array_map('trim', $csvData[0]);
-        $expectedHeader = ["name", "email", "phone", "status"];
+        $expectedHeader = ['name', 'email', 'phone', 'status'];
 
         if ($header !== $expectedHeader) {
-            \Log::error("Invalid CSV header. Expected: " . implode(", ", $expectedHeader) . " | Found: " . implode(", ", $header));
+            \Log::error('Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header));
+
             return;
         }
 
@@ -61,7 +62,8 @@ class ProcessVendorUpload implements ShouldQueue
         // Process each vendor (skip first row since it's the header)
         foreach (array_slice($csvData, 1) as $row) {
             if (count($row) !== count($expectedHeader)) {
-                \Log::warning("Skipping invalid row: " . json_encode($row));
+                \Log::warning('Skipping invalid row: '.json_encode($row));
+
                 continue;
             }
 
@@ -76,7 +78,7 @@ class ProcessVendorUpload implements ShouldQueue
 
             // Send confirmation mail
             // Mail::to($vendor->email)->send(new VendorConfirmationMail($vendor));
-            Log::info("Email Confirmation Message Sent to " . $vendor->email);
+            Log::info('Email Confirmation Message Sent to '.$vendor->email);
         }
 
         // Delete the file after processing
