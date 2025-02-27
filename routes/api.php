@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ChildCategoryController;
+use App\Http\Controllers\Api\Admin\SettingsController;
 use App\Http\Controllers\Api\Admin\SubCategoryController;
 use App\Http\Controllers\Api\Admin\VendorController;
 use Illuminate\Http\Request;
@@ -19,5 +20,10 @@ Route::prefix('admin')->group(function () {
         'child-category' => ChildCategoryController::class,
         'vendor' => VendorController::class,
     ]);
+
+    /**
+     * routes out of resources methods
+     */
     Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
+    Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
 });
