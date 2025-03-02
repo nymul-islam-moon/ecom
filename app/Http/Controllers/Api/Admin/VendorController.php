@@ -92,22 +92,68 @@ class VendorController extends Controller
      */
     public function uploadVendorCSV(Request $request)
     {
-        if (! $request->hasFile('file')) {
+        // Validate if a file is uploaded
+        if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
 
         $file = $request->file('file');
-        $filePath = storage_path('app/tmp/' . uniqid('vendor_upload_') . '.csv');
 
-        // Move file to storage before dispatching job
-        $file->move(storage_path('app/tmp/'), basename($filePath));
+        // Validate file type (only CSV allowed)
+        if (!in_array($file->getClientOriginalExtension(), ['csv'])) {
+            return response()->json(['error' => 'Invalid file type. Only CSV files are allowed.'], 400);
+        }
 
-        Log::info('Stored CSV file at: ' . $filePath);
+        // Read file content for validation
+        $filePath = $file->getPathname();
+        $csvData = array_map('str_getcsv', file($filePath));
 
-        // Dispatch job
-        ProcessVendorUpload::dispatch($filePath);
+        if (empty($csvData)) {
+            return response()->json(['error' => 'CSV file is empty.'], 400);
+        }
 
-        return ApiResponseClass::sendResponse(null, 'Vendor Uploaded Successfully', 200);
-        // return response()->json(['message' => 'Upload started'], 200);
+        // Expected headers (ignoring id, created_at, updated_at)
+        $expectedHeader = [
+            'name',
+            'email',
+            'phone',
+            'password',
+            'company_name',
+            'address',
+            'status',
+            'logo',
+            'cover_image',
+            'description',
+            'commission',
+            'business_license_number',
+            'business_license_document'
+        ];
+
+        // Extract first row as the actual header
+        $header = array_map('trim', $csvData[0]);
+
+        // Ensure headers match
+        if (array_diff($expectedHeader, $header)) {
+            return response()->json([
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) .
+                    ' | Found: ' . implode(', ', $header)
+            ], 400);
+        }
+
+        // Move the validated file to a temporary location
+        $storagePath = storage_path('app/tmp/');
+        if (!file_exists($storagePath)) {
+            mkdir($storagePath, 0777, true);
+        }
+
+        $storedFilePath = $storagePath . uniqid('vendor_upload_') . '.csv';
+        $file->move($storagePath, basename($storedFilePath));
+
+        Log::info('Stored valid CSV file at: ' . $storedFilePath);
+
+        // Dispatch the job to process the file
+        ProcessVendorUpload::dispatch($storedFilePath);
+
+        return response()->json(['message' => 'Vendor file uploaded successfully and is being processed.'], 200);
     }
 }
