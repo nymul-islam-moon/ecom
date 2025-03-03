@@ -92,19 +92,16 @@ class VendorController extends Controller
      */
     public function uploadVendorCSV(Request $request)
     {
-        // Validate if a file is uploaded
         if (!$request->hasFile('file')) {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
 
         $file = $request->file('file');
 
-        // Validate file type (only CSV allowed)
         if (!in_array($file->getClientOriginalExtension(), ['csv'])) {
             return response()->json(['error' => 'Invalid file type. Only CSV files are allowed.'], 400);
         }
 
-        // Read file content for validation
         $filePath = $file->getPathname();
         $csvData = array_map('str_getcsv', file($filePath));
 
@@ -112,7 +109,7 @@ class VendorController extends Controller
             return response()->json(['error' => 'CSV file is empty.'], 400);
         }
 
-        // Expected headers (ignoring id, created_at, updated_at)
+        // Expected headers
         $expectedHeader = [
             'name',
             'email',
@@ -129,30 +126,44 @@ class VendorController extends Controller
             'business_license_document'
         ];
 
-        // Extract first row as the actual header
+        // Extract headers
         $header = array_map('trim', $csvData[0]);
 
-        // Ensure headers match
-        if (array_diff($expectedHeader, $header)) {
+        if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) .
-                    ' | Found: ' . implode(', ', $header)
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header)
             ], 400);
         }
 
-        // Move the validated file to a temporary location
-        $storagePath = storage_path('app/tmp/');
-        if (!file_exists($storagePath)) {
-            mkdir($storagePath, 0777, true);
+        // **Validate rows before processing**
+        $validRows = [];
+        foreach (array_slice($csvData, 1) as $row) {
+            if (count($row) !== count($header)) continue; // Ignore malformed rows
+
+            $vendorData = array_combine($header, array_map('trim', $row));
+
+            if (empty($vendorData['name']) || empty($vendorData['phone']) || empty($vendorData['password'])) {
+                continue; // Skip rows with missing required fields
+            }
+
+            if (Vendor::where('email', $vendorData['email'])->exists() || Vendor::where('phone', $vendorData['phone'])->exists()) {
+                continue; // Skip duplicates
+            }
+
+            $vendorData['password'] = bcrypt($vendorData['password']);
+            $validRows[] = $vendorData;
         }
 
-        $storedFilePath = $storagePath . uniqid('vendor_upload_') . '.csv';
-        $file->move($storagePath, basename($storedFilePath));
+        if (empty($validRows)) {
+            return response()->json(['error' => 'No valid vendor records found.'], 400);
+        }
 
-        Log::info('Stored valid CSV file at: ' . $storedFilePath);
+        // Store valid data as JSON to process in the job
+        $tempFilePath = storage_path('app/tmp/vendor_data_' . uniqid() . '.json');
+        file_put_contents($tempFilePath, json_encode($validRows));
 
-        // Dispatch the job to process the file
-        ProcessVendorUpload::dispatch($storedFilePath);
+        // Dispatch the job with valid data
+        ProcessVendorUpload::dispatch($tempFilePath);
 
         return response()->json(['message' => 'Vendor file uploaded successfully and is being processed.'], 200);
     }
