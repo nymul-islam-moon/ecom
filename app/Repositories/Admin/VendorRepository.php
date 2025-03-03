@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Admin;
 
 use App\Interfaces\VendorRepositoryInterface;
 use App\Models\Vendor;

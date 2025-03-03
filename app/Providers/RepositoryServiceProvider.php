@@ -9,7 +9,7 @@ use App\Interfaces\VendorRepositoryInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ChildCategoryRepository;
 use App\Repositories\SubCategoryRepository;
-use App\Repositories\VendorRepository;
+use App\Repositories\Admin\VendorRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
