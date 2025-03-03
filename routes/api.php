@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\CategoryController;
-use App\Http\Controllers\Api\Admin\ChildCategoryController;
-use App\Http\Controllers\Api\Admin\SettingsController;
-use App\Http\Controllers\Api\Admin\SubCategoryController;
-use App\Http\Controllers\Api\Admin\VendorController;
+use App\Http\Controllers\Api\V1\Admin\CategoryController;
+use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
+use App\Http\Controllers\Api\V1\Admin\SettingsController;
+use App\Http\Controllers\Api\V1\Admin\SubCategoryController;
+use App\Http\Controllers\Api\V1\Admin\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
