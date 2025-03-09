@@ -40,9 +40,19 @@ class VendorController extends Controller
      */
     public function store(StoreVendorRequest $request)
     {
+
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $formData = $request->validated();
+            if ($request->hasFile('logo')) {
+                $formData['logo'] = $request->file('logo')->store('uploads/vendors', 'public');
+            }
+
+
+            if ($request->hasFile('business_license_document')) {
+                $formData['business_license_document'] = $request->file('business_license_document')->store('uploads/vendors', 'local'); // store in storage/app
+            }
             $vendor = $this->vendorRepository->store($formData);
             DB::commit();
             dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class));
