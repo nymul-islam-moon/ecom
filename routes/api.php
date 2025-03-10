@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\BrandController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
 use App\Http\Controllers\Api\V1\Admin\SettingsController;
@@ -19,6 +20,7 @@ Route::prefix('admin')->group(function () {
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,
         'vendor' => VendorController::class,
+        'brand' => BrandController::class,
     ]);
 
     /**

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('website_url')->nullable();
+            $table->string('name')->unique(); // Required (Brands should have unique names)
+            $table->text('description')->nullable(); // Nullable
+            $table->string('logo')->nullable(); // Nullable (URL or file path to logo)
+            $table->string('website_url')->nullable(); // Nullable (Brand's official website)
+            $table->string('slug')->unique(); // 🔥 New: SEO-friendly unique identifier
             $table->timestamps();
         });
     }
