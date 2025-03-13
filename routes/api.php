@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function () {
         'child-category' => ChildCategoryController::class,
         'vendor' => VendorController::class,
         'brand' => BrandController::class,
+        // 'attribute' => BrandController::class,
     ]);
 
     /**

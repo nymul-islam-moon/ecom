@@ -17,9 +17,7 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function store(array $data)
     {
-        // $data['password'] = Hash::make(Str::random(10));
-
-        // return Vendor::create($data);
+        return Brand::create($data);
     }
 
     public function show($vendor)

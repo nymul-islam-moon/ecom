@@ -2,8 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Mail\VendorConfirmationMail;
-use App\Mail\VendorUploadErrorMail;
 use App\Models\Vendor;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\QueryException;
@@ -11,9 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class ProcessVendorUpload implements ShouldQueue
 {
@@ -29,14 +25,14 @@ class ProcessVendorUpload implements ShouldQueue
         $this->filePath = $filePath;
     }
 
-
     /**
      * Execute the job.
      */
     public function handle()
     {
-        if (!file_exists($this->filePath)) {
-            Log::error('Vendor data file not found: ' . $this->filePath);
+        if (! file_exists($this->filePath)) {
+            Log::error('Vendor data file not found: '.$this->filePath);
+
             return;
         }
 
@@ -46,7 +42,7 @@ class ProcessVendorUpload implements ShouldQueue
             try {
                 Vendor::create($vendorData);
             } catch (QueryException $qe) {
-                Log::error('Database error: ' . $qe->getMessage());
+                Log::error('Database error: '.$qe->getMessage());
             }
         }
 

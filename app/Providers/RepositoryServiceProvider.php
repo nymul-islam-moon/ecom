@@ -8,10 +8,10 @@ use App\Interfaces\ChildCategoryRepositoryInterface;
 use App\Interfaces\SubCategoryRepositoryInterface;
 use App\Interfaces\VendorRepositoryInterface;
 use App\Repositories\Admin\BrandRepository;
+use App\Repositories\Admin\VendorRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ChildCategoryRepository;
 use App\Repositories\SubCategoryRepository;
-use App\Repositories\Admin\VendorRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

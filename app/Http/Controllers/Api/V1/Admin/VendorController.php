@@ -14,7 +14,6 @@ use App\Mail\VendorConfirmationMail;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class VendorController extends Controller
 {
@@ -41,14 +40,13 @@ class VendorController extends Controller
     public function store(StoreVendorRequest $request)
     {
 
+        $formData = $request->validated();
         // dd($request->all());
         DB::beginTransaction();
         try {
-            $formData = $request->validated();
             if ($request->hasFile('logo')) {
                 $formData['logo'] = $request->file('logo')->store('uploads/vendors', 'public');
             }
-
 
             if ($request->hasFile('business_license_document')) {
                 $formData['business_license_document'] = $request->file('business_license_document')->store('uploads/vendors', 'local'); // store in storage/app
@@ -102,13 +100,13 @@ class VendorController extends Controller
      */
     public function uploadVendorCSV(Request $request)
     {
-        if (!$request->hasFile('file')) {
+        if (! $request->hasFile('file')) {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
 
         $file = $request->file('file');
 
-        if (!in_array($file->getClientOriginalExtension(), ['csv'])) {
+        if (! in_array($file->getClientOriginalExtension(), ['csv'])) {
             return response()->json(['error' => 'Invalid file type. Only CSV files are allowed.'], 400);
         }
 
@@ -133,7 +131,7 @@ class VendorController extends Controller
             'description',
             'commission',
             'business_license_number',
-            'business_license_document'
+            'business_license_document',
         ];
 
         // Extract headers
@@ -141,14 +139,16 @@ class VendorController extends Controller
 
         if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header)
+                'error' => 'Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header),
             ], 400);
         }
 
         // **Validate rows before processing**
         $validRows = [];
         foreach (array_slice($csvData, 1) as $row) {
-            if (count($row) !== count($header)) continue; // Ignore malformed rows
+            if (count($row) !== count($header)) {
+                continue;
+            } // Ignore malformed rows
 
             $vendorData = array_combine($header, array_map('trim', $row));
 
@@ -169,7 +169,7 @@ class VendorController extends Controller
         }
 
         // Store valid data as JSON to process in the job
-        $tempFilePath = storage_path('app/tmp/vendor_data_' . uniqid() . '.json');
+        $tempFilePath = storage_path('app/tmp/vendor_data_'.uniqid().'.json');
         file_put_contents($tempFilePath, json_encode($validRows));
 
         // Dispatch the job with valid data

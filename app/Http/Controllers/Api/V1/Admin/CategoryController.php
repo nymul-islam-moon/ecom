@@ -30,9 +30,9 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
+        $formData = $request->validated();
         DB::beginTransaction();
         try {
-            $formData = $request->validated();
             $category = $this->categoryRepository->store($formData);
             DB::commit();
 

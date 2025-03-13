@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\StoreBrandRequest;
 use App\Http\Resources\Admin\BrandResource;
 use App\Interfaces\Admin\BrandRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
-
-    protected $brandRepository;
-
-    public function __construct(BrandRepositoryInterface $brandRepository)
+    public function __construct(protected BrandRepositoryInterface $brandRepository)
     {
         $this->brandRepository = $brandRepository;
     }
@@ -31,9 +31,28 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request)
     {
-        //
+        $formData = $request->validated();
+        DB::beginTransaction();
+        try {
+            $fileDirectory = 'uploads/brands';
+            if (! Storage::disk('public')->exists($fileDirectory)) {
+                Storage::disk('public')->makeDirectory($fileDirectory);
+                chmod(storage_path("app/public/{$fileDirectory}"), 0775); // Set read-write-execute permissions
+            }
+
+            if ($request->hasFile('logo')) {
+                $formData['logo'] = $request->file('logo')->store('uploads/brands', 'public');
+            }
+
+            $brand = $this->brandRepository->store($formData);
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(new BrandResource($brand), 'Brand Created Success');
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Failed to create brand!');
+        }
     }
 
     /**
