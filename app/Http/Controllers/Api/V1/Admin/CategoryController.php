@@ -44,10 +44,8 @@ class CategoryController extends Controller
 
     public function show($category)
     {
-        DB::beginTransaction();
         try {
             $category_instance = Category::findOrFail($category);
-            DB::commit();
 
             return ApiResponseClass::sendResponse(new CategoryResource($category_instance), 'Category fetched successfully', 200);
         } catch (\Exception $e) {

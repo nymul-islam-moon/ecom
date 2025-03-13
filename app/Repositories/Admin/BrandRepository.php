@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Interfaces\Admin\BrandRepositoryInterface;
 use App\Models\Brand;
+use Illuminate\Support\Str;
 
 class BrandRepository implements BrandRepositoryInterface
 {
@@ -17,6 +18,9 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function store(array $data)
     {
+
+        $data['slug'] = Str::slug($data['name'], '-');
+
         return Brand::create($data);
     }
 
@@ -25,15 +29,17 @@ class BrandRepository implements BrandRepositoryInterface
         // return Vendor::findOrFail($vendor);
     }
 
-    public function update(array $data, $vendor)
+    public function update(array $data, $brand)
     {
-        // $vendor->update($data);
 
-        // return $vendor;
+        $data['slug'] = Str::slug($data['name'], '-');
+        $brand->update($data);
+
+        return $brand;
     }
 
-    public function destroy($vendor)
+    public function destroy($brand)
     {
-        // return $vendor->delete();
+        return $brand->delete();
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\StoreBrandRequest;
+use App\Http\Requests\Api\Admin\UpdateBrandRequest;
 use App\Http\Resources\Admin\BrandResource;
 use App\Interfaces\Admin\BrandRepositoryInterface;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +38,7 @@ class BrandController extends Controller
         $formData = $request->validated();
         DB::beginTransaction();
         try {
-            $fileDirectory = 'uploads/brands';
+            $fileDirectory = 'brands';
             if (! Storage::disk('public')->exists($fileDirectory)) {
                 Storage::disk('public')->makeDirectory($fileDirectory);
                 chmod(storage_path("app/public/{$fileDirectory}"), 0775); // Set read-write-execute permissions
@@ -58,24 +60,49 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($brand)
     {
-        //
+        try {
+            $brand_instance = Brand::findOrFail($brand);
+
+            return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand fetched successfully', 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Brand not found!');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBrandRequest $request, $brand)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $brand_instance = Brand::findOrFail($brand);
+            $formData = $request->validated();
+            $this->brandRepository->update($formData, $brand_instance);
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand updated successfully', 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Failed to update brand!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($brand)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $brand_instance = Brand::findOrFail($brand);
+            $this->brandRepository->destroy($brand_instance);
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand deleted successfully', 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Failed to delete brand!');
+        }
     }
 }
