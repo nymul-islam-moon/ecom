@@ -10,8 +10,8 @@ class SettingsController extends Controller
 {
     public function refreshDatabase()
     {
-        Artisan::call('optimize:clear');
         Artisan::call('migrate:fresh', ['--force' => true]);
+        Artisan::call('optimize:clear');
 
         return ApiResponseClass::sendResponse(null, 'Database refreshed and cache cleared successfully', 200);
     }
