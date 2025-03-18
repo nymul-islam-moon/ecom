@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Admin;
 
-use App\Interfaces\Admin\AttributeRepositoryInterface;
+use App\Interfaces\Admin\AttributeValueRepositoryInterface;
 use App\Models\AttributeValue;
 
-class AttributeValueRepository implements AttributeRepositoryInterface
+class AttributeValueRepository implements AttributeValueRepositoryInterface
 {
     public function get($request)
     {

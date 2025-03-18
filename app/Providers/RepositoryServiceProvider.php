@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Interfaces\Admin\AttributeRepositoryInterface;
+use App\Interfaces\Admin\AttributeValueRepositoryInterface;
 use App\Interfaces\Admin\BrandRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\ChildCategoryRepositoryInterface;
 use App\Interfaces\SubCategoryRepositoryInterface;
 use App\Interfaces\VendorRepositoryInterface;
 use App\Repositories\Admin\AttributeRepository;
+use App\Repositories\Admin\AttributeValueRepository;
 use App\Repositories\Admin\BrandRepository;
 use App\Repositories\Admin\VendorRepository;
 use App\Repositories\CategoryRepository;
@@ -29,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(VendorRepositoryInterface::class, VendorRepository::class);
         $this->app->bind(BrandRepositoryInterface::class, BrandRepository::class);
         $this->app->bind(AttributeRepositoryInterface::class, AttributeRepository::class);
+        $this->app->bind(AttributeValueRepositoryInterface::class, AttributeValueRepository::class);
     }
 
     /**
