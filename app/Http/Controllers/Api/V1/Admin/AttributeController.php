@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class AttributeController extends Controller
 {
-
     public function __construct(protected AttributeRepositoryInterface $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;

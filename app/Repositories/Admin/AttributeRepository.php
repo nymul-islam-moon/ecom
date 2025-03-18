@@ -27,6 +27,7 @@ class AttributeRepository implements AttributeRepositoryInterface
     public function update(array $data, $attribute)
     {
         $attribute->update($data);
+
         return $attribute;
     }
 
