@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\AttributeController;
 use App\Http\Controllers\Api\V1\Admin\BrandController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
@@ -21,7 +22,7 @@ Route::prefix('admin')->group(function () {
         'child-category' => ChildCategoryController::class,
         'vendor' => VendorController::class,
         'brand' => BrandController::class,
-        // 'attribute' => BrandController::class,
+        'attribute' => AttributeController::class,
     ]);
 
     /**
