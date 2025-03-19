@@ -34,7 +34,7 @@ return new class extends Migration
             $table->timestamp('restock_date')->nullable();
 
             // Product Type
-            $table->enum('product_type', ['physical', 'digital', 'subscription'])->default('physical');
+            $table->enum('product_type', ['physical', 'digital', 'subscription', 'service', 'girt_card'])->default('physical');
 
             // Physical & Digital Product Details
             $table->decimal('weight', 10, 2)->nullable();
