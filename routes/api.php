@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\Admin\AttributeValueController;
 use App\Http\Controllers\Api\V1\Admin\BrandController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
+use App\Http\Controllers\Api\V1\Admin\ProductController;
 use App\Http\Controllers\Api\V1\Admin\SettingsController;
 use App\Http\Controllers\Api\V1\Admin\SubCategoryController;
 use App\Http\Controllers\Api\V1\Admin\VendorController;
@@ -25,6 +26,7 @@ Route::prefix('admin')->group(function () {
         'brand' => BrandController::class,
         'attribute' => AttributeController::class,
         'attribute-value' => AttributeValueController::class,
+        'product' => ProductController::class,
     ]);
 
     /**
