@@ -28,7 +28,7 @@ Route::prefix('admin')->group(function () {
     ]);
 
     /**
-     * routes out of resources methods
+     * routes out of resources methods test
      */
     Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
     Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
