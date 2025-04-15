@@ -25,7 +25,7 @@ class StoreVendorRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|unique:vendors,email',
             'phone' => 'required|string|max:15|unique:vendors,phone',
-            'password' => 'nullable|string|min:8', // password will be generated in the controller
+            // 'password' => 'nullable|string|min:8', // password will be generated in the controller
             'company_name' => 'nullable|string|max:255',
             'address' => 'nullable|string',
             'status' => 'required|in:pending,approved,rejected,suspended',

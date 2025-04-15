@@ -41,7 +41,6 @@ class VendorController extends Controller
     {
 
         $formData = $request->validated();
-        // dd($request->all());
         DB::beginTransaction();
         try {
             if ($request->hasFile('logo')) {
@@ -139,7 +138,7 @@ class VendorController extends Controller
 
         if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header),
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header),
             ], 400);
         }
 
@@ -169,7 +168,7 @@ class VendorController extends Controller
         }
 
         // Store valid data as JSON to process in the job
-        $tempFilePath = storage_path('app/tmp/vendor_data_'.uniqid().'.json');
+        $tempFilePath = storage_path('app/tmp/vendor_data_' . uniqid() . '.json');
         file_put_contents($tempFilePath, json_encode($validRows));
 
         // Dispatch the job with valid data
