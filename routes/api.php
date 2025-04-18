@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Admin\ProductController;
 use App\Http\Controllers\Api\V1\Admin\SettingsController;
 use App\Http\Controllers\Api\V1\Admin\SubCategoryController;
 use App\Http\Controllers\Api\V1\Admin\VendorController;
+use App\Http\Controllers\Api\V1\Auth\AuthenicationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
 // Admin routes
-Route::prefix('admin')->group(function () {
+Route::post('admin/register', [AuthenicationController::class, 'register']);
+Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+
     Route::apiResources([
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
@@ -29,9 +33,7 @@ Route::prefix('admin')->group(function () {
         'product' => ProductController::class,
     ]);
 
-    /**
-     * routes out of resources methods
-     */
+    // Additional admin routes
     Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
     Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
 });
