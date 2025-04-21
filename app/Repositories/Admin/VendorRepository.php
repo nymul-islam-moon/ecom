@@ -24,7 +24,7 @@ class VendorRepository implements VendorRepositoryInterface
         return Vendor::create($data);
     }
 
-    public function show($vendor)
+    public function findById($vendor)
     {
         return Vendor::findOrFail($vendor);
     }

@@ -8,7 +8,7 @@ interface VendorRepositoryInterface
 
     public function store(array $data);
 
-    public function show($vendor);
+    public function findById($vendor);
 
     public function update(array $data, $vendor);
 

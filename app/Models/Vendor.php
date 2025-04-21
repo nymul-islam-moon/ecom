@@ -19,7 +19,6 @@ class Vendor extends Model
         'phone',
         'password',
         'company_name',
-        'company_name',
         'address',
         'status',
         'logo',
