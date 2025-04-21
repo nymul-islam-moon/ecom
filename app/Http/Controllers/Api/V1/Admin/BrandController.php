@@ -37,25 +37,23 @@ class BrandController extends Controller
     {
         $formData = $request->validated();
         DB::beginTransaction();
-        try {
-            $fileDirectory = 'brands';
-            if (! Storage::disk('public')->exists($fileDirectory)) {
-                Storage::disk('public')->makeDirectory($fileDirectory);
-                chmod(storage_path("app/public/{$fileDirectory}"), 0775); // Set read-write-execute permissions
-            }
 
+        try {
             if ($request->hasFile('logo')) {
                 $formData['logo'] = $request->file('logo')->store('uploads/brands', 'public');
             }
 
             $brand = $this->brandRepository->store($formData);
+
             DB::commit();
 
-            return ApiResponseClass::sendResponse(new BrandResource($brand), 'Brand Created Success');
+            return ApiResponseClass::sendResponse(new BrandResource($brand), 'Brand created successfully');
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, 'Failed to create brand!');
+            DB::rollback();
+            return ApiResponseClass::rollback($e, 'Failed to create brand!');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -77,17 +75,34 @@ class BrandController extends Controller
     public function update(UpdateBrandRequest $request, $brand)
     {
         DB::beginTransaction();
+
         try {
             $brand_instance = Brand::findOrFail($brand);
             $formData = $request->validated();
+
+            // Handle logo update
+            if ($request->hasFile('logo')) {
+                // Optional: delete old logo file if it exists
+                if ($brand_instance->logo) {
+                    Storage::disk('public')->delete($brand_instance->logo);
+                }
+
+                // Store the new logo
+                $formData['logo'] = $request->file('logo')->store('uploads/brands', 'public');
+            }
+
+            // Update brand
             $this->brandRepository->update($formData, $brand_instance);
+
             DB::commit();
 
             return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand updated successfully', 200);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, 'Failed to update brand!');
+            DB::rollback();
+            return ApiResponseClass::rollback($e, 'Failed to update brand!');
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
