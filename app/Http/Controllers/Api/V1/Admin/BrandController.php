@@ -76,9 +76,9 @@ class BrandController extends Controller
     {
         DB::beginTransaction();
 
+        $formData = $request->validated();
         try {
             $brand_instance = Brand::findOrFail($brand);
-            $formData = $request->validated();
 
             // Handle logo update
             if ($request->hasFile('logo')) {
@@ -110,14 +110,24 @@ class BrandController extends Controller
     public function destroy($brand)
     {
         DB::beginTransaction();
+
         try {
             $brand_instance = Brand::findOrFail($brand);
+
+            // Delete logo file if it exists
+            if ($brand_instance->logo && Storage::disk('public')->exists($brand_instance->logo)) {
+                Storage::disk('public')->delete($brand_instance->logo);
+            }
+
+            // Delete the brand record
             $this->brandRepository->destroy($brand_instance);
+
             DB::commit();
 
             return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand deleted successfully', 200);
         } catch (\Exception $e) {
-            ApiResponseClass::rollback($e, 'Failed to delete brand!');
+            DB::rollback();
+            return ApiResponseClass::rollback($e, 'Failed to delete brand!');
         }
     }
 }
