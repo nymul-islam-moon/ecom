@@ -20,7 +20,11 @@ Route::get('/user', function (Request $request) {
 
 // Admin routes
 Route::post('admin/register', [AuthenicationController::class, 'register']);
+Route::post('admin/login', [AuthenicationController::class, 'login']);
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+
+    // authentication routes
+    Route::post('/logout', [AuthenicationController::class, 'logout']);
 
     Route::apiResources([
         'category' => CategoryController::class,
