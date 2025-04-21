@@ -24,9 +24,9 @@ class BrandRepository implements BrandRepositoryInterface
         return Brand::create($data);
     }
 
-    public function show($vendor)
+    public function findById($brand)
     {
-        // return Vendor::findOrFail($vendor);
+        return Brand::findOrFail($brand);
     }
 
     public function update(array $data, $brand)

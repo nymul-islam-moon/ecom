@@ -8,7 +8,7 @@ interface BrandRepositoryInterface
 
     public function store(array $data);
 
-    public function show($category);
+    public function findById($category);
 
     public function update(array $data, $category);
 

@@ -61,7 +61,7 @@ class BrandController extends Controller
     public function show($brand)
     {
         try {
-            $brand_instance = Brand::findOrFail($brand);
+            $brand_instance = $this->brandRepository->findById($brand);
 
             return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand fetched successfully', 200);
         } catch (\Exception $e) {
