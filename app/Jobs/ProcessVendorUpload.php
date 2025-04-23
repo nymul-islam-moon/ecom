@@ -34,6 +34,7 @@ class ProcessVendorUpload implements ShouldQueue
      */
     public function handle()
     {
+        // Path to the file
         $fullPath = storage_path('app/private/uploads/vendors/' . $this->filePath);
 
         if (!file_exists($fullPath)) {
@@ -41,24 +42,37 @@ class ProcessVendorUpload implements ShouldQueue
             return;
         }
 
+        // Reading the file
         $rows = array_map('str_getcsv', file($fullPath));
         $header = array_map('trim', $rows[0]);
+        $validRows = [];
         $errors = [];
 
         foreach (array_slice($rows, 1) as $index => $row) {
-            $lineNumber = $index + 2; // actual line number in CSV
+            $lineNumber = $index + 2;  // +2 because first line is the header
             $vendorData = array_combine($header, array_map('trim', $row));
 
+            // Skip empty or malformed rows
             if (!$vendorData) {
-                $errors[] = [
-                    'row' => $lineNumber,
-                    'reason' => 'Malformed row or header mismatch.'
-                ];
+                $errors[] = ['row' => $lineNumber, 'reason' => 'Malformed row or header mismatch.'];
                 continue;
             }
 
+            // Handle missing fields (e.g., email, phone, status)
+            if (empty($vendorData['email']) || empty($vendorData['phone'])) {
+                $errors[] = ['row' => $lineNumber, 'reason' => 'Missing email or phone.'];
+                continue;
+            }
+
+            // Set default values for missing fields if needed
+            if (empty($vendorData['status'])) {
+                $vendorData['status'] = 'pending'; // Default status
+            }
+
+            // Generate password for the vendor
             $vendorData['password'] = bcrypt(Str::random(10));
 
+            // Run validation on the data (email, phone, etc.)
             $validator = Validator::make($vendorData, [
                 'name' => 'required|string|max:255',
                 'email' => 'nullable|email|unique:vendors,email',
@@ -82,23 +96,22 @@ class ProcessVendorUpload implements ShouldQueue
                 continue;
             }
 
-            try {
-                Vendor::create($vendorData);
-            } catch (\Exception $e) {
-                $errors[] = [
-                    'row' => $lineNumber,
-                    'reason' => 'DB error: ' . $e->getMessage()
-                ];
-            }
+            // If validation passes, add the row to valid rows array
+            $validRows[] = $vendorData;
         }
 
-        // Always delete the file after processing
-        unlink($fullPath);
+        // Bulk insert all valid rows into the database
+        if (count($validRows) > 0) {
+            Vendor::insert($validRows);  // Bulk insert
+            Log::info("[Vendor CSV Upload] Bulk insert of " . count($validRows) . " vendors completed.");
+        }
 
+        // If there are errors, log them
         if (!empty($errors)) {
-            Log::warning("[Vendor CSV Upload] Completed with errors", $errors);
-        } else {
-            Log::info("[Vendor CSV Upload] Completed successfully. All rows inserted.");
+            Log::warning("[Vendor CSV Upload] Errors occurred during processing", $errors);
         }
+
+        // Cleanup: delete the file after processing
+        unlink($fullPath);
     }
 }
