@@ -6,7 +6,7 @@ use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\StoreVendorRequest;
 use App\Http\Requests\Api\Admin\UpdateVendorRequest;
-use App\Http\Resources\Api\Admin\VendorResource;
+use App\Http\Resources\Admin\VendorResource;
 use App\Interfaces\VendorRepositoryInterface;
 use App\Jobs\ProcessVendorUpload;
 use App\Jobs\SendConfirmationMail;
