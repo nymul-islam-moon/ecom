@@ -9,10 +9,12 @@ class SubCategoryRepository implements SubCategoryRepositoryInterface
 {
     public function get($request)
     {
+        $perPage = $request->query('per_page', 5);
+
         return SubCategory::latest()
             ->search($request->query('search'))
             ->filterStatus($request->query('status'))
-            ->get();
+            ->paginate($perPage);
     }
 
     public function store(array $data)

@@ -26,9 +26,13 @@ class SubCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $subCategories = $this->subCategoryRepository->get($request);
+        $categories = $this->subCategoryRepository->get($request);
 
-        return ApiResponseClass::sendResponse(SubCategoryResource::collection($subCategories), 'SubCategory fetched successfully', 200);
+        return ApiResponseClass::sendResponse(
+            SubCategoryResource::collection($categories)->response()->getData(true), // <- Important fix
+            'SubCategory fetched successfully',
+            200
+        );
     }
 
     /**
