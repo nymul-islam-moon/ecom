@@ -37,7 +37,9 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
         'product' => ProductController::class,
     ]);
 
-    // Additional admin routes
+    /**
+     * routes out of resources methods test
+     */
     Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
     Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
 });
