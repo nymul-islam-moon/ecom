@@ -24,7 +24,7 @@ class ApiResponseClass
     {
         $response = [
             'success' => $success,
-            'data' => $result,
+            'collections' => $result,
         ];
 
         if (! empty($message)) {

@@ -30,10 +30,10 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,
-        'vendor' => VendorController::class,
-        'brand' => BrandController::class,
         'attribute' => AttributeController::class,
         'attribute-value' => AttributeValueController::class,
+        'brand' => BrandController::class,
+        'vendor' => VendorController::class,
         'product' => ProductController::class,
     ]);
 

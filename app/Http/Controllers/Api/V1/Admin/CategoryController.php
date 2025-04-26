@@ -25,8 +25,13 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryRepository->get($request);
 
-        return ApiResponseClass::sendResponse(CategoryResource::collection($categories), 'Categories fetched successfully', 200);
+        return ApiResponseClass::sendResponse(
+            CategoryResource::collection($categories)->response()->getData(true), // <- Important fix
+            'Categories fetched successfully',
+            200
+        );
     }
+
 
     public function store(StoreCategoryRequest $request)
     {
