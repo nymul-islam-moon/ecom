@@ -108,7 +108,23 @@ class ProcessVendorUpload implements ShouldQueue
 
         // If there are errors, log them
         if (!empty($errors)) {
-            Log::warning("[Vendor CSV Upload] Errors occurred during processing", $errors);
+            $failedFileName = 'failed_uploads_' . now()->format('Ymd_His') . '.csv';
+            $failedFilePath = storage_path('app/private/uploads/vendors/' . $failedFileName);
+
+            // Open a file for writing
+            $handle = fopen($failedFilePath, 'w');
+
+            // Write the header
+            fputcsv($handle, ['Row', 'Reason']);
+
+            // Write each error row
+            foreach ($errors as $error) {
+                fputcsv($handle, [$error['row'], $error['reason']]);
+            }
+
+            fclose($handle);
+
+            Log::info("[Vendor CSV Upload] Failed rows saved to {$failedFileName}");
         }
 
         // Cleanup: delete the file after processing

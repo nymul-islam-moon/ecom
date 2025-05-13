@@ -40,7 +40,7 @@ class BrandController extends Controller
 
         try {
             if ($request->hasFile('logo')) {
-                $formData['logo'] = $request->file('logo')->store('uploads/brands', 'public');
+                $formData['logo'] = $request->file('logo')->store('brands', 'public');
             }
 
             $brand = $this->brandRepository->store($formData);
