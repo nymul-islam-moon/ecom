@@ -9,6 +9,8 @@ use App\Http\Requests\Api\Admin\UpdateVendorRequest;
 use App\Http\Resources\Admin\VendorResource;
 use App\Interfaces\VendorRepositoryInterface;
 use App\Jobs\ProcessVendorUpload;
+use App\Jobs\SendConfirmationMail;
+use App\Mail\VendorConfirmationMail;
 use App\Services\FileUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,62 +38,60 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreVendorRequest $request)
-    // {
-    //     $formData = $request->validated();
-
-    //     DB::beginTransaction();
-
-    //     try {
-    //         // Store logo in 'public' disk → Accessible via browser
-    //         if ($request->hasFile('logo')) {
-    //             $formData['logo'] = $request->file('logo')->store('vendors/logos', 'public');
-    //         }
-
-    //         // Store logo in 'public' disk → Accessible via browser
-    //         if ($request->hasFile('cover_image')) {
-    //             $formData['cover_image'] = $request->file('cover_image')->store('vendors/coverImages', 'public');
-    //         }
-
-    //         // Store business license in 'local' disk → Not accessible via browser
-    //         if ($request->hasFile('business_license_document')) {
-    //             $formData['business_license_document'] = $request->file('business_license_document')->store('vendors/licenses', 'local');
-    //         }
-
-    //         $vendor = $this->vendorRepository->store($formData);
-
-    //         DB::commit();
-
-    //         dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class));
-
-    //         return ApiResponseClass::sendResponse(new VendorResource($vendor), 'Vendor created successfully', 201);
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         return ApiResponseClass::rollback($e, 'Failed to create vendor!');
-    //     }
-    // }
-
     public function store(StoreVendorRequest $request, FileUpload $uploader)
     {
-        $data = $request->validated();
+        $formData = $request->validated();
 
         DB::beginTransaction();
-        try {
-            $data['logo'] = $uploader->upload($request->file('logo'), 'vendors/logos');
-            $data['cover_image'] = $uploader->upload($request->file('cover_image'), 'vendors/coverImages');
-            $data['business_license_document'] = $uploader->upload($request->file('business_license_document'), 'vendors/licenses', 'local');
 
-            $vendor = $this->vendorRepository->store($data);
+        try {
+            // Upload logo to 'public' disk
+            if ($request->hasFile('logo')) {
+                $formData['logo'] = $uploader->upload(
+                    $request->file('logo'),
+                    'vendors/logos',
+                    'public'
+                );
+            }
+
+            // Upload cover image to 'public' disk
+            if ($request->hasFile('cover_image')) {
+                $formData['cover_image'] = $uploader->upload(
+                    $request->file('cover_image'),
+                    'vendors/coverImages',
+                    'public'
+                );
+            }
+
+            // Upload business license document to 'local' (private) disk
+            if ($request->hasFile('business_license_document')) {
+                $formData['business_license_document'] = $uploader->upload(
+                    $request->file('business_license_document'),
+                    'vendors/licenses',
+                    'local'
+                );
+            }
+
+            // Store vendor in the database
+            $vendor = $this->vendorRepository->store($formData);
 
             DB::commit();
 
-            return response()->json(['data' => $vendor], 201);
+            // Send confirmation email after storing
+            dispatch(new SendConfirmationMail($vendor, VendorConfirmationMail::class));
+
+            return ApiResponseClass::sendResponse(
+                new VendorResource($vendor),
+                'Vendor created successfully',
+                201
+            );
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return response()->json(['error' => $e->getMessage()], 500);
+            return ApiResponseClass::rollback($e, 'Failed to create vendor!');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -112,52 +112,66 @@ class VendorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVendorRequest $request, string $id)
+    public function update(UpdateVendorRequest $request, string $id, FileUpload $uploader)
     {
         $formData = $request->validated();
 
         DB::beginTransaction();
 
         try {
-            // $vendor_instance = Vendor::findOrFail($id);
             $vendor_instance = $this->vendorRepository->findById($id);
 
             // Update logo if a new one is uploaded
             if ($request->hasFile('logo')) {
-                // Optional: Delete old file
                 if ($vendor_instance->logo) {
-                    Storage::disk('public')->delete($vendor_instance->logo);
+                    $uploader->delete($vendor_instance->logo, 'public');
                 }
 
-                $formData['logo'] = $request->file('logo')->store('uploads/vendors/logos', 'public');
+                $formData['logo'] = $uploader->upload(
+                    $request->file('logo'),
+                    'uploads/vendors/logos',
+                    'public'
+                );
             }
 
             // Update cover image if a new one is uploaded
             if ($request->hasFile('cover_image')) {
                 if ($vendor_instance->cover_image) {
-                    Storage::disk('public')->delete($vendor_instance->cover_image);
+                    $uploader->delete($vendor_instance->cover_image, 'public');
                 }
 
-                $formData['cover_image'] = $request->file('cover_image')->store('uploads/vendors/coverImages', 'public');
+                $formData['cover_image'] = $uploader->upload(
+                    $request->file('cover_image'),
+                    'uploads/vendors/coverImages',
+                    'public'
+                );
             }
 
-            // Update license document (private)
+            // Update business license document (private/local)
             if ($request->hasFile('business_license_document')) {
                 if ($vendor_instance->business_license_document) {
-                    Storage::disk('local')->delete($vendor_instance->business_license_document);
+                    $uploader->delete($vendor_instance->business_license_document, 'local');
                 }
 
-                $formData['business_license_document'] = $request->file('business_license_document')->store('uploads/vendors/licenses', 'local');
+                $formData['business_license_document'] = $uploader->upload(
+                    $request->file('business_license_document'),
+                    'uploads/vendors/licenses',
+                    'local'
+                );
             }
 
-            // Update the vendor
+            // Update the vendor record
             $vendor = $this->vendorRepository->update($formData, $vendor_instance);
 
             DB::commit();
 
-            return ApiResponseClass::sendResponse(new VendorResource($vendor), 'Vendor updated successfully', 200);
+            return ApiResponseClass::sendResponse(
+                new VendorResource($vendor),
+                'Vendor updated successfully',
+                200
+            );
         } catch (\Exception $e) {
-            DB::rollback();
+            DB::rollBack();
 
             return ApiResponseClass::rollback($e, 'Failed to update vendor!');
         }
@@ -168,7 +182,42 @@ class VendorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            // Fetch vendor via repository
+            $vendor = $this->vendorRepository->findById($id);
+
+            // Delete logo from public disk
+            if ($vendor->logo) {
+                Storage::disk('public')->delete($vendor->logo);
+            }
+
+            // Delete cover image from public disk
+            if ($vendor->cover_image) {
+                Storage::disk('public')->delete($vendor->cover_image);
+            }
+
+            // Delete business license from local (private) disk
+            if ($vendor->business_license_document) {
+                Storage::disk('local')->delete($vendor->business_license_document);
+            }
+
+            // Delete vendor from database
+            $this->vendorRepository->destroy($vendor);
+
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(
+                new VendorResource($vendor),
+                'Vendor deleted successfully',
+                200
+            );
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return ApiResponseClass::rollback($e, 'Failed to delete vendor!');
+        }
     }
 
     /**
@@ -212,12 +261,12 @@ class VendorController extends Controller
 
         if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header),
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header),
             ], 400);
         }
 
         // Save the file to storage (private)
-        $fileName = 'vendor_upload_'.uniqid().'.csv';
+        $fileName = 'vendor_upload_' . uniqid() . '.csv';
         $file->storeAs('/uploads/vendors', $fileName);
 
         // Save the filename in cache or DB (for now, we’ll use session or job param)
