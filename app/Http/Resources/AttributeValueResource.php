@@ -20,7 +20,7 @@ class AttributeValueResource extends JsonResource
             'attribute' => [
                 'id' => $this->attribute?->id,
                 'name' => $this->attribute?->name,
-            ]
+            ],
         ];
     }
 }

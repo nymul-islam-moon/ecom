@@ -14,7 +14,10 @@ class VendorRepository implements VendorRepositoryInterface
         return Vendor::latest()
             ->search($request->query('search'))
             ->filterStatus($request->query('status'))
-            ->get();
+            ->sortBy(
+                $request->query('sortBy', 'id'),
+                $request->query('sortDirection', 'desc')
+            )->get();
     }
 
     public function store(array $data)

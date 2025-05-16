@@ -6,11 +6,10 @@ use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Auth\StoreRegistrationRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenicationController extends Controller
 {
@@ -54,7 +53,7 @@ class AuthenicationController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             return ApiResponseClass::sendResponse(null, 'Invalid email or password', 401);
         }
 
@@ -76,6 +75,7 @@ class AuthenicationController extends Controller
 
         if ($token) {
             $token->delete(); // <- this deletes the token from the DB
+
             return ApiResponseClass::sendResponse(null, 'User logged out successfully', 200);
         }
 

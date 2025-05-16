@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\StoreAttributeRequest;
 use App\Http\Requests\Api\Admin\StoreAttributeValueRequest;
 use App\Http\Requests\Api\Admin\UpdateAttributeValueRequest;
 use App\Http\Resources\AttributeValueResource;

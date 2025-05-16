@@ -50,10 +50,10 @@ class BrandController extends Controller
             return ApiResponseClass::sendResponse(new BrandResource($brand), 'Brand created successfully');
         } catch (\Exception $e) {
             DB::rollback();
+
             return ApiResponseClass::rollback($e, 'Failed to create brand!');
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -99,10 +99,10 @@ class BrandController extends Controller
             return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand updated successfully', 200);
         } catch (\Exception $e) {
             DB::rollback();
+
             return ApiResponseClass::rollback($e, 'Failed to update brand!');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -127,6 +127,7 @@ class BrandController extends Controller
             return ApiResponseClass::sendResponse(new BrandResource($brand_instance), 'Brand deleted successfully', 200);
         } catch (\Exception $e) {
             DB::rollback();
+
             return ApiResponseClass::rollback($e, 'Failed to delete brand!');
         }
     }

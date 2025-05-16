@@ -55,7 +55,7 @@ class Product extends Model
         'child_category_id',
         'shop_id',
         'vendor_id',
-        'brand_id'
+        'brand_id',
     ];
 
     // Scope for searching by name

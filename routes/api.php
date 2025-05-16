@@ -17,7 +17,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
 // Admin routes
 Route::post('admin/register', [AuthenicationController::class, 'register']);
 Route::post('admin/login', [AuthenicationController::class, 'login']);

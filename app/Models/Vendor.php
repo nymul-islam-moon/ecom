@@ -37,6 +37,11 @@ class Vendor extends Model
         });
     }
 
+    public function scopeSortBy(Builder $query, $sortBy = 'id', $sortDirection = 'desc'): Builder
+    {
+        return $query->orderBy($sortBy, $sortDirection);
+    }
+
     // Scope for filtering by status
     public function scopeFilterStatus(Builder $query, $status): Builder
     {

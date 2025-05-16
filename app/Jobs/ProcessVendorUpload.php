@@ -4,16 +4,13 @@ namespace App\Jobs;
 
 use App\Models\Vendor;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-
-
+use Illuminate\Support\Str;
 
 class ProcessVendorUpload implements ShouldQueue
 {
@@ -35,10 +32,11 @@ class ProcessVendorUpload implements ShouldQueue
     public function handle()
     {
         // Path to the file
-        $fullPath = storage_path('app/private/uploads/vendors/' . $this->filePath);
+        $fullPath = storage_path('app/private/uploads/vendors/'.$this->filePath);
 
-        if (!file_exists($fullPath)) {
+        if (! file_exists($fullPath)) {
             Log::error("[Vendor CSV Upload] File not found: {$fullPath}");
+
             return;
         }
 
@@ -53,14 +51,16 @@ class ProcessVendorUpload implements ShouldQueue
             $vendorData = array_combine($header, array_map('trim', $row));
 
             // Skip empty or malformed rows
-            if (!$vendorData) {
+            if (! $vendorData) {
                 $errors[] = ['row' => $lineNumber, 'reason' => 'Malformed row or header mismatch.'];
+
                 continue;
             }
 
             // Handle missing fields (e.g., email, phone, status)
             if (empty($vendorData['email']) || empty($vendorData['phone'])) {
                 $errors[] = ['row' => $lineNumber, 'reason' => 'Missing email or phone.'];
+
                 continue;
             }
 
@@ -91,8 +91,9 @@ class ProcessVendorUpload implements ShouldQueue
             if ($validator->fails()) {
                 $errors[] = [
                     'row' => $lineNumber,
-                    'reason' => 'Validation failed: ' . implode('; ', $validator->errors()->all())
+                    'reason' => 'Validation failed: '.implode('; ', $validator->errors()->all()),
                 ];
+
                 continue;
             }
 
@@ -103,13 +104,13 @@ class ProcessVendorUpload implements ShouldQueue
         // Bulk insert all valid rows into the database
         if (count($validRows) > 0) {
             Vendor::insert($validRows);  // Bulk insert
-            Log::info("[Vendor CSV Upload] Bulk insert of " . count($validRows) . " vendors completed.");
+            Log::info('[Vendor CSV Upload] Bulk insert of '.count($validRows).' vendors completed.');
         }
 
         // If there are errors, log them
-        if (!empty($errors)) {
-            $failedFileName = 'failed_uploads_' . now()->format('Ymd_His') . '.csv';
-            $failedFilePath = storage_path('app/private/uploads/vendors/' . $failedFileName);
+        if (! empty($errors)) {
+            $failedFileName = 'failed_uploads_'.now()->format('Ymd_His').'.csv';
+            $failedFilePath = storage_path('app/private/uploads/vendors/'.$failedFileName);
 
             // Open a file for writing
             $handle = fopen($failedFilePath, 'w');

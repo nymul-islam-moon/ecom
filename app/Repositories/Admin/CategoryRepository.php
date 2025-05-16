@@ -17,7 +17,6 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->paginate($perPage);
     }
 
-
     public function store(array $data)
     {
         return Category::create($data);

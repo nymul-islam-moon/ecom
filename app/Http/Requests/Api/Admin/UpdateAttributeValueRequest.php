@@ -22,7 +22,7 @@ class UpdateAttributeValueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:attribute_values,name,' . $this->attribute_value . ',id,attribute_id,' . request('attribute_id'),
+            'name' => 'required|string|max:255|unique:attribute_values,name,'.$this->attribute_value.',id,attribute_id,'.request('attribute_id'),
             'attribute_id' => 'sometimes|integer|exists:attributes,id',
         ];
     }
