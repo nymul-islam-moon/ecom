@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Admin;
 
+use App\Services\FileUpload;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Services\FileUpload;
 
 class VendorResource extends JsonResource
 {
