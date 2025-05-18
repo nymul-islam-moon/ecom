@@ -179,30 +179,25 @@ class VendorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, FileUpload $fileUpload)
     {
         DB::beginTransaction();
 
         try {
-            // Fetch vendor via repository
             $vendor = $this->vendorRepository->findById($id);
 
-            // Delete logo from public disk
             if ($vendor->logo) {
-                Storage::disk('public')->delete($vendor->logo);
+                $fileUpload->delete($vendor->logo, 'public');
             }
 
-            // Delete cover image from public disk
             if ($vendor->cover_image) {
-                Storage::disk('public')->delete($vendor->cover_image);
+                $fileUpload->delete($vendor->cover_image, 'public');
             }
 
-            // Delete business license from local (private) disk
             if ($vendor->business_license_document) {
-                Storage::disk('local')->delete($vendor->business_license_document);
+                $fileUpload->delete($vendor->business_license_document, 'local');
             }
 
-            // Delete vendor from database
             $this->vendorRepository->destroy($vendor);
 
             DB::commit();
@@ -218,6 +213,7 @@ class VendorController extends Controller
             return ApiResponseClass::rollback($e, 'Failed to delete vendor!');
         }
     }
+
 
     /**
      * Upload CSV or EXCEL file to bulk store vendors
@@ -260,12 +256,12 @@ class VendorController extends Controller
 
         if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header),
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header),
             ], 400);
         }
 
         // Save the file to storage (private)
-        $fileName = 'vendor_upload_'.uniqid().'.csv';
+        $fileName = 'vendor_upload_' . uniqid() . '.csv';
         $file->storeAs('/uploads/vendors', $fileName);
 
         // Save the filename in cache or DB (for now, we’ll use session or job param)
