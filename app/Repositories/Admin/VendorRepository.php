@@ -11,13 +11,12 @@ class VendorRepository implements VendorRepositoryInterface
 {
     public function get($request)
     {
+        $perPage = $request->query('per_page', 5); // Default to 15 items per page if not specified
+
         return Vendor::latest()
             ->search($request->query('search'))
             ->filterStatus($request->query('status'))
-            ->sortBy(
-                $request->query('sortBy', 'id'),
-                $request->query('sortDirection', 'desc')
-            )->get();
+            ->paginate($perPage);
     }
 
     public function store(array $data)

@@ -32,7 +32,7 @@ class VendorController extends Controller
     {
         $vendors = $this->vendorRepository->get($request);
 
-        return ApiResponseClass::sendResponse(VendorResource::collection($vendors), 'Vendor fetched successfully', 200);
+        return ApiResponseClass::sendResponse(VendorResource::collection($vendors)->response()->getData(true), 'Vendor fetched successfully', 200);
     }
 
     /**
@@ -255,12 +255,12 @@ class VendorController extends Controller
 
         if ($header !== $expectedHeader) {
             return response()->json([
-                'error' => 'Invalid CSV header. Expected: '.implode(', ', $expectedHeader).' | Found: '.implode(', ', $header),
+                'error' => 'Invalid CSV header. Expected: ' . implode(', ', $expectedHeader) . ' | Found: ' . implode(', ', $header),
             ], 400);
         }
 
         // Save the file to storage (private)
-        $fileName = 'vendor_upload_'.uniqid().'.csv';
+        $fileName = 'vendor_upload_' . uniqid() . '.csv';
         $file->storeAs('/uploads/vendors', $fileName);
 
         // Save the filename in cache or DB (for now, we’ll use session or job param)
