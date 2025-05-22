@@ -6,6 +6,7 @@ use App\Interfaces\Admin\AttributeRepositoryInterface;
 use App\Interfaces\Admin\AttributeValueRepositoryInterface;
 use App\Interfaces\Admin\BrandRepositoryInterface;
 use App\Interfaces\Admin\ProductRepositoryInterface;
+use App\Interfaces\Admin\ProfileRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\ChildCategoryRepositoryInterface;
 use App\Interfaces\SubCategoryRepositoryInterface;
@@ -15,6 +16,7 @@ use App\Repositories\Admin\AttributeValueRepository;
 use App\Repositories\Admin\BrandRepository;
 use App\Repositories\Admin\CategoryRepository;
 use App\Repositories\Admin\ProductRepository;
+use App\Repositories\Admin\ProfileRepository;
 use App\Repositories\Admin\VendorRepository;
 use App\Repositories\ChildCategoryRepository;
 use App\Repositories\SubCategoryRepository;
@@ -35,6 +37,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeRepositoryInterface::class, AttributeRepository::class);
         $this->app->bind(AttributeValueRepositoryInterface::class, AttributeValueRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
     }
 
     /**

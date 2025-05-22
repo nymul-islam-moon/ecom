@@ -40,14 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin' => [
-            'driver' => 'session',
+        'admin-api' => [
+            'driver' => 'sanctum',
             'provider' => 'admins',
-        ],
-        'shop' => [
-            'driver' => 'session',
-            'provider' => 'shops',
-        ],
+        ]
     ],
 
     /*
@@ -75,13 +71,10 @@ return [
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => env('ADMIN_MODEL', App\Models\Admin::class),
+            'model' => App\Models\Admin::class,
         ],
 
-        'shops' => [
-            'driver' => 'eloquent',
-            'model' => env('SHOP_MODEL', App\Models\Shop::class),
-        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\AdminProfileController;
 use App\Http\Controllers\Api\V1\Admin\AttributeController;
 use App\Http\Controllers\Api\V1\Admin\AttributeValueController;
+use App\Http\Controllers\Api\V1\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Api\V1\Admin\BrandController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
@@ -18,14 +20,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Admin routes
-Route::post('admin/register', [AuthenicationController::class, 'register']);
+Route::post('admin/register', [AdminAuthController::class, 'register']);
 Route::post('admin/login', [AuthenicationController::class, 'login']);
-Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+
+// Admin Routes
+Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
 
     // authentication routes
     Route::post('/logout', [AuthenicationController::class, 'logout']);
 
     Route::apiResources([
+        'profile' => AdminProfileController::class,
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,

@@ -14,7 +14,6 @@ use App\Mail\VendorConfirmationMail;
 use App\Services\FileUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class VendorController extends Controller
 {

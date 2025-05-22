@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\Auth;
+namespace App\Http\Requests\Api\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRegistrationRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +22,7 @@ class StoreRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'username' => 'required|string|unique:admins,username',
-            'email' => 'required|email|unique:admins,email',
-            'password' => 'required|confirmed',
+            //
         ];
     }
 }
