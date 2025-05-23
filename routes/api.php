@@ -21,7 +21,7 @@ Route::get('/user', function (Request $request) {
 
 // Admin routes
 Route::post('admin/register', [AdminAuthController::class, 'register']);
-Route::post('admin/login', [AuthenicationController::class, 'login']);
+Route::post('admin/login', [AdminAuthController::class, 'login']);
 
 // Admin Routes
 Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
