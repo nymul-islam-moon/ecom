@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\Admin\SettingsController;
 use App\Http\Controllers\Api\V1\Admin\SubCategoryController;
 use App\Http\Controllers\Api\V1\Admin\VendorController;
 use App\Http\Controllers\Api\V1\Auth\AuthenicationController;
+use App\Http\Controllers\Api\V1\Customer\Auth\CustomerAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,12 @@ Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
      */
     Route::post('/vendor/upload', [VendorController::class, 'uploadVendorCSV']);
     Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
+});
+
+
+// Customer routes
+Route::post('register', [CustomerAuthController::class, 'register']);
+Route::prefix('/')->middleware('auth:sanctum')->group(function () {
+
+    // Route::apiResources([]);
 });
