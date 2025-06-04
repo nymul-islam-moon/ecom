@@ -6,8 +6,8 @@ use App\Models\Vendor;
 use App\Repositories\Admin\VendorRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class VendorTest extends TestCase
 {
@@ -18,7 +18,7 @@ class VendorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repository = new VendorRepository();
+        $this->repository = new VendorRepository;
     }
 
     #[Test]

@@ -5,10 +5,8 @@ namespace Tests\Unit\Api\Admin;
 use App\Models\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
-
-use function PHPUnit\Framework\assertTrue;
+use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
@@ -38,8 +36,6 @@ class LoginTest extends TestCase
                 'collections' => ['name', 'email', 'token', 'token_type'],
             ]);
     }
-
-
 
     #[Test]
     public function it_fails_with_invalid_password()

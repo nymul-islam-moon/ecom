@@ -6,12 +6,8 @@ use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Customer\Auth\StoreCustomerRegistrationRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-
-
 
 class AuthenicationController extends Controller
 {

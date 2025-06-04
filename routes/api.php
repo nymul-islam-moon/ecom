@@ -49,7 +49,6 @@ Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
     Route::get('/settings/refresh-database', [SettingsController::class, 'refreshDatabase']);
 });
 
-
 // Customer routes
 Route::post('register', [CustomerAuthController::class, 'register']);
 Route::prefix('/')->middleware('auth:sanctum')->group(function () {

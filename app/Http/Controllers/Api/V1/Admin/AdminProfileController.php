@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminProfileController extends Controller
 {
-
     protected $profileRepository;
-
 
     public function __construct(ProfileRepositoryInterface $profileRepository)
     {

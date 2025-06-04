@@ -43,7 +43,7 @@ return [
         'admin-api' => [
             'driver' => 'sanctum',
             'provider' => 'admins',
-        ]
+        ],
     ],
 
     /*
@@ -73,7 +73,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
 
         // 'users' => [
         //     'driver' => 'database',

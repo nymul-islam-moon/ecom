@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1\Admin\Auth;
 
+use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Auth\StoreRegistrationRequest;
 use App\Models\Admin;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Classes\ApiResponseClass;
 use Illuminate\Support\Facades\Validator;
-
 
 class AdminAuthController extends Controller
 {
-
     /**
      * Register api
      *
@@ -42,7 +40,6 @@ class AdminAuthController extends Controller
 
         return ApiResponseClass::sendResponse($data, 'Admin registered and logged in successfully', 200);
     }
-
 
     public function login(Request $request): JsonResponse
     {
