@@ -83,6 +83,17 @@ class AdminProfileController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $id = auth('admin-api')->id();
+
+        DB::beginTransaction();
+        try {
+            $profile_instance = $this->profileRepository->findById($id);
+            $this->profileRepository->destroy($profile_instance);
+            DB::commit();
+
+            return ApiResponseClass::sendResponse(new ProfileResource($profile_instance), 'Profile deleted successfully', 200);
+        } catch (\Exception $e) {
+            ApiResponseClass::rollback($e, 'Failed to delete profile!');
+        }
     }
 }
