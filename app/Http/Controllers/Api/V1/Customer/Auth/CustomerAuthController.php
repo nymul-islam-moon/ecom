@@ -8,6 +8,8 @@ use App\Http\Requests\Api\Customer\Auth\StoreCustomerRegistrationRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
 
 class CustomerAuthController extends Controller
 {
@@ -36,5 +38,18 @@ class CustomerAuthController extends Controller
         ];
 
         return ApiResponseClass::sendResponse($data, 'Successfully registered and login as customer', 200);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $token = $request->user()->currentAccessToken();
+
+        if ($token) {
+            $token->delete(); // <- this deletes the token from the DB
+
+            return ApiResponseClass::sendResponse(null, 'Customer logged out successfully', 200);
+        }
+
+        return ApiResponseClass::sendResponse(null, 'No active token found', 400);
     }
 }

@@ -53,5 +53,8 @@ Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
 Route::post('register', [CustomerAuthController::class, 'register']);
 Route::prefix('/')->middleware('auth:sanctum')->group(function () {
 
+    Route::post('/logout', [CustomerAuthController::class, 'logout']);
+
+
     // Route::apiResources([]);
 });
