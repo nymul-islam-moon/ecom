@@ -6,7 +6,7 @@ use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\StoreChildCategoryRequest;
 use App\Http\Requests\Api\Admin\UpdateChildCategoryRequest;
-use App\Http\Resources\Api\Admin\ChildCategoryResource;
+use App\Http\Resources\Admin\ChildCategoryResource;
 use App\Interfaces\ChildCategoryRepositoryInterface;
 use App\Models\ChildCategory;
 use Illuminate\Http\Request;
