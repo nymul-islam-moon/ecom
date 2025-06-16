@@ -73,4 +73,44 @@ class Product extends Model
             $q->where('status', $status);
         });
     }
+
+
+    // 🔗 Main Relationships
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function childCategory()
+    {
+        return $this->belongsTo(ChildCategory::class);
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    // Optional: Ratings, Reviews, Tags, Wishlists, etc. can be added later
 }

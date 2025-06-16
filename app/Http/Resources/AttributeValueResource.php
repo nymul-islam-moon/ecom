@@ -18,8 +18,10 @@ class AttributeValueResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'attribute' => [
-                'id' => $this->attribute?->id,
-                'name' => $this->attribute?->name,
+                'id' => $this->attribute_id,
+                // 'id' => $this->rel_to_attribute?->id,
+                'name' => $this->attributes_name,
+                // 'name' => $this->rel_to_attribute?->name,
             ],
         ];
     }

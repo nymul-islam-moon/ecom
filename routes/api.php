@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Admin\AdminProfileController;
+use App\Http\Controllers\Api\V1\Admin\ProfileController;
 use App\Http\Controllers\Api\V1\Admin\AttributeController;
 use App\Http\Controllers\Api\V1\Admin\AttributeValueController;
 use App\Http\Controllers\Api\V1\Admin\Auth\AdminAuthController;
@@ -31,7 +31,7 @@ Route::prefix('admin')->middleware('auth:admin-api')->group(function () {
     Route::post('/logout', [AuthenicationController::class, 'logout']);
 
     Route::apiResources([
-        'profile' => AdminProfileController::class,
+        'profile' => ProfileController::class,
         'category' => CategoryController::class,
         'sub-category' => SubCategoryController::class,
         'child-category' => ChildCategoryController::class,

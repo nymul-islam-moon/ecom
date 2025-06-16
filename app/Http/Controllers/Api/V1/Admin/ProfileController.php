@@ -11,7 +11,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminProfileController extends Controller
+class ProfileController extends Controller
 {
     protected $profileRepository;
 
