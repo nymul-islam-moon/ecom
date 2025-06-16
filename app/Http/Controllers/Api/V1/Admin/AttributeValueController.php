@@ -37,7 +37,6 @@ class AttributeValueController extends Controller
         $formData = $request->validated();
         DB::beginTransaction();
         try {
-
             $attributeValue = $this->attributeValueRepository->store($formData);
             DB::commit();
 

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();
-            $table->json('images')->nullable();
 
             // Pricing
             $table->decimal('price', 10, 2);
