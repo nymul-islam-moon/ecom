@@ -15,10 +15,10 @@ use App\Repositories\Admin\AttributeRepository;
 use App\Repositories\Admin\AttributeValueRepository;
 use App\Repositories\Admin\BrandRepository;
 use App\Repositories\Admin\CategoryRepository;
+use App\Repositories\Admin\ChildCategoryRepository;
 use App\Repositories\Admin\ProductRepository;
 use App\Repositories\Admin\ProfileRepository;
 use App\Repositories\Admin\VendorRepository;
-use App\Repositories\ChildCategoryRepository;
 use App\Repositories\SubCategoryRepository;
 use Illuminate\Support\ServiceProvider;
 

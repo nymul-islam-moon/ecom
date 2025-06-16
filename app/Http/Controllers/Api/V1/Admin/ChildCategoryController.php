@@ -28,7 +28,11 @@ class ChildCategoryController extends Controller
     {
         $childCategories = $this->childCategoryRepository->get($request);
 
-        return ApiResponseClass::sendResponse(ChildCategoryResource::collection($childCategories), 'Child-Category fetched successfully', 200);
+        return ApiResponseClass::sendResponse(
+            ChildCategoryResource::collection($childCategories)->response()->getData(true),
+            'Child-Category fetched successfully',
+            200
+        );
     }
 
     /**
