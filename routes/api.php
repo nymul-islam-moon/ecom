@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Admin\ProfileController;
 use App\Http\Controllers\Api\V1\Admin\AttributeController;
 use App\Http\Controllers\Api\V1\Admin\AttributeValueController;
 use App\Http\Controllers\Api\V1\Admin\Auth\AdminAuthController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\Api\V1\Admin\BrandController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use App\Http\Controllers\Api\V1\Admin\ChildCategoryController;
 use App\Http\Controllers\Api\V1\Admin\ProductController;
+use App\Http\Controllers\Api\V1\Admin\ProfileController;
 use App\Http\Controllers\Api\V1\Admin\SettingsController;
 use App\Http\Controllers\Api\V1\Admin\SubCategoryController;
 use App\Http\Controllers\Api\V1\Admin\VendorController;
@@ -54,7 +54,6 @@ Route::post('register', [CustomerAuthController::class, 'register']);
 Route::prefix('/')->middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [CustomerAuthController::class, 'logout']);
-
 
     // Route::apiResources([]);
 });

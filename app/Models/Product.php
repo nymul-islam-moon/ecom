@@ -74,7 +74,6 @@ class Product extends Model
         });
     }
 
-
     // 🔗 Main Relationships
 
     public function variants()

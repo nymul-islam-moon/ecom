@@ -10,7 +10,6 @@ class ProductVariant extends Model
     /** @use HasFactory<\Database\Factories\ProductVariantFactory> */
     use HasFactory;
 
-
     protected $fillable = [
         'product_id',
         'sku',

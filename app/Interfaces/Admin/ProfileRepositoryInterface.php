@@ -3,7 +3,6 @@
 namespace App\Interfaces\Admin;
 
 use App\Models\Admin;
-use phpDocumentor\Reflection\Types\Boolean;
 
 interface ProfileRepositoryInterface
 {

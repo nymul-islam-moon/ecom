@@ -4,7 +4,6 @@ namespace App\Repositories\Admin;
 
 use App\Interfaces\Admin\ProfileRepositoryInterface;
 use App\Models\Admin;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class ProfileRepository implements ProfileRepositoryInterface
 {

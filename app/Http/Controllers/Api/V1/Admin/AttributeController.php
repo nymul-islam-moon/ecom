@@ -26,7 +26,11 @@ class AttributeController extends Controller
     {
         $attributes = $this->attributeRepository->get($request);
 
-        return ApiResponseClass::sendResponse(AttributeResource::collection($attributes), 'Attributes fetched successfully', 200);
+        return ApiResponseClass::sendResponse(
+            AttributeResource::collection($attributes)->response()->getData(true),
+            'Attributes fetched successfully',
+            200
+        );
     }
 
     /**
