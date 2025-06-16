@@ -19,7 +19,6 @@ class Product extends Model
         'name',
         'description',
         'short_description',
-        'images',
         'price',
         'sale_price',
         'tax_included',

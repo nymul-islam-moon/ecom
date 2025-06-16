@@ -14,13 +14,11 @@ return new class extends Migration
         Schema::create('product_variant_attribute_values', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('product_variant_id')->constrained('product_variants')->onDelete('cascade');
-            $table->foreignId('attribute_id')->constrained('attributes')->onDelete('cascade');
-            $table->foreignId('attribute_value_id')->constrained('attribute_values')->onDelete('cascade');
+            $table->foreignId('product_variant_id')->unique()->constrained('product_variants')->onDelete('cascade');
+            $table->foreignId('attribute_id')->unique()->constrained('attributes')->onDelete('cascade');
+            $table->foreignId('attribute_value_id')->unique()->constrained('attribute_values')->onDelete('cascade');
 
             $table->timestamps();
-
-            $table->unique(['product_variant_id', 'attribute_value_id'], 'variant_attribute_unique');
         });
     }
 
