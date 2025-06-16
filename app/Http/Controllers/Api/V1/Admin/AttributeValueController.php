@@ -26,7 +26,7 @@ class AttributeValueController extends Controller
     {
         $attributes = $this->attributeValueRepository->get($request);
 
-        return ApiResponseClass::sendResponse(AttributeValueResource::collection($attributes), 'Attribute Values fetched successfully', 200);
+        return ApiResponseClass::sendResponse(AttributeValueResource::collection($attributes)->response()->getData(true), 'Attribute Values fetched successfully', 200);
     }
 
     /**

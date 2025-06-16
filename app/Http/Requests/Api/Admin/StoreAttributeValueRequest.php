@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Api\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class StoreAttributeValueRequest extends FormRequest
 {
@@ -22,8 +24,19 @@ class StoreAttributeValueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:attribute_values,name,NULL,id,attribute_id,'.request('attribute_id'),
-            'attribute_id' => 'required|integer|max:255|unique:attribute_values,attribute_id',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('attribute_values')->where(function ($query) {
+                    return $query->where('attribute_id', request('attribute_id'));
+                }),
+            ],
+            'attribute_id' => [
+                'required',
+                'integer',
+                'exists:attributes,id',
+            ],
         ];
     }
 }

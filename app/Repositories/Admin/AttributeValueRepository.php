@@ -9,9 +9,11 @@ class AttributeValueRepository implements AttributeValueRepositoryInterface
 {
     public function get($request)
     {
+        $perPage = $request->query('per_page', 5); // Default to 15 items per page if not specified
+
         return AttributeValue::latest()
             ->search($request->query('search'))
-            ->get();
+            ->paginate($perPage);
     }
 
     public function store(array $data)

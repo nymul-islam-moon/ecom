@@ -9,9 +9,11 @@ class AttributeRepository implements AttributeRepositoryInterface
 {
     public function get($request)
     {
+        $perPage = $request->query('per_page', 5);
+
         return Attribute::latest()
             ->search($request->query('search'))
-            ->get();
+            ->paginate($perPage);
     }
 
     public function store(array $data)
